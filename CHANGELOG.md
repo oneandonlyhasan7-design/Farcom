@@ -16,6 +16,19 @@ Group changes to describe their impact on the project, as follows:
 - Client secret support to OIDC authentication
 - Call Redirection Service APIs allowing to redirect a GSM call to a SIP address via Linphone
 
+## [6.2.3] - 2026-07-07
+
+### Added
+- Setting to disable proximity sensor turning screen off when device is next to the ear during audio calls
+
+### Changed
+- Show chat message emoji reaction as soon as selected instead of waiting for message to be sent
+
+### Fixed
+- Account registrar & outbound SIP proxy URIs transport that couldn't be changed
+- Layout when conference is paused
+- Prevent fullscreen mode when conference is paused
+
 ## [6.2.2] - 2026-06-25
 
 ### Changed

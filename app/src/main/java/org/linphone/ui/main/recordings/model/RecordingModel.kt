@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2024 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,18 +17,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.recordings.model
+package org.farcom.ui.main.recordings.model
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import java.text.SimpleDateFormat
 import java.util.Locale
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.core.Factory
-import org.linphone.core.tools.Log
-import org.linphone.utils.FileUtils
-import org.linphone.utils.LinphoneUtils
-import org.linphone.utils.TimestampUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.core.Factory
+import org.farcom.core.tools.Log
+import org.farcom.utils.FileUtils
+import org.farcom.utils.FarcomUtils
+import org.farcom.utils.TimestampUtils
 
 class RecordingModel
     @WorkerThread
@@ -62,7 +62,7 @@ class RecordingModel
             sipUri = sipAddress?.asStringUriOnly() ?: username
             displayName = if (sipAddress != null) {
                 val contact = coreContext.contactsManager.findContactByAddress(sipAddress)
-                contact?.name ?: LinphoneUtils.getDisplayName(sipAddress)
+                contact?.name ?: FarcomUtils.getDisplayName(sipAddress)
             } else {
                 sipUri
             }
@@ -78,22 +78,22 @@ class RecordingModel
                 Log.e("$TAG Failed to parse legacy timestamp [$parsedDate]")
             }
             timestamp = parsedTimestamp
-        } else if (fileName.length > LinphoneUtils.RECORDING_FILE_NAME_HEADER.length) {
-            val withoutHeader = fileName.substring(LinphoneUtils.RECORDING_FILE_NAME_HEADER.length)
+        } else if (fileName.length > FarcomUtils.RECORDING_FILE_NAME_HEADER.length) {
+            val withoutHeader = fileName.substring(FarcomUtils.RECORDING_FILE_NAME_HEADER.length)
             val indexOfSeparator = withoutHeader.indexOf(
-                LinphoneUtils.RECORDING_FILE_NAME_URI_TIMESTAMP_SEPARATOR
+                FarcomUtils.RECORDING_FILE_NAME_URI_TIMESTAMP_SEPARATOR
             )
             sipUri = withoutHeader.take(indexOfSeparator)
             val sipAddress = Factory.instance().createAddress(sipUri)
             displayName = if (sipAddress != null) {
                 val contact = coreContext.contactsManager.findContactByAddress(sipAddress)
-                contact?.name ?: LinphoneUtils.getDisplayName(sipAddress)
+                contact?.name ?: FarcomUtils.getDisplayName(sipAddress)
             } else {
                 sipUri
             }
 
             val parsedTimestamp = withoutHeader.substring(
-                indexOfSeparator + LinphoneUtils.RECORDING_FILE_NAME_URI_TIMESTAMP_SEPARATOR.length,
+                indexOfSeparator + FarcomUtils.RECORDING_FILE_NAME_URI_TIMESTAMP_SEPARATOR.length,
                 withoutHeader.lastIndexOf(".")
             )
             Log.i(

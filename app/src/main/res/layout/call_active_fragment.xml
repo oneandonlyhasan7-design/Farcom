@@ -25,13 +25,13 @@
             type="View.OnClickListener" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.call.viewmodel.CurrentCallViewModel" />
+            type="org.farcom.ui.call.viewmodel.CurrentCallViewModel" />
         <variable
             name="callsViewModel"
-            type="org.linphone.ui.call.viewmodel.CallsViewModel" />
+            type="org.farcom.ui.call.viewmodel.CallsViewModel" />
         <variable
             name="numpadModel"
-            type="org.linphone.ui.main.history.model.NumpadModel" />
+            type="org.farcom.ui.main.history.model.NumpadModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="@{viewModel.displayedAddress, default=`sip:johndoe@sip.linphone.org`}"
+                android:text="@{viewModel.displayedAddress, default=`sip:johndoe@sip.farcom.org`}"
                 android:textColor="@color/bc_white"
                 android:textSize="14sp"
                 android:visibility="@{viewModel.hideSipAddresses || viewModel.pipMode || viewModel.halfOpenedFolded ? View.GONE : View.VISIBLE}"
@@ -104,7 +104,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <org.linphone.ui.call.view.RoundCornersTextureView
+            <org.farcom.ui.call.view.RoundCornersTextureView
                 android:id="@+id/remote_video_surface"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -259,7 +259,7 @@
                 app:layout_constraintStart_toStartOf="@id/name"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <org.linphone.ui.call.view.RoundCornersTextureView
+            <org.farcom.ui.call.view.RoundCornersTextureView
                 android:id="@+id/local_preview_video_surface"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

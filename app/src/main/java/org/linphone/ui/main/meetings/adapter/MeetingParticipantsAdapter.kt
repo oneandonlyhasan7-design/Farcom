@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.meetings.adapter
+package org.farcom.ui.main.meetings.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -27,9 +27,9 @@ import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import org.linphone.R
-import org.linphone.databinding.MeetingParticipantListCellBinding
-import org.linphone.ui.main.meetings.model.ParticipantModel
+import org.farcom.R
+import org.farcom.databinding.MeetingParticipantListCellBinding
+import org.farcom.ui.main.meetings.model.ParticipantModel
 
 class MeetingParticipantsAdapter : ListAdapter<ParticipantModel, RecyclerView.ViewHolder>(
     MeetingParticipantDiffCallback()

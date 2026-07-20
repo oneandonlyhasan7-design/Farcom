@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.chat.receiver
+package org.farcom.ui.main.chat.receiver
 
 import android.content.ClipData
 import android.net.Uri
@@ -26,7 +26,7 @@ import androidx.core.util.component1
 import androidx.core.util.component2
 import androidx.core.view.ContentInfoCompat
 import androidx.core.view.OnReceiveContentListener
-import org.linphone.core.tools.Log
+import org.farcom.core.tools.Log
 
 class RichContentReceiver(private val contentReceived: (uri: Uri) -> Unit) :
     OnReceiveContentListener {

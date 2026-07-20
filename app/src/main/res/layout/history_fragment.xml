@@ -5,7 +5,7 @@
 
     <data>
         <import type="android.view.View" />
-        <import type="org.linphone.core.ConsolidatedPresence" />
+        <import type="org.farcom.core.ConsolidatedPresence" />
         <variable
             name="backClickListener"
             type="View.OnClickListener" />
@@ -17,7 +17,7 @@
             type="View.OnClickListener" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.main.history.viewmodel.HistoryViewModel" />
+            type="org.farcom.ui.main.history.viewmodel.HistoryViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

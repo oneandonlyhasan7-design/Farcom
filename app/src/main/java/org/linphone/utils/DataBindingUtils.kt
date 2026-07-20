@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.utils
+package org.farcom.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -63,16 +63,16 @@ import coil3.transform.CircleCropTransformation
 import coil3.transform.RoundedCornersTransformation
 import coil3.video.videoFrameMillis
 import com.google.android.flexbox.FlexboxLayout
-import org.linphone.BR
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.R
-import org.linphone.contacts.AbstractAvatarModel
-import org.linphone.core.ConsolidatedPresence
-import org.linphone.core.tools.Log
-import org.linphone.ui.NotoSansFont
-import org.linphone.ui.call.conference.model.ConferenceParticipantDeviceModel
-import org.linphone.ui.call.view.VuMeterView
-import org.linphone.ui.call.view.RoundCornersTextureView
+import org.farcom.BR
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.R
+import org.farcom.contacts.AbstractAvatarModel
+import org.farcom.core.ConsolidatedPresence
+import org.farcom.core.tools.Log
+import org.farcom.ui.NotoSansFont
+import org.farcom.ui.call.conference.model.ConferenceParticipantDeviceModel
+import org.farcom.ui.call.view.VuMeterView
+import org.farcom.ui.call.view.RoundCornersTextureView
 
 /**
  * This file contains all the data binding necessary for the app

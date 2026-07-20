@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui
+package org.farcom.ui
 
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
@@ -37,13 +37,13 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.compatibility.Compatibility
-import org.linphone.core.tools.Log
-import org.linphone.utils.ToastUtils
-import org.linphone.utils.slideInToastFromTop
-import org.linphone.utils.slideInToastFromTopForDuration
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.compatibility.Compatibility
+import org.farcom.core.tools.Log
+import org.farcom.utils.ToastUtils
+import org.farcom.utils.slideInToastFromTop
+import org.farcom.utils.slideInToastFromTopForDuration
 
 @MainThread
 open class GenericActivity : AppCompatActivity() {
@@ -59,16 +59,16 @@ open class GenericActivity : AppCompatActivity() {
         mainColor = corePreferences.themeMainColor
         val theme = super.theme
         when (mainColor) {
-            "terracotta" -> theme.applyStyle(R.style.Theme_LinphoneTerracotta, true)
-            "lavender" -> theme.applyStyle(R.style.Theme_LinphoneLavender, true)
-            "honey" -> theme.applyStyle(R.style.Theme_LinphoneHoney, true)
-            "burgundy" -> theme.applyStyle(R.style.Theme_LinphoneBurgundy, true)
-            "mint" -> theme.applyStyle(R.style.Theme_LinphoneMint, true)
-            "coral" -> theme.applyStyle(R.style.Theme_LinphoneCoral, true)
-            "plum" -> theme.applyStyle(R.style.Theme_LinphonePlum, true)
-            "titanium" -> theme.applyStyle(R.style.Theme_LinphoneTitanium, true)
-            "mineral_blue" -> theme.applyStyle(R.style.Theme_LinphoneMineralBlue, true)
-            else -> theme.applyStyle(R.style.Theme_Linphone, true)
+            "terracotta" -> theme.applyStyle(R.style.Theme_FarcomTerracotta, true)
+            "lavender" -> theme.applyStyle(R.style.Theme_FarcomLavender, true)
+            "honey" -> theme.applyStyle(R.style.Theme_FarcomHoney, true)
+            "burgundy" -> theme.applyStyle(R.style.Theme_FarcomBurgundy, true)
+            "mint" -> theme.applyStyle(R.style.Theme_FarcomMint, true)
+            "coral" -> theme.applyStyle(R.style.Theme_FarcomCoral, true)
+            "plum" -> theme.applyStyle(R.style.Theme_FarcomPlum, true)
+            "titanium" -> theme.applyStyle(R.style.Theme_FarcomTitanium, true)
+            "mineral_blue" -> theme.applyStyle(R.style.Theme_FarcomMineralBlue, true)
+            else -> theme.applyStyle(R.style.Theme_Farcom, true)
         }
         return theme
     }

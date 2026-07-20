@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,29 +17,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.chat.viewmodel
+package org.farcom.ui.main.chat.viewmodel
 
 import android.view.View
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.contacts.ContactsManager
-import org.linphone.core.Address
-import org.linphone.core.ChatRoom
-import org.linphone.core.ChatRoomListenerStub
-import org.linphone.core.EventLog
-import org.linphone.core.Factory
-import org.linphone.core.Friend
-import org.linphone.core.Participant
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.chat.model.ParticipantModel
-import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.contacts.ContactsManager
+import org.farcom.core.Address
+import org.farcom.core.ChatRoom
+import org.farcom.core.ChatRoomListenerStub
+import org.farcom.core.EventLog
+import org.farcom.core.Factory
+import org.farcom.core.Friend
+import org.farcom.core.Participant
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.chat.model.ParticipantModel
+import org.farcom.ui.main.contacts.model.ContactAvatarModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
 
 class ConversationInfoViewModel
     @UiThread
@@ -157,7 +157,7 @@ class ConversationInfoViewModel
         @WorkerThread
         override fun onSubjectChanged(chatRoom: ChatRoom, eventLog: EventLog) {
             Log.i(
-                "$TAG Conversation [${LinphoneUtils.getConversationId(chatRoom)}] has a new subject [${chatRoom.subjectUtf8}]"
+                "$TAG Conversation [${FarcomUtils.getConversationId(chatRoom)}] has a new subject [${chatRoom.subjectUtf8}]"
             )
             showGreenToast(R.string.conversation_subject_changed_toast, R.drawable.check)
 
@@ -227,7 +227,7 @@ class ConversationInfoViewModel
     fun leaveGroup() {
         coreContext.postOnCoreThread {
             if (isChatRoomInitialized()) {
-                Log.i("$TAG Leaving conversation [${LinphoneUtils.getConversationId(chatRoom)}]")
+                Log.i("$TAG Leaving conversation [${FarcomUtils.getConversationId(chatRoom)}]")
                 chatRoom.leave()
             }
             groupLeftEvent.postValue(Event(true))
@@ -239,7 +239,7 @@ class ConversationInfoViewModel
         coreContext.postOnCoreThread {
             if (isChatRoomInitialized()) {
                 Log.i(
-                    "$TAG Cleaning conversation [${LinphoneUtils.getConversationId(chatRoom)}] history"
+                    "$TAG Cleaning conversation [${FarcomUtils.getConversationId(chatRoom)}] history"
                 )
                 chatRoom.deleteHistory()
             }
@@ -258,7 +258,7 @@ class ConversationInfoViewModel
     @UiThread
     fun scheduleMeeting() {
         coreContext.postOnCoreThread {
-            if (LinphoneUtils.isChatRoomAGroup(chatRoom)) {
+            if (FarcomUtils.isChatRoomAGroup(chatRoom)) {
                 val participantsList = arrayListOf<String>()
                 for (participant in chatRoom.participants) {
                     participantsList.add(participant.address.asStringUriOnly())
@@ -289,7 +289,7 @@ class ConversationInfoViewModel
         coreContext.postOnCoreThread {
             val address = participantModel.address
             Log.i(
-                "$TAG Removing participant [$address] from the conversation [${LinphoneUtils.getConversationId(
+                "$TAG Removing participant [$address] from the conversation [${FarcomUtils.getConversationId(
                     chatRoom
                 )}]"
             )
@@ -310,7 +310,7 @@ class ConversationInfoViewModel
         coreContext.postOnCoreThread {
             val address = participantModel.address
             Log.i(
-                "$TAG Granting admin rights to participant [$address] from the conversation [${LinphoneUtils.getConversationId(
+                "$TAG Granting admin rights to participant [$address] from the conversation [${FarcomUtils.getConversationId(
                     chatRoom
                 )}]"
             )
@@ -331,7 +331,7 @@ class ConversationInfoViewModel
         coreContext.postOnCoreThread {
             val address = participantModel.address
             Log.i(
-                "$TAG Removing admin rights from participant [$address] from the conversation [${LinphoneUtils.getConversationId(
+                "$TAG Removing admin rights from participant [$address] from the conversation [${FarcomUtils.getConversationId(
                     chatRoom
                 )}]"
             )
@@ -351,7 +351,7 @@ class ConversationInfoViewModel
     fun setParticipants(newList: ArrayList<String>) {
         coreContext.postOnCoreThread {
             if (isChatRoomInitialized()) {
-                if (!LinphoneUtils.isChatRoomAGroup(chatRoom)) {
+                if (!FarcomUtils.isChatRoomAGroup(chatRoom)) {
                     Log.e("$TAG Can't add participants to a conversation that's not a group!")
                     return@postOnCoreThread
                 }
@@ -360,7 +360,7 @@ class ConversationInfoViewModel
                 for (participant in chatRoom.participants) {
                     val address = participant.address
                     // Do not remove ourselves if not in participants list anymore
-                    if (LinphoneUtils.getDefaultAccount()?.params?.identityAddress?.weakEqual(
+                    if (FarcomUtils.getDefaultAccount()?.params?.identityAddress?.weakEqual(
                             address
                         ) == true
                     ) {
@@ -443,7 +443,7 @@ class ConversationInfoViewModel
     @UiThread
     fun updateEphemeralLifetime(lifetime: Long) {
         coreContext.postOnCoreThread {
-            LinphoneUtils.chatRoomConfigureEphemeralMessagesLifetime(chatRoom, lifetime)
+            FarcomUtils.chatRoomConfigureEphemeralMessagesLifetime(chatRoom, lifetime)
             ephemeralLifetime.postValue(
                 if (!chatRoom.isEphemeralEnabled) 0L else chatRoom.ephemeralLifetime
             )
@@ -456,7 +456,7 @@ class ConversationInfoViewModel
 
         isMyselfAdmin.postValue(chatRoom.me?.isAdmin)
 
-        val isGroupChatRoom = LinphoneUtils.isChatRoomAGroup(chatRoom)
+        val isGroupChatRoom = FarcomUtils.isChatRoomAGroup(chatRoom)
         isGroup.postValue(isGroupChatRoom)
         isEndToEndEncrypted.postValue(
             chatRoom.hasCapability(ChatRoom.Capabilities.Encrypted.toInt())
@@ -477,7 +477,7 @@ class ConversationInfoViewModel
             val uri = if (corePreferences.onlyDisplaySipUriUsername) {
                 address.username ?: ""
             } else {
-                LinphoneUtils.getAddressAsCleanStringUriOnly(address)
+                FarcomUtils.getAddressAsCleanStringUriOnly(address)
             }
             sipUri.postValue(uri)
 
@@ -500,7 +500,7 @@ class ConversationInfoViewModel
 
     @WorkerThread
     private fun computeParticipantsList() {
-        val groupChatRoom = LinphoneUtils.isChatRoomAGroup(chatRoom)
+        val groupChatRoom = FarcomUtils.isChatRoomAGroup(chatRoom)
         val selfAdmin = if (groupChatRoom) chatRoom.me?.isAdmin == true else false
 
         val friends = arrayListOf<Friend>()
@@ -587,7 +587,7 @@ class ConversationInfoViewModel
             val model = participants.value.orEmpty().find {
                 it.address.weakEqual(participantAddress)
             }
-            model?.avatarModel?.contactName ?: LinphoneUtils.getDisplayName(participantAddress)
+            model?.avatarModel?.contactName ?: FarcomUtils.getDisplayName(participantAddress)
         } else {
             ""
         }

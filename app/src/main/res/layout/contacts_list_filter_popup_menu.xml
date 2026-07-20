@@ -9,7 +9,7 @@
             name="noFilterClickListener"
             type="View.OnClickListener" />
         <variable
-            name="linphoneOnlyClickListener"
+            name="farcomOnlyClickListener"
             type="View.OnClickListener" />
         <variable
             name="sipOnlyClickListener"
@@ -18,7 +18,7 @@
             name="seeAllSelected"
             type="Boolean" />
         <variable
-            name="showLinphoneFilter"
+            name="showFarcomFilter"
             type="Boolean" />
     </data>
 
@@ -41,16 +41,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/linphone_filter"/>
+            app:layout_constraintBottom_toTopOf="@id/farcom_filter"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/popup_menu_item"
-            android:id="@+id/linphone_filter"
-            android:onClick="@{linphoneOnlyClickListener}"
+            android:id="@+id/farcom_filter"
+            android:onClick="@{farcomOnlyClickListener}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/contacts_list_filter_popup_see_linphone_only"
-            android:visibility="@{showLinphoneFilter ? View.VISIBLE : View.GONE}"
+            android:text="@string/contacts_list_filter_popup_see_farcom_only"
+            android:visibility="@{showFarcomFilter ? View.VISIBLE : View.GONE}"
             android:drawableEnd="@drawable/check"
             android:drawableTint="@{seeAllSelected ? @color/transparent_color : @color/green_success_500, default=@color/green_success_500}"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,12 +65,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/contacts_list_filter_popup_see_sip_only"
-            android:visibility="@{showLinphoneFilter ? View.GONE : View.VISIBLE}"
+            android:visibility="@{showFarcomFilter ? View.GONE : View.VISIBLE}"
             android:drawableEnd="@drawable/check"
             android:drawableTint="@{seeAllSelected ? @color/transparent_color : @color/green_success_500, default=@color/green_success_500}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linphone_filter"
+            app:layout_constraintTop_toBottomOf="@id/farcom_filter"
             app:layout_constraintBottom_toTopOf="@id/bottom_anchor"/>
 
         <View

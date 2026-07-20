@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2026 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,14 +17,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.core
+package org.farcom.core
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_APPLICATION_RESTRICTIONS_CHANGED
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.core.tools.Log
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.core.tools.Log
 
 class ManagedConfigurationReceiver : BroadcastReceiver() {
     companion object {

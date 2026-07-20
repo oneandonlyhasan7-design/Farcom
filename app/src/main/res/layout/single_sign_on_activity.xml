@@ -9,7 +9,7 @@
             type="View.OnClickListener" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.sso.SingleSignOnViewModel" />
+            type="org.farcom.ui.sso.SingleSignOnViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

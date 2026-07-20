@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.telecom
+package org.farcom.telecom
 
 import android.telecom.DisconnectCause
 import androidx.annotation.WorkerThread
@@ -29,15 +29,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.core.Call
-import org.linphone.core.CallListenerStub
-import org.linphone.core.Reason
-import org.linphone.core.tools.Log
-import org.linphone.utils.AudioUtils
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.core.Call
+import org.farcom.core.CallListenerStub
+import org.farcom.core.Reason
+import org.farcom.core.tools.Log
+import org.farcom.utils.AudioUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
 
 class TelecomCallControlCallback(
     private val call: Call,
@@ -132,7 +132,7 @@ class TelecomCallControlCallback(
                 // Only follow un-mute requests for not outgoing calls (such as joining a conference muted)
                 // and if connected to Android Auto that has a way to let user mute/unmute from the car directly
                 // or if we muted the call previously following Telecom Manager request.
-                if (muted || mutedByTelecomManager || (!LinphoneUtils.isCallOutgoing(callState, false) && coreContext.isConnectedToAndroidAuto)) {
+                if (muted || mutedByTelecomManager || (!FarcomUtils.isCallOutgoing(callState, false) && coreContext.isConnectedToAndroidAuto)) {
                     mutedByTelecomManager = muted
                     call.microphoneMuted = muted
                     coreContext.refreshMicrophoneMuteStateEvent.postValue(Event(true))
@@ -152,7 +152,7 @@ class TelecomCallControlCallback(
     }
 
     private fun answerCall() {
-        val isVideo = LinphoneUtils.isVideoEnabled(call)
+        val isVideo = FarcomUtils.isVideoEnabled(call)
         val type = if (isVideo) {
             CallAttributesCompat.CALL_TYPE_VIDEO_CALL
         } else {

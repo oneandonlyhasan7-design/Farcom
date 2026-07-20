@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="model"
-            type="org.linphone.ui.main.contacts.model.ContactNumberOrAddressModel" />
+            type="org.farcom.ui.main.contacts.model.ContactNumberOrAddressModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@{model.displayedValue, default=`sip:johndoe@sip.linphone.org`}"
+            android:text="@{model.displayedValue, default=`sip:johndoe@sip.farcom.org`}"
             android:textSize="14sp"
             android:maxLines="1"
             android:ellipsize="end"

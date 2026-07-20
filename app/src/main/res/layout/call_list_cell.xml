@@ -13,7 +13,7 @@
             type="View.OnLongClickListener" />
         <variable
             name="model"
-            type="org.linphone.ui.call.model.CallModel" />
+            type="org.farcom.ui.call.model.CallModel" />
         <variable
             name="showTransferIcon"
             type="Boolean" />

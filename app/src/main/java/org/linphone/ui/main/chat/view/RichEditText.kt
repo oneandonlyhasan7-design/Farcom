@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.chat.view
+package org.farcom.ui.main.chat.view
 
 import android.app.Activity
 import android.content.Context
@@ -27,10 +27,10 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.chat.receiver.RichContentReceiver
-import org.linphone.ui.main.viewmodel.SharedMainViewModel
-import org.linphone.utils.Event
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.chat.receiver.RichContentReceiver
+import org.farcom.ui.main.viewmodel.SharedMainViewModel
+import org.farcom.utils.Event
 
 /**
  * Allows for image input inside an EditText, usefull for keyboards with gif support for example.

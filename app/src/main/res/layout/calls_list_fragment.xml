@@ -12,7 +12,7 @@
             type="View.OnClickListener" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.call.viewmodel.CallsViewModel" />
+            type="org.farcom.ui.call.viewmodel.CallsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -94,7 +94,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--suppress AndroidUnknownAttribute -->
-        <org.linphone.ui.call.view.RoundCornersTextureView
+        <org.farcom.ui.call.view.RoundCornersTextureView
             android:id="@+id/local_preview_video_surface"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

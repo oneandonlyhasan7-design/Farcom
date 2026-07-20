@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,28 +17,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.history.viewmodel
+package org.farcom.ui.main.history.viewmodel
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.core.Address
-import org.linphone.core.CallLog
-import org.linphone.core.ChatRoom
-import org.linphone.core.ChatRoomListenerStub
-import org.linphone.core.Conference
-import org.linphone.core.Core
-import org.linphone.core.CoreListenerStub
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.ui.main.history.model.CallLogHistoryModel
-import org.linphone.ui.main.history.model.CallLogModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.core.Address
+import org.farcom.core.CallLog
+import org.farcom.core.ChatRoom
+import org.farcom.core.ChatRoomListenerStub
+import org.farcom.core.Conference
+import org.farcom.core.Core
+import org.farcom.core.CoreListenerStub
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.ui.main.history.model.CallLogHistoryModel
+import org.farcom.ui.main.history.model.CallLogModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
 
 class HistoryViewModel
     @UiThread
@@ -92,7 +92,7 @@ class HistoryViewModel
         override fun onCallLogUpdated(core: Core, callLog: CallLog) {
             val peerAddress = callLog.remoteAddress
             val localAddress = callLog.localAddress
-            val defaultAccount = LinphoneUtils.getDefaultAccount()
+            val defaultAccount = FarcomUtils.getDefaultAccount()
             if (::address.isInitialized && address.weakEqual(peerAddress) && defaultAccount?.params?.identityAddress?.weakEqual(
                     localAddress
                 ) == true
@@ -109,14 +109,14 @@ class HistoryViewModel
             val state = chatRoom.state
             if (state == ChatRoom.State.Instantiated) return
 
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
             Log.i("$TAG Conversation [$id] (${chatRoom.subjectUtf8}) state changed: [$state]")
 
             if (state == ChatRoom.State.Created) {
                 Log.i("$TAG Conversation [$id] successfully created")
                 chatRoom.removeListener(this)
                 operationInProgress.postValue(false)
-                goToConversationEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                goToConversationEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
             } else if (state == ChatRoom.State.CreationFailed) {
                 Log.e("$TAG Conversation [$id] creation has failed!")
                 chatRoom.removeListener(this)
@@ -204,7 +204,7 @@ class HistoryViewModel
         coreContext.postOnCoreThread {
             val chatRoom = meetingChatRoom
             if (chatRoom != null) {
-                goToMeetingConversationEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                goToMeetingConversationEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
             } else {
                 Log.e("$TAG Failed to find chat room for current call log!")
             }
@@ -242,7 +242,7 @@ class HistoryViewModel
                     chatParams.backend = ChatRoom.Backend.FlexisipChat
                     params.securityLevel = Conference.SecurityLevel.EndToEnd
                 } else if (!account.params.instantMessagingEncryptionMandatory) {
-                    if (LinphoneUtils.isEndToEndEncryptedChatAvailable(core)) {
+                    if (FarcomUtils.isEndToEndEncryptedChatAvailable(core)) {
                         Log.i(
                             "$TAG Account is in interop mode but LIME is available, creating an E2E encrypted conversation"
                         )
@@ -268,11 +268,11 @@ class HistoryViewModel
                 val existingChatRoom = core.searchChatRoom(params, localAddress, null, participants)
                 if (existingChatRoom != null) {
                     Log.i(
-                        "$TAG Found existing conversation [${LinphoneUtils.getConversationId(
+                        "$TAG Found existing conversation [${FarcomUtils.getConversationId(
                             existingChatRoom
                         )}], going to it"
                     )
-                    goToConversationEvent.postValue(Event(LinphoneUtils.getConversationId(existingChatRoom)))
+                    goToConversationEvent.postValue(Event(FarcomUtils.getConversationId(existingChatRoom)))
                 } else {
                     Log.i(
                         "$TAG No existing conversation between [$localSipUri] and [$remoteSipUri] was found, let's create it"
@@ -282,19 +282,19 @@ class HistoryViewModel
                     if (chatRoom != null) {
                         if (chatParams.backend == ChatRoom.Backend.FlexisipChat) {
                             if (chatRoom.state == ChatRoom.State.Created) {
-                                val id = LinphoneUtils.getConversationId(chatRoom)
+                                val id = FarcomUtils.getConversationId(chatRoom)
                                 Log.i("$TAG 1-1 conversation [$id] has been created")
                                 operationInProgress.postValue(false)
-                                goToConversationEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                                goToConversationEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
                             } else {
                                 Log.i("$TAG Conversation isn't in Created state yet, wait for it")
                                 chatRoom.addListener(chatRoomListener)
                             }
                         } else {
-                            val id = LinphoneUtils.getConversationId(chatRoom)
+                            val id = FarcomUtils.getConversationId(chatRoom)
                             Log.i("$TAG Conversation successfully created [$id]")
                             operationInProgress.postValue(false)
-                            goToConversationEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                            goToConversationEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
                         }
                     } else {
                         Log.e(
@@ -319,7 +319,7 @@ class HistoryViewModel
     @WorkerThread
     private fun computeCallLogs() {
         val history = arrayListOf<CallLogHistoryModel>()
-        val account = LinphoneUtils.getDefaultAccount()
+        val account = FarcomUtils.getDefaultAccount()
         account ?: return
 
         val list = account.getCallLogsForAddress(address)

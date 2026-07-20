@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2020 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.utils
+package org.farcom.utils
 
 import android.app.Dialog
 import android.content.Context
@@ -32,47 +32,47 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
-import org.linphone.R
-import org.linphone.databinding.DialogAssistantAcceptConditionsAndPolicyBinding
-import org.linphone.databinding.DialogAssistantCreateAccountConfirmPhoneNumberBinding
-import org.linphone.databinding.DialogCallConfirmTransferBinding
-import org.linphone.databinding.DialogCancelContactChangesBinding
-import org.linphone.databinding.DialogCancelMeetingBinding
-import org.linphone.databinding.DialogConfirmTurningOnVfsBinding
-import org.linphone.databinding.DialogContactConfirmTrustCallBinding
-import org.linphone.databinding.DialogContactTrustProcessBinding
-import org.linphone.databinding.DialogDeleteContactBinding
-import org.linphone.databinding.DialogKickFromConferenceBinding
-import org.linphone.databinding.DialogManageAccountInternationalPrefixHelpBinding
-import org.linphone.databinding.DialogMergeCallsIntoConferenceBinding
-import org.linphone.databinding.DialogOpenExportFileBinding
-import org.linphone.databinding.DialogOpenPlainTextBinding
-import org.linphone.databinding.DialogPickNumberOrAddressBinding
-import org.linphone.databinding.DialogRemoveAccountBinding
-import org.linphone.databinding.DialogRemoveAllCallLogsBinding
-import org.linphone.databinding.DialogRemoveCallLogsBinding
-import org.linphone.databinding.DialogRemoveConversationHistoryBinding
-import org.linphone.databinding.DialogSetOrEditGroupSubjectBindingImpl
-import org.linphone.databinding.DialogStartGroupCallFromConversationBinding
-import org.linphone.databinding.DialogUpdateAccountPasswordAfterRegisterFailureBinding
-import org.linphone.databinding.DialogUpdateAccountPasswordBinding
-import org.linphone.databinding.DialogUpdateAvailableBinding
-import org.linphone.databinding.DialogZrtpSasValidationBinding
-import org.linphone.databinding.DialogZrtpSecurityAlertBinding
-import org.linphone.ui.assistant.model.AcceptConditionsAndPolicyDialogModel
-import org.linphone.ui.call.model.ZrtpAlertDialogModel
-import org.linphone.ui.call.model.ZrtpSasConfirmationDialogModel
-import org.linphone.ui.main.contacts.model.ContactTrustDialogModel
-import org.linphone.ui.main.contacts.model.NumberOrAddressPickerDialogModel
-import org.linphone.ui.main.model.GroupSetOrEditSubjectDialogModel
+import org.farcom.R
+import org.farcom.databinding.DialogAssistantAcceptConditionsAndPolicyBinding
+import org.farcom.databinding.DialogAssistantCreateAccountConfirmPhoneNumberBinding
+import org.farcom.databinding.DialogCallConfirmTransferBinding
+import org.farcom.databinding.DialogCancelContactChangesBinding
+import org.farcom.databinding.DialogCancelMeetingBinding
+import org.farcom.databinding.DialogConfirmTurningOnVfsBinding
+import org.farcom.databinding.DialogContactConfirmTrustCallBinding
+import org.farcom.databinding.DialogContactTrustProcessBinding
+import org.farcom.databinding.DialogDeleteContactBinding
+import org.farcom.databinding.DialogKickFromConferenceBinding
+import org.farcom.databinding.DialogManageAccountInternationalPrefixHelpBinding
+import org.farcom.databinding.DialogMergeCallsIntoConferenceBinding
+import org.farcom.databinding.DialogOpenExportFileBinding
+import org.farcom.databinding.DialogOpenPlainTextBinding
+import org.farcom.databinding.DialogPickNumberOrAddressBinding
+import org.farcom.databinding.DialogRemoveAccountBinding
+import org.farcom.databinding.DialogRemoveAllCallLogsBinding
+import org.farcom.databinding.DialogRemoveCallLogsBinding
+import org.farcom.databinding.DialogRemoveConversationHistoryBinding
+import org.farcom.databinding.DialogSetOrEditGroupSubjectBindingImpl
+import org.farcom.databinding.DialogStartGroupCallFromConversationBinding
+import org.farcom.databinding.DialogUpdateAccountPasswordAfterRegisterFailureBinding
+import org.farcom.databinding.DialogUpdateAccountPasswordBinding
+import org.farcom.databinding.DialogUpdateAvailableBinding
+import org.farcom.databinding.DialogZrtpSasValidationBinding
+import org.farcom.databinding.DialogZrtpSecurityAlertBinding
+import org.farcom.ui.assistant.model.AcceptConditionsAndPolicyDialogModel
+import org.farcom.ui.call.model.ZrtpAlertDialogModel
+import org.farcom.ui.call.model.ZrtpSasConfirmationDialogModel
+import org.farcom.ui.main.contacts.model.ContactTrustDialogModel
+import org.farcom.ui.main.contacts.model.NumberOrAddressPickerDialogModel
+import org.farcom.ui.main.model.GroupSetOrEditSubjectDialogModel
 import androidx.core.graphics.drawable.toDrawable
-import org.linphone.databinding.DialogAssistantCreateAccountPhoneNumberValidationNotAvailableBinding
-import org.linphone.databinding.DialogDeleteMeetingBinding
-import org.linphone.databinding.DialogLeaveGroupConversationBinding
-import org.linphone.databinding.DialogManageAccountOutboundProxyHelpBinding
-import org.linphone.databinding.DialogRemoveCallLogBinding
-import org.linphone.databinding.DialogRemoveConversationBinding
-import org.linphone.databinding.DialogRemoveParticipantFromGroupBinding
+import org.farcom.databinding.DialogAssistantCreateAccountPhoneNumberValidationNotAvailableBinding
+import org.farcom.databinding.DialogDeleteMeetingBinding
+import org.farcom.databinding.DialogLeaveGroupConversationBinding
+import org.farcom.databinding.DialogManageAccountOutboundProxyHelpBinding
+import org.farcom.databinding.DialogRemoveCallLogBinding
+import org.farcom.databinding.DialogRemoveConversationBinding
+import org.farcom.databinding.DialogRemoveParticipantFromGroupBinding
 
 class DialogUtils {
     companion object {
@@ -635,7 +635,7 @@ class DialogUtils {
 
         @UiThread
         private fun getDialog(context: Context, binding: ViewDataBinding): Dialog {
-            val dialog = Dialog(context, R.style.Theme_LinphoneDialog)
+            val dialog = Dialog(context, R.style.Theme_FarcomDialog)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(binding.root)
 

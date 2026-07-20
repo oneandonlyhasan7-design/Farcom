@@ -28,7 +28,7 @@
             type="View.OnClickListener" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.assistant.viewmodel.PermissionsViewModel" />
+            type="org.farcom.ui.assistant.viewmodel.PermissionsViewModel" />
     </data>
 
     <ScrollView

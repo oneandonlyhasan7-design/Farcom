@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.main.settings.viewmodel.SettingsViewModel" />
+            type="org.farcom.ui.main.settings.viewmodel.SettingsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -79,32 +79,32 @@
 
         <com.google.android.material.materialswitch.MaterialSwitch
             style="@style/material_switch_style"
-            android:id="@+id/edit_native_contacts_in_linphone_switch"
-            android:onClick="@{() -> viewModel.toggleEditNativeContactsInLinphone()}"
+            android:id="@+id/edit_native_contacts_in_farcom_switch"
+            android:onClick="@{() -> viewModel.toggleEditNativeContactsInFarcom()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
-            android:checked="@{viewModel.editNativeContactsInLinphone}"
+            android:checked="@{viewModel.editNativeContactsInFarcom}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sort_contacts_by_first_name_spinner" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/settings_title_style"
-            android:onClick="@{() -> viewModel.toggleEditNativeContactsInLinphone()}"
-            android:id="@+id/edit_native_contacts_in_linphone_title"
+            android:onClick="@{() -> viewModel.toggleEditNativeContactsInFarcom()}"
+            android:id="@+id/edit_native_contacts_in_farcom_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="10dp"
-            android:text="@string/settings_contacts_edit_native_contacts_in_linphone_title"
+            android:text="@string/settings_contacts_edit_native_contacts_in_farcom_title"
             android:maxLines="2"
             android:ellipsize="end"
-            android:labelFor="@id/edit_native_contacts_in_linphone_switch"
-            app:layout_constraintTop_toTopOf="@id/edit_native_contacts_in_linphone_switch"
-            app:layout_constraintBottom_toBottomOf="@id/edit_native_contacts_in_linphone_switch"
+            android:labelFor="@id/edit_native_contacts_in_farcom_switch"
+            app:layout_constraintTop_toTopOf="@id/edit_native_contacts_in_farcom_switch"
+            app:layout_constraintBottom_toBottomOf="@id/edit_native_contacts_in_farcom_switch"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/edit_native_contacts_in_linphone_switch"/>
+            app:layout_constraintEnd_toStartOf="@id/edit_native_contacts_in_farcom_switch"/>
 
         <com.google.android.material.materialswitch.MaterialSwitch
             style="@style/material_switch_style"
@@ -116,7 +116,7 @@
             android:layout_marginEnd="16dp"
             android:checked="@{viewModel.hideEmptyContacts}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_native_contacts_in_linphone_switch" />
+            app:layout_constraintTop_toBottomOf="@id/edit_native_contacts_in_farcom_switch" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/settings_title_style"

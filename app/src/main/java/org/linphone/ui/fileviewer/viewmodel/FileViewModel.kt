@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.fileviewer.viewmodel
+package org.farcom.ui.fileviewer.viewmodel
 
 import android.graphics.pdf.PdfRenderer
 import android.net.Uri
@@ -33,12 +33,12 @@ import java.lang.IllegalStateException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.utils.Event
-import org.linphone.utils.FileUtils
-import org.linphone.utils.TimestampUtils
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.utils.Event
+import org.farcom.utils.FileUtils
+import org.farcom.utils.TimestampUtils
 import androidx.core.net.toUri
 import androidx.core.graphics.createBitmap
 

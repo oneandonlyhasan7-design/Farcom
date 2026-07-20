@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
 <!DOCTYPE resources [
-    <!ENTITY appName "Linphone">
+    <!ENTITY appName "Farcom">
 ]>
 
 <resources>
@@ -10,17 +10,17 @@
     <!-- Not translatable strings -->
     <string name="vertical_separator" translatable="false">|</string>
 
-    <string name="assistant_web_platform_link" translatable="false">subscribe.linphone.org</string>
-    <string name="assistant_linphone_contact_us_link" translatable="false">linphone.org/contact</string>
+    <string name="assistant_web_platform_link" translatable="false">subscribe.farcom.org</string>
+    <string name="assistant_farcom_contact_us_link" translatable="false">farcom.org/contact</string>
 
-    <string name="notification_channel_call_id" translatable="false">linphone_6.0_notification_call_id</string>
-    <string name="notification_channel_incoming_call_id" translatable="false">linphone_6.0_notification_incoming_call_id</string>
-    <string name="notification_channel_missed_call_id" translatable="false">linphone_6.0_notification_missed_call_id</string>
-    <string name="notification_channel_service_id" translatable="false">linphone_6.0_notification_service_id</string>
-    <string name="notification_channel_chat_id" translatable="false">linphone_6.0_notification_chat_id</string>
-    <string name="notification_channel_without_ringtone_incoming_call_id" translatable="false">linphone_6.0.1_notification_incoming_call_id</string>
-    <string name="notification_channel_account_error_id" translatable="false">linphone_6.1_account_error_id</string>
-    <string name="notification_channel_call_redirection_id" translatable="false">linphone_6.2_call_redirection_id</string>
+    <string name="notification_channel_call_id" translatable="false">farcom_6.0_notification_call_id</string>
+    <string name="notification_channel_incoming_call_id" translatable="false">farcom_6.0_notification_incoming_call_id</string>
+    <string name="notification_channel_missed_call_id" translatable="false">farcom_6.0_notification_missed_call_id</string>
+    <string name="notification_channel_service_id" translatable="false">farcom_6.0_notification_service_id</string>
+    <string name="notification_channel_chat_id" translatable="false">farcom_6.0_notification_chat_id</string>
+    <string name="notification_channel_without_ringtone_incoming_call_id" translatable="false">farcom_6.0.1_notification_incoming_call_id</string>
+    <string name="notification_channel_account_error_id" translatable="false">farcom_6.1_account_error_id</string>
+    <string name="notification_channel_call_redirection_id" translatable="false">farcom_6.2_call_redirection_id</string>
 
     <string name="emoji_love" translatable="false">❤️</string>
     <string name="emoji_thumbs_up" translatable="false">👍</string>
@@ -30,18 +30,18 @@
 
     <string name="help_about_open_source_licenses_title" translatable="false">GNU General Public License v3.0</string>
     <string name="help_about_open_source_licenses_subtitle" translatable="false">© Belledonne Communications 2010-2025</string>
-    <string name="help_advanced_send_debug_logs_email_address" translatable="false">linphone-android@belledonne-communications.com</string>
+    <string name="help_advanced_send_debug_logs_email_address" translatable="false">farcom-android@belledonne-communications.com</string>
 
-    <string name="website_contact_url" translatable="false">https://linphone.org/contact</string>
-    <string name="website_download_url" translatable="false">https://linphone.org/linphone-softphone</string>
-    <string name="website_user_guide_url" translatable="false">https://linphone.org/en/docs/</string>
-    <string name="website_privacy_policy_url" translatable="false">https://linphone.org/en/privacy-policy</string>
-    <string name="website_terms_and_conditions_url" translatable="false">https://linphone.org/en/terms-of-use</string>
-    <string name="web_platform_register_email_url" translatable="false">https://subscribe.linphone.org/register/email</string>
-    <string name="web_platform_forgotten_password_url" translatable="false">https://subscribe.linphone.org</string>
-    <string name="website_translate_weblate_url" translatable="false">https://weblate.linphone.org/</string>
-    <string name="website_open_source_licences_usage_url" translatable="false">https://wiki.linphone.org/xwiki/wiki/public/view/Linphone/Third%20party%20components%20/#Hlinphone-android</string>
-    <string name="conversation_end_to_end_encrypted_bottom_sheet_link" translatable="false"><u>https://linphone.org/en/features/#security</u></string>
+    <string name="website_contact_url" translatable="false">https://farcom.org/contact</string>
+    <string name="website_download_url" translatable="false">https://farcom.org/farcom-softphone</string>
+    <string name="website_user_guide_url" translatable="false">https://farcom.org/en/docs/</string>
+    <string name="website_privacy_policy_url" translatable="false">https://farcom.org/en/privacy-policy</string>
+    <string name="website_terms_and_conditions_url" translatable="false">https://farcom.org/en/terms-of-use</string>
+    <string name="web_platform_register_email_url" translatable="false">https://subscribe.farcom.org/register/email</string>
+    <string name="web_platform_forgotten_password_url" translatable="false">https://subscribe.farcom.org</string>
+    <string name="website_translate_weblate_url" translatable="false">https://weblate.farcom.org/</string>
+    <string name="website_open_source_licences_usage_url" translatable="false">https://wiki.farcom.org/xwiki/wiki/public/view/Farcom/Third%20party%20components%20/#Hfarcom-android</string>
+    <string name="conversation_end_to_end_encrypted_bottom_sheet_link" translatable="false"><u>https://farcom.org/en/features/#security</u></string>
 
     <string name="conversation_one_to_one_hidden_subject" translatable="false">Dummy subject</string>
 
@@ -150,57 +150,24 @@
     <string name="media_player_generic_error_toast">Error trying to create media player</string>
 
     <!-- Assistant related string (account register / login / etc...) -->
-    <string name="assistant_dialog_general_terms_and_privacy_policy_title">General terms &amp; privacy policy</string>
-    <string name="assistant_dialog_general_terms_label">general terms</string>
-    <string name="assistant_dialog_privacy_policy_label">privacy policy</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_message">By continuing, you accept our %1$s and %2$s.</string>
     <string name="assistant_dialog_confirm_phone_number_title">Confirm phone number</string>
     <string name="assistant_dialog_confirm_phone_number_message">Are you sure your phone number is %s?</string>
     <string name="assistant_dialog_phone_number_validation_not_available_title">Phone number validation not available</string>
     <string name="assistant_dialog_phone_number_validation_not_available_message">Phone number validation is not available, please use email account creation process.</string>
     <string name="assistant_dialog_phone_number_validation_not_available_register_button_label">Register with an email</string>
     <string name="assistant_account_login">Login</string>
-    <string name="assistant_scan_qr_code">Scan QR code</string>
     <string name="assistant_qr_code_invalid_toast">Invalid QR code!</string>
     <string name="assistant_login_third_party_sip_account">Use a third party SIP account</string>
     <string name="assistant_login_third_party_sip_account_title">Third party SIP account</string>
-    <string name="assistant_login_using_single_sign_on">Single sign on</string>
     <string name="assistant_login_cant_parse_address_toast">SIP address is invalid!</string>
     <string name="assistant_login_address_without_username_toast">SIP address doesn\'t contains a username!</string>
     <string name="assistant_account_login_already_connected_error">Account already exists</string>
-    <string name="assistant_no_account_yet">No account yet?</string>
-    <string name="assistant_account_register">Register</string>
-    <string name="assistant_account_creation_sms_confirmation_title">Confirm your phone number</string>
-    <string name="assistant_account_creation_sms_confirmation_explanation">We have sent a verification code on your phone number %1$s.\n\nPlease enter the verification code below:</string>
-    <string name="assistant_account_creation_wrong_phone_number">Wrong number?</string>
-    <string name="assistant_account_create">Create</string>
-    <string name="assistant_create_account_using_email_on_our_web_platform">Create an account with your email on:</string>
-    <string name="assistant_already_have_an_account">Already have an account?</string>
     <string name="assistant_sip_account_transport_protocol">Transport</string>
     <string name="assistant_sip_account_lime_algorithm">LIME algorithm(s) (comma separated)</string>
     <string name="assistant_sip_account_lime_algorithm_hint">Allowed values are: c25519, c448, c25519k512, c25519mlk512 and c448mlk1024</string>
-    <string name="assistant_third_party_sip_account_warning_explanation">Some features require a &appName; account, such as group messaging, video conferences…\n\nThese features are hidden when you register with a third party SIP account.\n\nTo enable it in a commercial project, please contact us.</string>
-    <string name="assistant_third_party_sip_account_create_linphone_account">I prefer to create a &appName; account</string>
-    <string name="assistant_third_party_sip_account_warning_ok">I understand</string>
-    <string name="assistant_account_register_unavailable_no_push_warning">Push notifications do not seem to be available on your device, but they are mandatory for creating an account in the mobile app.\n\nWe invite you to create an account on our web platform instead:</string>
-    <string name="assistant_account_register_push_notification_not_received_error">Push notification with auth token not received in 5 seconds, please try again later</string>
-    <string name="assistant_account_register_unexpected_error">Unexpected error occurred, please try again later</string>
     <string name="assistant_account_login_forbidden_error">Wrong username or password</string>
     <string name="assistant_account_login_error">Failed to login: error code is %s</string>
-    <string name="assistant_permissions_title">Grant permissions</string>
     <string name="assistant_permissions_grant_all_of_them">OK</string>
-    <string name="assistant_permissions_skip_permissions">Do it later</string>
-    <string name="assistant_permissions_subtitle">To fully enjoy &appName; we need you to grant us the following permissions :</string>
-    <string name="assistant_permissions_read_contacts_title"><b>Read contacts:</b> To display your contacts and find whom is using &appName;.</string>
-    <string name="assistant_permissions_post_notifications_title"><b>Post notifications:</b> To be informed when you receive a message or a call.</string>
-    <string name="assistant_permissions_record_audio_title"><b>Record audio:</b> So your correspondent can hear you and to record voice messages.</string>
-    <string name="assistant_permissions_access_camera_title"><b>Access camera:</b> To capture video during video calls and conferences.</string>
-    <string name="assistant_forgotten_password_title">Account recovery</string>
-    <string name="assistant_forgotten_password_subtitle">Choose how to recover your account.</string>
-    <string name="assistant_forgotten_password_message">You created your account using:</string>
-    <string name="assistant_recover_email_account_label">An email</string>
-    <string name="assistant_recover_phone_number_account_label">A phone number</string>
-    <string name="assistant_recover_phone_number_account_unavailable_no_push_warning">Push notifications do not seem to be available on your device, but they are mandatory for recovering a phone number account in the mobile app.</string>
 
     <!-- Main navigation items -->
     <string name="bottom_navigation_contacts_label">Contacts</string>
@@ -285,7 +252,7 @@
     <string name="settings_conversations_hide_message_content_in_notif_title">Do not show message content in Android notification</string>
     <string name="settings_contacts_title">Contacts</string>
     <string name="settings_contacts_sort_by_first_name_title">Sort contacts by</string>
-    <string name="settings_contacts_edit_native_contacts_in_linphone_title">Use &appName; contact editor for native contacts</string>
+    <string name="settings_contacts_edit_native_contacts_in_farcom_title">Use &appName; contact editor for native contacts</string>
     <string name="settings_contacts_hide_empty_contacts_title">Hide contacts without SIP address nor phone number</string>
     <string name="settings_contacts_presence_subscribe_title">Subscribe to presence info</string>
     <string name="settings_contacts_add_ldap_server_title">Add LDAP server</string>
@@ -427,7 +394,7 @@
     <string name="manage_account_device_remove">Remove</string>
     <string name="manage_account_device_last_connection">Last connection:</string>
     <string name="manage_account_dialog_remove_account_title">Sign out of your account?</string>
-    <string name="manage_account_dialog_remove_account_message">If you wish to delete your account permanently, go to: https://sip.linphone.org</string>
+    <string name="manage_account_dialog_remove_account_message">If you wish to delete your account permanently, go to: https://sip.farcom.org</string>
     <string name="manage_account_outbound_proxy">Outbound SIP Proxy</string>
     <string name="manage_account_dialog_outbound_proxy_help_message">If this field is filled, the outbound proxy will be enabled automatically. Leave it empty to disable it.</string>
 
@@ -487,7 +454,7 @@
     <string name="contacts_list_favourites_title">Favourites</string>
     <string name="contacts_list_all_contacts_title">All contacts</string>
     <string name="contacts_list_filter_popup_see_all">See all</string>
-    <string name="contacts_list_filter_popup_see_linphone_only">See &appName; contacts</string>
+    <string name="contacts_list_filter_popup_see_farcom_only">See &appName; contacts</string>
     <string name="contacts_list_filter_popup_see_sip_only">See SIP contacts</string>
     <string name="contacts_list_search_results_limit_reached_label">Search results limit reached, refine your search.</string>
 
@@ -952,7 +919,6 @@
 
     <!-- Keep <u></u> in the following strings translations! -->
     <string name="welcome_carousel_skip"><u>Skip</u></string>
-    <string name="assistant_forgotten_password"><u>Forgotten or unknown password?</u></string>
     <string name="call_zrtp_sas_validation_skip"><u>Skip</u></string>
 
     <!-- Keep <b></b> in the following strings translations! -->

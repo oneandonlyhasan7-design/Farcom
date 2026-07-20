@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources [
-<!ENTITY appName "Linphone">
+<!ENTITY appName "Farcom">
 ]>
 <resources>
     <string name="content_description_schedule_meeting">安排会议</string>
@@ -9,7 +9,6 @@
     <string name="conversation_info_participant_removed_from_conversation_toast">从聊天中移除了%s</string>
     <string name="content_description_call_voicemail">长按可拨打语音信箱</string>
     <string name="conversation_dialog_open_or_export_file_message">&appName;无法打开此文件。\n\n您想在另一个应用程序中打开它（如果可能的话），还是在您的设备上导出它？</string>
-    <string name="assistant_permissions_read_contacts_title"><b>读取联系人：</b>显示您的联系人并查找谁在使用 &appName;。</string>
     <string name="conversation_reply_to_message_title">回复：</string>
     <string name="conversation_message_forward_cancelled_toast">转发消息已经取消</string>
     <string name="call_state_outgoing_progress">进行中</string>
@@ -114,39 +113,18 @@
     <string name="remote_provisioning_config_applied_toast">配置已成功应用</string>
     <string name="remote_provisioning_config_failed_toast">尝试下载和应用远程配置时出错</string>
     <string name="media_player_generic_error_toast">尝试创建媒体播放器时出错</string>
-    <string name="assistant_dialog_general_terms_label">通用条款</string>
     <string name="assistant_qr_code_invalid_toast">无效二维码！</string>
-    <string name="assistant_permissions_subtitle">充分享受&appName;我们需要您授予我们以下权限：</string>
-    <string name="assistant_third_party_sip_account_create_linphone_account">我更喜欢创建一个&appName;账户</string>
     <string name="assistant_dialog_confirm_phone_number_title">确认电话号码</string>
     <string name="assistant_dialog_confirm_phone_number_message">您确定您的电话号码是%s吗？</string>
     <string name="assistant_account_login">登录</string>
-    <string name="assistant_scan_qr_code">扫描二维码</string>
     <string name="assistant_login_third_party_sip_account">使用第三方SIP账户</string>
     <string name="assistant_login_third_party_sip_account_title">第三方SIP账户</string>
-    <string name="assistant_login_using_single_sign_on">单点登录</string>
     <string name="assistant_login_cant_parse_address_toast">SIP地址无效！</string>
     <string name="assistant_account_login_already_connected_error">账户已存在</string>
-    <string name="assistant_account_register">注册</string>
-    <string name="assistant_account_creation_sms_confirmation_title">确认您的电话号码</string>
-    <string name="assistant_account_creation_wrong_phone_number">错误的电话号码？</string>
-    <string name="assistant_account_create">创建</string>
-    <string name="assistant_create_account_using_email_on_our_web_platform">使用您的电子邮件在以下网址创建账户：</string>
     <string name="assistant_sip_account_transport_protocol">传输</string>
-    <string name="assistant_third_party_sip_account_warning_ok">我明白</string>
-    <string name="assistant_account_register_unavailable_no_push_warning">推送通知似乎在您的设备上不可用，但在移动应用程序中创建账户时必须使用推送通知。\n\n我们邀请您在我们的网络平台上创建一个账户：</string>
-    <string name="assistant_account_register_push_notification_not_received_error">5秒内未收到带有身份验证令牌的推送通知，请稍后重试</string>
-    <string name="assistant_account_register_unexpected_error">发生意外错误，请稍后重试</string>
     <string name="assistant_account_login_forbidden_error">用户名或密码错误</string>
     <string name="assistant_account_login_error">登录失败：错误代码为%s</string>
-    <string name="assistant_permissions_title">授予权限</string>
     <string name="assistant_permissions_grant_all_of_them">OK</string>
-    <string name="assistant_permissions_skip_permissions">以后再说</string>
-    <string name="assistant_permissions_post_notifications_title"><b>发布通知：</b>当您收到消息或通话时收到通知。</string>
-    <string name="assistant_permissions_access_camera_title"><b>访问摄像头：</b>在视频通话和会议期间捕获视频。</string>
-    <string name="assistant_forgotten_password_title">忘记密码</string>
-    <string name="assistant_no_account_yet">还没有账户？</string>
-    <string name="assistant_already_have_an_account">已经有账户了？</string>
     <string name="drawer_menu_account_connection_status_progress">正在连接…</string>
     <string name="help_about_privacy_policy_subtitle">什么信息&appName;收集和使用</string>
     <string name="help_about_contribute_translations_title">在&appName;上投稿翻译</string>
@@ -175,10 +153,6 @@
     <string name="help_troubleshooting_debug_logs_cleaned_toast_message">调试日志已清理</string>
     <string name="help_troubleshooting_debug_logs_upload_error_toast_message">上传调试日志失败</string>
     <string name="help_troubleshooting_show_config_file">显示配置</string>
-    <string name="assistant_forgotten_password_message">您使用以下方式创建了账户：</string>
-    <string name="assistant_recover_phone_number_account_label">电话号码</string>
-    <string name="assistant_recover_email_account_label">电子邮箱</string>
-    <string name="assistant_recover_phone_number_account_unavailable_no_push_warning">推送通知似乎在您的设备上不可用，但它们是在移动应用程序中恢复电话号码账户所必需的。</string>
     <string name="bottom_navigation_contacts_label">联系人</string>
     <string name="bottom_navigation_calls_label">通话</string>
     <string name="bottom_navigation_conversations_label">聊天</string>
@@ -302,7 +276,7 @@
     <string name="manage_account_device_remove">删除</string>
     <string name="manage_account_device_last_connection">上次连接：</string>
     <string name="manage_account_dialog_remove_account_title">退出登录并注销您的账户（该账户信息会被清除）？</string>
-    <string name="manage_account_dialog_remove_account_message">如果您想永久删除您的账户，请转到：https://sip.linphone.org</string>
+    <string name="manage_account_dialog_remove_account_message">如果您想永久删除您的账户，请转到：https://sip.farcom.org</string>
     <string name="account_settings_title">账户设置</string>
     <string name="account_settings_push_notification_title">允许推送通知</string>
     <string name="account_settings_push_notification_not_available_title">推送通知不可用！</string>
@@ -333,7 +307,7 @@
     <string name="history_call_start_search_bar_filter_hint">搜索联系人或历史通话记录</string>
     <string name="history_call_start_create_group_call">创建群组呼叫</string>
     <string name="contact_edit_title">编辑联系人</string>
-    <string name="contacts_list_filter_popup_see_linphone_only">查看&appName;联系人</string>
+    <string name="contacts_list_filter_popup_see_farcom_only">查看&appName;联系人</string>
     <string name="contacts_list_favourites_title">收藏夹</string>
     <string name="contact_sms_invite_content">您好，加入我的&appName;！您可以在%s免费下载</string>
     <string name="history_group_call_start_dialog_set_subject">设置组呼主题</string>
@@ -651,7 +625,6 @@
     <string name="menu_delete_selected_item">删除</string>
     <string name="menu_invite">邀请</string>
     <string name="menu_resend_chat_message">重新发送</string>
-    <string name="assistant_forgotten_password"><u> 忘记密码？</u></string>
     <string name="menu_reply_to_chat_message">回复</string>
     <string name="menu_forward_chat_message">转发</string>
     <string name="menu_copy_chat_message">复制</string>
@@ -765,14 +738,11 @@
     <string name="settings_advanced_upload_server_url">文件共享服务器URL</string>
     <string name="manage_account_e2e_encrypted_mode_default_summary">此模式保证您的数据机密性。我们的端到端加密技术为您的通信提供最高级别的安全保障。</string>
     <string name="contact_editor_dialog_abort_confirmation_title">不保存更改？</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_message">继续，即表示您接受我们的%1$s和%2$s。</string>
-    <string name="assistant_third_party_sip_account_warning_explanation">某些功能需要&appName;账户，如群消息、视频会议…\n\n当您使用第三方SIP账户注册时，这些功能将被隐藏。\n\n要在商业项目中启用它，请联系我们。</string>
     <string name="notification_channel_service_desc">此服务将一直运行，以保持应用程序的活动状态，并允许您接收来电和消息。</string>
     <string name="drawer_menu_no_account_configured_yet">没有配置账户</string>
     <string name="settings_conversations_mark_as_read_when_dismissing_notif_title">在取消消息通知时将聊天标记为已读</string>
     <string name="settings_advanced_enable_auto_answer_incoming_calls_after_delay_title">自动应答呼叫前的延迟</string>
     <string name="history_dialog_delete_call_logs_title">您真的要删除与该人的历史记录吗？</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_title">通用条款和隐私政策</string>
     <string name="welcome_page_1_message">一款 <b>安全</b>、<b>开源</b> 、<b>法国</b> 通讯应用app。</string>
     <string name="drawer_menu_manage_account">管理个人资料</string>
     <string name="settings_advanced_use_smff_format_for_call_recordings_subtitle">将使用专有文件格式</string>
@@ -780,17 +750,13 @@
     <string name="account_settings_dialog_invalid_password_message">连接失败，因为账户缺少身份验证或身份验证无效。\n%s\n\n您可以再次提供密码，或在设置中检查您的账户配置。</string>
     <string name="settings_security_enable_vfs_subtitle">警告：一旦启用，就不能禁用！</string>
     <string name="settings_contacts_carddav_deleted_toast">CardDAV账户已删除</string>
-    <string name="assistant_dialog_privacy_policy_label">隐私政策</string>
     <string name="assistant_login_address_without_username_toast">SIP地址不包含用户名！</string>
     <string name="settings_contacts_carddav_mandatory_field_not_filled_toast">请至少填写昵称和服务器URL</string>
     <string name="account_settings_conference_factory_uri_title">会议工厂URI</string>
     <string name="history_call_start_no_suggestion_nor_contact">目前没有建议，也没有联系人…</string>
     <string name="contact_editor_job_title">职位</string>
     <string name="contact_details_add_to_favourites">添加到收藏夹</string>
-    <string name="assistant_account_creation_sms_confirmation_explanation">我们已给您的电话号码%1$s发送了验证码。\n\n请在下面输入验证码：</string>
-    <string name="assistant_forgotten_password_subtitle">选择如何恢复您的账户。</string>
     <string name="conversation_failed_to_add_participant_to_group_conversation_toast">未能将参与者添加到聊天中</string>
-    <string name="assistant_permissions_record_audio_title"><b>录制音频：</b>这样您的对话方就可以听到您的声音并录制语音信息。</string>
     <string name="call_remotely_ended">对方已结束通话</string>
     <string name="calls_list_dialog_merge_into_conference_title">将所有通话合并到会议中？</string>
     <string name="network_is_not_wifi">仅支持Wi-Fi模式</string>

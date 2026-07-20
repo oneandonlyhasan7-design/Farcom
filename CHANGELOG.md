@@ -14,7 +14,7 @@ Group changes to describe their impact on the project, as follows:
 
 ### Added
 - Client secret support to OIDC authentication
-- Call Redirection Service APIs allowing to redirect a GSM call to a SIP address via Linphone
+- Call Redirection Service APIs allowing to redirect a GSM call to a SIP address via Farcom
 
 ## [6.2.3] - 2026-07-07
 
@@ -74,7 +74,7 @@ Group changes to describe their impact on the project, as follows:
   - one for user to choose whether to sort contacts by first name or last name
   - one to hide contacts that have neither a SIP address nor a phone number
   - one to let app auto-answer call with video sending already enabled
-  - one to let edit native contacts Linphone copy in-app instead of opening native addressbook third party app
+  - one to let edit native contacts Farcom copy in-app instead of opening native addressbook third party app
   - one to show past meetings (they are now hidden by default)
   - one to hide received message content in android notification
   - possibility to choose between RFC2833 and SIP INFO for DTMFs
@@ -94,7 +94,7 @@ Group changes to describe their impact on the project, as follows:
 - Improved UI on tablets with screen sw600dp and higher, will look more like our desktop app
 - Improved navigation within app when using a keyboard
 - Now loading media/documents contents in conversation by chunks (instead of all of them at once)
-- If in-call foreground service doesn't start, show an error notification and clicking on it will fix the issue (by bringing Linphone in foreground and re-starting the foreground service)
+- If in-call foreground service doesn't start, show an error notification and clicking on it will fix the issue (by bringing Farcom in foreground and re-starting the foreground service)
 - Restart keep-alive service foreground notification if it's dismissed to ensure app will be kept alive in background
 - Simplified audio device name in settings
 - Reworked some settings (moved calls related ones from advanced settings to advanced calls settings)
@@ -112,7 +112,7 @@ Group changes to describe their impact on the project, as follows:
 
 ### Fixed
 - Prevent crash & background mode from turning on when doing a remote provisioning if an account is already configured
-- Prevent app from sending all phone numbers & SIP addresses to sip.linphone.org presence server for long term presence feature if account is not sip.linphone.org
+- Prevent app from sending all phone numbers & SIP addresses to sip.farcom.org presence server for long term presence feature if account is not sip.farcom.org
 - Fixed SIP address picker not showing up in call transfer view when selecting a contact with more than 1 SIP address
 - Prevent incoming call notification from staying visible and answer button from doing nothing after answering incoming conference call
 - Copy raw message content instead of modified one when it contains a participant mention ("@username")
@@ -135,7 +135,7 @@ Group changes to describe their impact on the project, as follows:
 ## [6.0.21] - 2025-12-16
 
 ### Added
-- Allow linphone-config: scheme URIs in in-app QR code scanner
+- Allow farcom-config: scheme URIs in in-app QR code scanner
 
 ### Changed
 - Workaround for audio focus & audio manager mode on devices that do not support TelecomManager APIs
@@ -145,7 +145,7 @@ Group changes to describe their impact on the project, as follows:
 ### Fixed
 - Fixed call recording indicator not showing local record in progress in case UPDATE isn't answered
 - Fixed native addressbook reload when a contact is updated in the OS default app
-- Fixed issue with linphone-config scheme URIs if scheme is followed by "//"
+- Fixed issue with farcom-config scheme URIs if scheme is followed by "//"
 - Fixed Job & Company contact field not updated if field content was removed
 - Fixed local avatar not displayed when calling ourselves
 - Prevent crashes due to some ActivityNotFound exceptions
@@ -175,7 +175,7 @@ Group changes to describe their impact on the project, as follows:
 - Possible crash due to ConcurrentModificationException
 - Camera preview in conference that was black sometimes after switching layout
 - Possibly wrong screen sharing participant name in conference
-- Presence SUBSCRIBE that was only sent for sip.linphone.org accounts
+- Presence SUBSCRIBE that was only sent for sip.farcom.org accounts
 - Keyboard suggestions in participant picker textfield
 - Account labelled as Disabled instead of Disconnected when network isn't reachable
 - Suggestions generated avatar if username starts with '+'
@@ -219,7 +219,7 @@ Group changes to describe their impact on the project, as follows:
 ## [6.0.15] - 2025-08-11
 
 ### Fixed
-- Crash due to changes in SDK triggering fatal error if linphone_core_stop() is called from linphone_core_iterate() loop (which was done when scanning QR code)
+- Crash due to changes in SDK triggering fatal error if farcom_core_stop() is called from farcom_core_iterate() loop (which was done when scanning QR code)
 
 ### Changed
 - Prevent leaving assistant after doing a remote provisioning if there is still no account after it (if there was no account before and no account was provided in downloaded config)
@@ -416,7 +416,7 @@ Group changes to describe their impact on the project, as follows:
 - Fixed contact lookup if phone number starts by "00" instead of "+"
 - Fixed "delete all call history" sometimes not removing all call logs
 - Fixed LDAP / remote CardDAV contacts sometimes not displayed in contacts list when doing a search
-- Fixed issue where contact filter could be set to only show sip.linphone.org contacts even when third party account was being selected
+- Fixed issue where contact filter could be set to only show sip.farcom.org contacts even when third party account was being selected
 - Fixed sometimes wrong displayed SIP URI in detailed call history
 - Fixed invisible meeting icon in status bar
 - Fixed missed call count indicator behavior with some third party providers
@@ -431,7 +431,7 @@ Group changes to describe their impact on the project, as follows:
 - Start at boot & auto answer settings added back
 - Interface setting to have dialpad automatically opened in start call view
 - Replace "+" by "00" and do not apply prefix for calls & chat account settings
-- Setting to let user choose whether to record calls using MKV or SMFF format (the later allows to record H265/AV1 video but is a proprietary file format that can't be read outside of Linphone)
+- Setting to let user choose whether to record calls using MKV or SMFF format (the later allows to record H265/AV1 video but is a proprietary file format that can't be read outside of Farcom)
 
 ### Changed
 - Reverted the way of playing incoming call ringone (you may have to configure your own ringtone again), was causing various issues depending on devices/firmwares
@@ -449,7 +449,7 @@ Group changes to describe their impact on the project, as follows:
 
 ## [6.0.0] - 2025-03-11
 
-6.0.0 release is a complete rework of Linphone Android, with a fully redesigned UI, so it is impossible to list everything here.
+6.0.0 release is a complete rework of Farcom Android, with a fully redesigned UI, so it is impossible to list everything here.
 
 ### Changed
 - Separated threads: Contrary to previous versions, our SDK is now running in it's own thread, meaning it won't freeze the UI anymore in case of heavy work, thus reducing the number of ANR and greatly increasing the fluidity of the app.
@@ -464,7 +464,7 @@ Group changes to describe their impact on the project, as follows:
 - Account creation no longer allows you to use your phone number as username, but it is still required to provide it to receive activation code by SMS.
 - Minimum supported Android OS version is now 9 (API level 28).
 - Telecom Manager support is now based on androidx.core.core-telecom package.
-- Some settings have changed name and/or section in linphonerc file.
+- Some settings have changed name and/or section in farcomrc file.
 
 ### Added
 - Contacts trust: contacts for which all devices have been validated through a ZRTP call with SAS exchange are now highlighted with a blue circle (and with a red one in case of mistrust). That trust is now handled at contact level (instead of conversation level in previous versions).
@@ -480,18 +480,18 @@ Group changes to describe their impact on the project, as follows:
 - Screen sharing in conference: only desktop app starting with 6.0 version is able to start it, but on mobiles you'll be able to see it.
 - You can choose whatever ringtone you'd like for incoming calls (in Android notification channel settings).
 - Security focus: security & trust is more visible than ever, and unsecure conversations & calls are even more visible than before.
-- CardDAV: you can configure as many CardDAV servers you want to synchronize you contacts in Linphone (in addition or in replacement of native addressbook import).
+- CardDAV: you can configure as many CardDAV servers you want to synchronize you contacts in Farcom (in addition or in replacement of native addressbook import).
 - OpenID: when used with a SSO compliant SIP server (such as Flexisip), we support single-sign-on login.
 - MWI support: display and allow to call your voicemail when you have new messages (if supported by your VoIP provider and properly configured in your account params).
 - CCMP support: if you configure a CCMP server URL in your accounts params, it will be used when scheduling meetings & to fetch list of meetings you've organized/been invited to.
-- Devices list: check on which device your sip.linphone.org account is connected and the last connection date & time (like on subscribe.linphone.org).
+- Devices list: check on which device your sip.farcom.org account is connected and the last connection date & time (like on subscribe.farcom.org).
 - Protobuf dependency to allow logging native crashes stack traces at next app startup.
 - Android 15 startup listener, allowing us to log type of start (cold, warm, etc...) and some other useful info.
 - Dialer & in-call numpad show letters under the digit.
 
 ### Removed
 - Dialer: the previous home screen (dialer) has been removed, you'll find it as an input option in the new start call screen.
-- Peer-to-peer: a SIP account (sip.linphone.org or other) is now required.
+- Peer-to-peer: a SIP account (sip.farcom.org or other) is now required.
 - Contacts: we no longer add contacts created in-app in the native addressbook (WRITE_CONTACTS permission was removed), but we still import them if you grant us the READ_CONTACTS permission.
 
 ### Fixed
@@ -584,7 +584,7 @@ and also use the same device for input and output if the one set as output as RE
 ## [5.1.0] - 2023-08-21
 
 ### Added
-- Showing short term presence for contacts whom publish it + added setting to disable it (enabled by default for sip.linphone.org accounts)
+- Showing short term presence for contacts whom publish it + added setting to disable it (enabled by default for sip.farcom.org accounts)
 - Confirmation dialog before removing account
 - Attended transfer instead of blind transfer if there is more than 1 call
 - Last sent message delivery status (IMDN) icon in chat rooms list
@@ -735,7 +735,7 @@ and also use the same device for input and output if the one set as output as RE
 - Export files to native gallery is now available even if automatically download files setting is enabled
 
 ### Fixed
-- Makes sure sip.linphone.org accounts have a LIME X3DH server URL for E2E chat messages encryption
+- Makes sure sip.farcom.org accounts have a LIME X3DH server URL for E2E chat messages encryption
 - Files not being exported to native gallery sometimes
 - Crashes reported by Google Play Store & Crashlytics
 
@@ -759,7 +759,7 @@ and also use the same device for input and output if the one set as output as RE
 - When a message is received wait a short amount of time to check if more are to be received to notify them all at once
 - Outgoing call video in early-media if requested by callee
 - Image & Video in-app viewers allow for full-screen display
-- Display name can be set during assistant when creating / logging in a sip.linphone.org account
+- Display name can be set during assistant when creating / logging in a sip.farcom.org account
 - Android 13 support, using new post notifications & media permissions
 - Call recordings can be exported
 - Setting to prevent international prefix from account to be applied to call & chat
@@ -789,7 +789,7 @@ and also use the same device for input and output if the one set as output as RE
 - Issues when storing presence in native contacts + potentially duplicated SIP addresses in contact details
 - Chat room scroll position lost when going into sub-view
 - Trim user input to remove any space at end of string due to keyboard auto completion
-- No longer makes requests to our LIME server (end-to-end encryption keys server) for non sip.linphone.org accounts
+- No longer makes requests to our LIME server (end-to-end encryption keys server) for non sip.farcom.org accounts
 - Fixed incoming call/notification not ringing if Do not Disturb mode is enabled except for favorite contacts
 
 ## [4.6.14] - 2022-09-19
@@ -866,7 +866,7 @@ and also use the same device for input and output if the one set as output as RE
 ## [4.6.6] - 2022-04-26
 
 ### Changed
-- Prevent requests to LIME X3DH & long term presence servers when not using a sip.linphone.org account
+- Prevent requests to LIME X3DH & long term presence servers when not using a sip.farcom.org account
 - Updated DE & RU translations
 - Improved UI on landscape tablets
 
@@ -919,7 +919,7 @@ and also use the same device for input and output if the one set as output as RE
 
 ### Added
 - Request BLUETOOTH_CONNECT permission on Android 12+ devices, if not we won't be notified when a BT device is being connected/disconnected while app is alive.
-- LDAP settings if SDK is built with OpenLDAP (requires 5.1.1 or higher linphone-sdk), will add contacts if any
+- LDAP settings if SDK is built with OpenLDAP (requires 5.1.1 or higher farcom-sdk), will add contacts if any
 - SIP addresses & phone numbers can be selected in history & contact details view
 - Text can be selected in file viewer & config viewer
 - Prevent screen to turn off while recording a voice message
@@ -929,7 +929,7 @@ and also use the same device for input and output if the one set as output as RE
 
 ### Fixed
 - Negative gain in audio settings is allowed again
-- STUN server URL setting not enabling it for non sip.linphone.org accounts
+- STUN server URL setting not enabling it for non sip.farcom.org accounts
 - Contacts list header case comparison
 - Stop voice recording playback when sending chat message
 - Call activity not finishing when hanging up sometimes
@@ -959,7 +959,7 @@ and also use the same device for input and output if the one set as output as RE
 - Setting to automatically record all calls
 - When using a physical keyboard, use left control + enter keys to send message
 - Using CallStyle notifications for calls for devices running Android 12 or newer
-- New fragment explaining generic SIP account limitations contrary to sip.linphone.org SIP accounts
+- New fragment explaining generic SIP account limitations contrary to sip.farcom.org SIP accounts
 - Link to Weblate added in about page
 
 ### Changed
@@ -1048,7 +1048,7 @@ This version is a full rewrite of the app in kotlin, using modern Android compon
 
 ### Added
 
-- Using linphone SDK 5.0 API to better handle audio route (see linphone-sdk changelog)
+- Using farcom SDK 5.0 API to better handle audio route (see farcom-sdk changelog)
 - All files used by the app can now be encrypted for more security (VFS setting)
 - In-app file viewers for PDFs, images, videos, sounds and texts
 - Ephemeral messages
@@ -1069,8 +1069,8 @@ This version is a full rewrite of the app in kotlin, using modern Android compon
 
 ### Changed
 
-- Call history view groups call from the same SIP URI (like linphone-iphone)
-- Reworked conference (using new linphone-sdk APIs)
+- Call history view groups call from the same SIP URI (like farcom-iphone)
+- Reworked conference (using new farcom-sdk APIs)
 - Route audio to headset / headphones / bluetooth device automatically when available
 - Send logs / Reset logs buttons moved from About page to Advanced Settings like iOS
 - Improved how Android native contacts are used
@@ -1170,16 +1170,16 @@ This version is a full rewrite of the app in kotlin, using modern Android compon
 - Enhanced call and IM notifications, so that it is possible to answer, decline, reply or mark as read directly from them.
 - Setting to request attachments to be automatically downloaded, unconditionnally or based on their size.
 - Possibility to send multiple attachments (images, documents) in a same message.
-- Possibility to share multiple images through Linphone from an external application (ex: photo app)
+- Possibility to share multiple images through Farcom from an external application (ex: photo app)
 - Rich input from keyboard (images, animated gifs...) when composing messages.
 - Rendering of animated gifs in conversations.
-- Button to invite contacts to use Linphone by sending them a SMS.
+- Button to invite contacts to use Farcom by sending them a SMS.
 - Possibility to record calls (audio only), and replay them from the "Recordings" menu.
 - Remote provisioning from a QR code providing the http(s) url of a provisioning server.
 - Option for a dark theme
 
 ### Changed
-- Compilation procedure is simplified: a binary SDK containing dependencies (liblinphone) is retrieved automatically from a Maven repository.
+- Compilation procedure is simplified: a binary SDK containing dependencies (libfarcom) is retrieved automatically from a Maven repository.
   Full compilation remains absolutely supported. Please check local README.md for more details.
 - Updated translations, mainly French and English.
 - Call history view shows last calls for a given contact.
@@ -1193,7 +1193,7 @@ This version is a full rewrite of the app in kotlin, using modern Android compon
 
 ### Deprecated
 - The video rendering method based on GL2JNIView is deprecated in favour of TextureView, which is easier to use.
-  Please read [this article](https://wiki.linphone.org/xwiki/wiki/public/view/Lib/Features/Android%20TextureView%20Display/) for more information.
+  Please read [this article](https://wiki.farcom.org/xwiki/wiki/public/view/Lib/Features/Android%20TextureView%20Display/) for more information.
 
 ### Fixed
 - One to one text conversations mixed up when initiated from differents SIP accounts. 
@@ -1209,12 +1209,12 @@ This version is a full rewrite of the app in kotlin, using modern Android compon
 ## [4.0.0] - 2018-06-15
 
 ### Added
-- Group chat between linphone.org SIP accounts.
-- new JAVA/JNI wrapper. This new wrapper is automatically generated from liblinphone C API. It breaks compatibility with previous, hand-made wrapper.
-  (more information about new wrapper [here.](https://wiki.linphone.org/xwiki/wiki/public/view/Lib/Linphone%20%28Android%29%20Java%20wrapper/) )
+- Group chat between farcom.org SIP accounts.
+- new JAVA/JNI wrapper. This new wrapper is automatically generated from libfarcom C API. It breaks compatibility with previous, hand-made wrapper.
+  (more information about new wrapper [here.](https://wiki.farcom.org/xwiki/wiki/public/view/Lib/Farcom%20%28Android%29%20Java%20wrapper/) )
 
 ### Deprecated
-- hand-made java API in submodules/linphone/java is deprecated. However it is still possible to use it by checking out the 3.4.x branch of linphone-android.
+- hand-made java API in submodules/farcom/java is deprecated. However it is still possible to use it by checking out the 3.4.x branch of farcom-android.
 
 ### Fixed
 - issue with changing push notification token not passed to library, possibly resulting in a loss of incoming calls.
@@ -1223,7 +1223,7 @@ This version is a full rewrite of the app in kotlin, using modern Android compon
 
 ### Added
 - Integration with Android O
-- New video adaptive bitrate algorithm(More informations [here](https://wiki.linphone.org/xwiki/wiki/public/view/FAQ/How%20does%20adaptive%20bitrate%20algorithm%20work%20%3F/))
+- New video adaptive bitrate algorithm(More informations [here](https://wiki.farcom.org/xwiki/wiki/public/view/FAQ/How%20does%20adaptive%20bitrate%20algorithm%20work%20%3F/))
 
 ### Changed
 - Application is no more managing in-call wakelock, it's now managed by the library
@@ -1243,7 +1243,7 @@ This version is a full rewrite of the app in kotlin, using modern Android compon
 
 ### Added
 - Notification of message reading on chat
-- New permission to kill linphone app
+- New permission to kill farcom app
 
 ### Fixed
 - Crash with firebase push
@@ -1255,15 +1255,15 @@ This version is a full rewrite of the app in kotlin, using modern Android compon
 - Doze mode(energy saving) button in Network settings
 
 ### Changed
-- Migrate Linphone build from ANT to gradle
+- Migrate Farcom build from ANT to gradle
 - No pause VOIP Call on incoming GSM call until we off hook this
-- Subscription friends list enabled by default only for linphone domain
+- Subscription friends list enabled by default only for farcom domain
 
 ### Fixed
 - Rotation after screen locking
 - Contacts background task
-- No more asking phone number for non-linphone domain
-- Bug with Linphone credential login
+- No more asking phone number for non-farcom domain
+- Bug with Farcom credential login
 
 ## [Unreleased]
 

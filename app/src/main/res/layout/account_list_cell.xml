@@ -5,10 +5,10 @@
 
     <data>
         <import type="android.view.View" />
-        <import type="org.linphone.core.RegistrationState" />
+        <import type="org.farcom.core.RegistrationState" />
         <variable
             name="model"
-            type="org.linphone.ui.main.model.AccountModel" />
+            type="org.farcom.ui.main.model.AccountModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,10 +7,10 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.call.viewmodel.CurrentCallViewModel" />
+            type="org.farcom.ui.call.viewmodel.CurrentCallViewModel" />
         <variable
             name="numpadModel"
-            type="org.linphone.ui.main.history.model.NumpadModel" />
+            type="org.farcom.ui.main.history.model.NumpadModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -83,7 +83,7 @@
                     android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.displayedAddress, default=`sip:johndoe@sip.linphone.org`}"
+                    android:text="@{viewModel.displayedAddress, default=`sip:johndoe@sip.farcom.org`}"
                     android:textColor="@color/bc_white"
                     android:textSize="14sp"
                     android:visibility="@{viewModel.hideSipAddresses ? View.GONE : View.VISIBLE}" />
@@ -118,7 +118,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/name_address" />
 
             <!--suppress AndroidUnknownAttribute -->
-            <org.linphone.ui.call.view.RoundCornersTextureView
+            <org.farcom.ui.call.view.RoundCornersTextureView
                 android:id="@+id/local_preview_video_surface"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

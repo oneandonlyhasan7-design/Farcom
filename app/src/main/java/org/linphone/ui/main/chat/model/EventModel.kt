@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,17 +17,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.chat.model
+package org.farcom.ui.main.chat.model
 
 import android.graphics.drawable.Drawable
 import androidx.annotation.WorkerThread
 import androidx.core.content.res.ResourcesCompat
 import java.util.Locale
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.R
-import org.linphone.core.EventLog
-import org.linphone.utils.AppUtils
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.R
+import org.farcom.core.EventLog
+import org.farcom.utils.AppUtils
+import org.farcom.utils.FarcomUtils
 
 class EventModel
     @WorkerThread
@@ -82,7 +82,7 @@ class EventModel
             )
             EventLog.Type.ConferenceEphemeralMessageLifetimeChanged -> AppUtils.getFormattedString(
                 R.string.conversation_event_ephemeral_messages_lifetime_changed,
-                LinphoneUtils.formatEphemeralExpiration(eventLog.ephemeralMessageLifetime).lowercase(
+                FarcomUtils.formatEphemeralExpiration(eventLog.ephemeralMessageLifetime).lowercase(
                     Locale.getDefault()
                 )
             )

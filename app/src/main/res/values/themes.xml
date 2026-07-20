@@ -1,12 +1,12 @@
 <resources>
     <style name="AppSplashScreenTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/bc_white</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/linphone_splashscreen</item>
-        <item name="postSplashScreenTheme">@style/Theme.Linphone</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/farcom_splashscreen</item>
+        <item name="postSplashScreenTheme">@style/Theme.Farcom</item>
     </style>
 
     <!-- Base application theme. -->
-    <style name="Theme.Linphone" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Farcom" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- https://developer.android.com/guide/topics/display-cutout#best_practices_for_display_cutout_support -->
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <!-- Customize your theme here. -->
@@ -92,102 +92,102 @@
         <item name="color_bottom_sheet_disabled_menu">@color/gray_200</item>
     </style>
 
-    <style name="Theme.LinphoneTerracotta" parent="Theme.Linphone">
+    <style name="Theme.FarcomTerracotta" parent="Theme.Farcom">
         <item name="color_main1_100">@color/terracotta_main_100</item>
         <item name="color_main1_500">@color/terracotta_main_500</item>
         <item name="color_chat_bubble_outgoing">@color/terracotta_main_100</item>
     </style>
 
-    <style name="Theme.LinphoneLavender" parent="Theme.Linphone">
+    <style name="Theme.FarcomLavender" parent="Theme.Farcom">
         <item name="color_main1_100">@color/lavender_main_100</item>
         <item name="color_main1_500">@color/lavender_main_500</item>
         <item name="color_chat_bubble_outgoing">@color/lavender_main_100</item>
     </style>
 
-    <style name="Theme.LinphoneHoney" parent="Theme.Linphone">
+    <style name="Theme.FarcomHoney" parent="Theme.Farcom">
         <item name="color_main1_100">@color/honey_main_100</item>
         <item name="color_main1_500">@color/honey_main_500</item>
         <item name="color_chat_bubble_outgoing">@color/honey_main_100</item>
     </style>
 
-    <style name="Theme.LinphoneBurgundy" parent="Theme.Linphone">
+    <style name="Theme.FarcomBurgundy" parent="Theme.Farcom">
         <item name="color_main1_100">@color/burgundy_main_100</item>
         <item name="color_main1_500">@color/burgundy_main_500</item>
         <item name="color_chat_bubble_outgoing">@color/burgundy_main_100</item>
     </style>
 
-    <style name="Theme.LinphoneMint" parent="Theme.Linphone">
+    <style name="Theme.FarcomMint" parent="Theme.Farcom">
         <item name="color_main1_100">@color/mint_main_100</item>
         <item name="color_main1_500">@color/mint_main_500</item>
         <item name="color_chat_bubble_outgoing">@color/mint_main_100</item>
     </style>
 
-    <style name="Theme.LinphoneCoral" parent="Theme.Linphone">
+    <style name="Theme.FarcomCoral" parent="Theme.Farcom">
         <item name="color_main1_100">@color/coral_main_100</item>
         <item name="color_main1_500">@color/coral_main_500</item>
         <item name="color_chat_bubble_outgoing">@color/coral_main_100</item>
     </style>
 
-    <style name="Theme.LinphonePlum" parent="Theme.Linphone">
+    <style name="Theme.FarcomPlum" parent="Theme.Farcom">
         <item name="color_main1_100">@color/plum_main_100</item>
         <item name="color_main1_500">@color/plum_main_500</item>
         <item name="color_chat_bubble_outgoing">@color/plum_main_100</item>
     </style>
 
-    <style name="Theme.LinphoneTitanium" parent="Theme.Linphone">
+    <style name="Theme.FarcomTitanium" parent="Theme.Farcom">
         <item name="color_main1_100">@color/titanium_main_100</item>
         <item name="color_main1_500">@color/titanium_main_500</item>
         <item name="color_chat_bubble_outgoing">@color/titanium_main_100</item>
     </style>
 
-    <style name="Theme.LinphoneMineralBlue" parent="Theme.Linphone">
+    <style name="Theme.FarcomMineralBlue" parent="Theme.Farcom">
         <item name="color_main1_100">@color/mineral_blue_main_100</item>
         <item name="color_main1_500">@color/mineral_blue_main_500</item>
         <item name="color_chat_bubble_outgoing">@color/mineral_blue_main_100</item>
     </style>
 
     <!-- In-call application theme. -->
-    <style name="Theme.LinphoneInCall" parent="Theme.Linphone">
+    <style name="Theme.FarcomInCall" parent="Theme.Farcom">
         <item name="android:windowBackground">@color/gray_600</item>
     </style>
 
-    <style name="Theme.LinphoneInCallTerracotta" parent="Theme.LinphoneTerracotta">
+    <style name="Theme.FarcomInCallTerracotta" parent="Theme.FarcomTerracotta">
         <item name="android:windowBackground">@color/gray_600</item>
     </style>
 
-    <style name="Theme.LinphoneInCallLavender" parent="Theme.LinphoneLavender">
+    <style name="Theme.FarcomInCallLavender" parent="Theme.FarcomLavender">
         <item name="android:windowBackground">@color/gray_600</item>
     </style>
 
-    <style name="Theme.LinphoneInCallHoney" parent="Theme.LinphoneHoney">
+    <style name="Theme.FarcomInCallHoney" parent="Theme.FarcomHoney">
         <item name="android:windowBackground">@color/gray_600</item>
     </style>
 
-    <style name="Theme.LinphoneInCallBurgundy" parent="Theme.LinphoneBurgundy">
+    <style name="Theme.FarcomInCallBurgundy" parent="Theme.FarcomBurgundy">
         <item name="android:windowBackground">@color/gray_600</item>
     </style>
 
-    <style name="Theme.LinphoneInCallMint" parent="Theme.LinphoneMint">
+    <style name="Theme.FarcomInCallMint" parent="Theme.FarcomMint">
         <item name="android:windowBackground">@color/gray_600</item>
     </style>
 
-    <style name="Theme.LinphoneInCallCoral" parent="Theme.LinphoneCoral">
+    <style name="Theme.FarcomInCallCoral" parent="Theme.FarcomCoral">
         <item name="android:windowBackground">@color/gray_600</item>
     </style>
 
-    <style name="Theme.LinphoneInCallPlum" parent="Theme.LinphonePlum">
+    <style name="Theme.FarcomInCallPlum" parent="Theme.FarcomPlum">
         <item name="android:windowBackground">@color/gray_600</item>
     </style>
 
-    <style name="Theme.LinphoneInCallTitanium" parent="Theme.LinphoneTitanium">
+    <style name="Theme.FarcomInCallTitanium" parent="Theme.FarcomTitanium">
         <item name="android:windowBackground">@color/gray_600</item>
     </style>
 
-    <style name="Theme.LinphoneInCallMineralBlue" parent="Theme.LinphoneMineralBlue">
+    <style name="Theme.FarcomInCallMineralBlue" parent="Theme.FarcomMineralBlue">
         <item name="android:windowBackground">@color/gray_600</item>
     </style>
 
-    <style name="Theme.LinphoneDialog" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.FarcomDialog" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/gray_600</item>
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <item name="android:windowActivityTransitions">true</item>

@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone
+package org.farcom
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -38,20 +38,20 @@ import coil3.request.crossfade
 import coil3.svg.SvgDecoder
 import coil3.video.VideoFrameDecoder
 import com.google.android.material.color.DynamicColors
-import org.linphone.compatibility.Compatibility
-import org.linphone.core.CoreContext
-import org.linphone.core.CorePreferences
-import org.linphone.core.Factory
-import org.linphone.core.LogCollectionState
-import org.linphone.core.LogLevel
-import org.linphone.core.ManagedConfigurationReceiver
-import org.linphone.core.VFS
-import org.linphone.core.tools.Log
+import org.farcom.compatibility.Compatibility
+import org.farcom.core.CoreContext
+import org.farcom.core.CorePreferences
+import org.farcom.core.Factory
+import org.farcom.core.LogCollectionState
+import org.farcom.core.LogLevel
+import org.farcom.core.ManagedConfigurationReceiver
+import org.farcom.core.VFS
+import org.farcom.core.tools.Log
 
 @MainThread
-class LinphoneApplication : Application(), SingletonImageLoader.Factory {
+class FarcomApplication : Application(), SingletonImageLoader.Factory {
     companion object {
-        private const val TAG = "[Linphone Application]"
+        private const val TAG = "[Farcom Application]"
 
         @SuppressLint("StaticFieldLeak")
         lateinit var corePreferences: CorePreferences
@@ -67,7 +67,7 @@ class LinphoneApplication : Application(), SingletonImageLoader.Factory {
         val powerManager = context.getSystemService(POWER_SERVICE) as PowerManager
         val wakeLock = powerManager.newWakeLock(
             PowerManager.PARTIAL_WAKE_LOCK,
-            "Linphone:AppCreation"
+            "Farcom:AppCreation"
         )
         wakeLock.acquire(20000L) // 20 seconds
 

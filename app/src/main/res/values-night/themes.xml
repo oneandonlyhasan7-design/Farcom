@@ -1,12 +1,12 @@
 <resources>
     <style name="AppSplashScreenTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/background_color_alt_dark_mode</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/linphone_splashscreen</item>
-        <item name="postSplashScreenTheme">@style/Theme.Linphone</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/farcom_splashscreen</item>
+        <item name="postSplashScreenTheme">@style/Theme.Farcom</item>
     </style>
 
     <!-- Base application theme. -->
-    <style name="Theme.Linphone" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Farcom" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <!-- Customize your theme here. -->
         <item name="android:windowActivityTransitions">true</item>
@@ -92,47 +92,47 @@
         <item name="color_bottom_sheet_disabled_menu">@color/gray_500</item>
     </style>
 
-    <style name="Theme.LinphoneTerracotta" parent="Theme.Linphone">
+    <style name="Theme.FarcomTerracotta" parent="Theme.Farcom">
         <item name="color_main1_100">@color/terracotta_main_100</item>
         <item name="color_main1_500">@color/terracotta_main_500</item>
     </style>
 
-    <style name="Theme.LinphoneLavender" parent="Theme.Linphone">
+    <style name="Theme.FarcomLavender" parent="Theme.Farcom">
         <item name="color_main1_100">@color/lavender_main_100</item>
         <item name="color_main1_500">@color/lavender_main_500</item>
     </style>
 
-    <style name="Theme.LinphoneHoney" parent="Theme.Linphone">
+    <style name="Theme.FarcomHoney" parent="Theme.Farcom">
         <item name="color_main1_100">@color/honey_main_100</item>
         <item name="color_main1_500">@color/honey_main_500</item>
     </style>
 
-    <style name="Theme.LinphoneBurgundy" parent="Theme.Linphone">
+    <style name="Theme.FarcomBurgundy" parent="Theme.Farcom">
         <item name="color_main1_100">@color/burgundy_main_100</item>
         <item name="color_main1_500">@color/burgundy_main_500</item>
     </style>
 
-    <style name="Theme.LinphoneMint" parent="Theme.Linphone">
+    <style name="Theme.FarcomMint" parent="Theme.Farcom">
         <item name="color_main1_100">@color/mint_main_100</item>
         <item name="color_main1_500">@color/mint_main_500</item>
     </style>
 
-    <style name="Theme.LinphoneCoral" parent="Theme.Linphone">
+    <style name="Theme.FarcomCoral" parent="Theme.Farcom">
         <item name="color_main1_100">@color/coral_main_100</item>
         <item name="color_main1_500">@color/coral_main_500</item>
     </style>
 
-    <style name="Theme.LinphonePlum" parent="Theme.Linphone">
+    <style name="Theme.FarcomPlum" parent="Theme.Farcom">
         <item name="color_main1_100">@color/plum_main_100</item>
         <item name="color_main1_500">@color/plum_main_500</item>
     </style>
 
-    <style name="Theme.LinphoneTitanium" parent="Theme.Linphone">
+    <style name="Theme.FarcomTitanium" parent="Theme.Farcom">
         <item name="color_main1_100">@color/titanium_main_100</item>
         <item name="color_main1_500">@color/titanium_main_500</item>
     </style>
 
-    <style name="Theme.LinphoneMineralBlue" parent="Theme.Linphone">
+    <style name="Theme.FarcomMineralBlue" parent="Theme.Farcom">
         <item name="color_main1_100">@color/mineral_blue_main_100</item>
         <item name="color_main1_500">@color/mineral_blue_main_500</item>
     </style>

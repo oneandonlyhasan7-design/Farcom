@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources [
-<!ENTITY appName "Linphone">
+<!ENTITY appName "Farcom">
 ]>
 <resources>
     <string name="sip_address">SIP adresa</string>
@@ -32,9 +32,6 @@
     <string name="dialog_install">Instalovat</string>
     <string name="welcome_page_2_message">Vaše komunikace je bezpečná díky našemu <b>koncovému šifrování</b>.</string>
     <string name="remote_provisioning_config_failed_toast">Došlo k chybě při pokusu o stažení a použití vzdálené konfigurace</string>
-    <string name="assistant_third_party_sip_account_warning_explanation">Některé funkce jako skupinové zprávy nebo videokonference vyžadují účet &appName;\n\nTyto funkce jsou skryté, pokud se zaregistrujete pomocí SIP účtu třetí strany.\n\nPro aktivaci v komerčním projektu nás prosím kontaktujte.</string>
-    <string name="assistant_permissions_subtitle">Pro plné využívání &appName; potřebujeme, abyste nám udělili následující oprávnění:</string>
-    <string name="assistant_permissions_record_audio_title"><b>Nahrávání zvuku:</b> Aby Vás váš protějšek slyšel a pro nahrávání hlasových zpráv.</string>
     <string name="help_about_version_title">Verze</string>
     <string name="help_about_check_for_update">Kontrola aktualizací</string>
     <string name="help_troubleshooting_share_logs">Sdílet logy</string>
@@ -59,10 +56,8 @@
     <string name="content_description_meeting_edit">Upravit tuto schůzku</string>
     <string name="content_description_join_conference">Připojit se do konference</string>
     <string name="content_description_go_to_conversation">Jít na konverzaci</string>
-    <string name="assistant_recover_phone_number_account_unavailable_no_push_warning">Push notifikace se na vašem zařízení nezdají být dostupné, ale jsou nezbytné pro obnovení účtu s telefonním číslem v mobilní aplikaci.</string>
     <string name="export_file_to_media_store_error_toast">Chyba při exportování souboru do systémové galerie</string>
     <string name="media_player_generic_error_toast">Chyba při pokusu o vytvoření přehrávače médií</string>
-    <string name="assistant_permissions_post_notifications_title"><b>Odesílání notifikací:</b> Abyste byli informováni, když obdržíte zprávu nebo hovor.</string>
     <string name="conversation_failed_to_create_toast">Vytvoření konverzace se nezdařilo!</string>
     <string name="conversation_ephemeral_messages_enabled_toast">Mizející zprávy byly povoleny</string>
     <string name="conversation_no_app_registered_to_handle_content_type_error_toast">Nenalezena žádná aplikace k otevření tohoto typu souboru</string>
@@ -114,7 +109,7 @@
     <string name="settings_network_use_wifi_only">Používat pouze sítě Wi-Fi</string>
     <string name="settings_advanced_enable_auto_answer_incoming_calls_after_delay_hint">Prodleva v milisekundách</string>
     <string name="manage_account_status_failed_summary">Připojení účtu selhalo, zkontrolujte nastavení.</string>
-    <string name="manage_account_dialog_remove_account_message">Pokud si přejete nevratně smazat svůj účet, navštivte: https://sip.linphone.org</string>
+    <string name="manage_account_dialog_remove_account_message">Pokud si přejete nevratně smazat svůj účet, navštivte: https://sip.farcom.org</string>
     <string name="account_settings_conference_factory_uri_title">URI konfiguračního serveru konference</string>
     <string name="account_settings_cpim_in_basic_conversations_title">Použít CPIM v \"základních\" konverzacích</string>
     <string name="account_settings_replace_plus_by_00_title">Při formátování telefonních čísel nahradit \"+\" za \"00\"</string>
@@ -195,43 +190,17 @@
     <string name="export_file_to_documents_error_toast">Chyba při exportu souboru do dokumentů</string>
     <string name="media_playback_low_volume_warning_toast">Hlasitost médií je nízká, nemusíte nic slyšet!</string>
     <string name="remote_provisioning_config_applied_toast">Konfigurace byla úspěšně použita</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_title">Obecné podmínky a zásady ochrany soukromí</string>
-    <string name="assistant_dialog_general_terms_label">obecné podmínky</string>
-    <string name="assistant_dialog_privacy_policy_label">zásady ochrany soukromí</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_message">Pokračováním přijímáte naše %1$s a %2$s.</string>
     <string name="assistant_dialog_confirm_phone_number_title">Potvrdit telefonní číslo</string>
     <string name="assistant_dialog_confirm_phone_number_message">Jste si jistý(á), že vaše telefonní číslo je %s?</string>
     <string name="assistant_account_login">Přihlásit se</string>
-    <string name="assistant_scan_qr_code">Naskenovat QR kód</string>
     <string name="assistant_login_third_party_sip_account">Použít SIP účet třetí strany</string>
     <string name="assistant_login_third_party_sip_account_title">SIP účet třetí strany</string>
-    <string name="assistant_login_using_single_sign_on">Jednotné přihlášení (SSO)</string>
     <string name="assistant_login_cant_parse_address_toast">Neplatná SIP adresa!</string>
     <string name="assistant_account_login_already_connected_error">Účet již existuje</string>
-    <string name="assistant_no_account_yet">Ještě nemáte účet?</string>
-    <string name="assistant_account_register">Registrace</string>
-    <string name="assistant_account_creation_sms_confirmation_title">Potvrďte své telefonní číslo</string>
-    <string name="assistant_account_creation_wrong_phone_number">Nesprávné číslo?</string>
-    <string name="assistant_account_create">Vytvořit</string>
-    <string name="assistant_create_account_using_email_on_our_web_platform">Vytvořte účet pomocí své e-mailové adresy na:</string>
-    <string name="assistant_already_have_an_account">Máte již účet?</string>
     <string name="assistant_sip_account_transport_protocol">Transport</string>
-    <string name="assistant_third_party_sip_account_create_linphone_account">Preferuji vytvoření &appName; účtu</string>
-    <string name="assistant_third_party_sip_account_warning_ok">Rozumím</string>
-    <string name="assistant_account_register_push_notification_not_received_error">Push notifikace s autentifikačním tokenem nebyla přijata během 5 sekund, zkuste to prosím znovu později</string>
-    <string name="assistant_account_register_unexpected_error">Nastala neočekávaná chyba, zkuste to prosím znovu později</string>
     <string name="assistant_account_login_forbidden_error">Nesprávné uživatelské jméno nebo heslo</string>
     <string name="assistant_account_login_error">Přihlášení se nezdařilo: chybový kód je %s</string>
-    <string name="assistant_permissions_title">Udělit oprávnění</string>
     <string name="assistant_permissions_grant_all_of_them">OK</string>
-    <string name="assistant_permissions_skip_permissions">Provést později</string>
-    <string name="assistant_permissions_read_contacts_title"><b>Čtení kontaktů:</b> Pro zobrazení vašich kontaktů a zjištění, kdo používá &appName;.</string>
-    <string name="assistant_permissions_access_camera_title"><b>Přístup ke kameře:</b> Pro zachycení videa během videohovorů a konferencí.</string>
-    <string name="assistant_forgotten_password_title">Zapomenuté heslo</string>
-    <string name="assistant_forgotten_password_subtitle">Zvolte způsob obnovy svého účtu.</string>
-    <string name="assistant_forgotten_password_message">Váš účet byl vytvořen pomocí:</string>
-    <string name="assistant_recover_email_account_label">Emailu</string>
-    <string name="assistant_recover_phone_number_account_label">Telefonního čísla</string>
     <string name="bottom_navigation_contacts_label">Kontakty</string>
     <string name="bottom_navigation_calls_label">Hovory</string>
     <string name="bottom_navigation_meetings_label">Schůzky</string>
@@ -413,7 +382,7 @@
     <string name="contacts_list_favourites_title">Oblíbené</string>
     <string name="contacts_list_all_contacts_title">Všechny kontakty</string>
     <string name="contacts_list_filter_popup_see_all">Zobrazit vše</string>
-    <string name="contacts_list_filter_popup_see_linphone_only">Zobrazit &appName; kontakty</string>
+    <string name="contacts_list_filter_popup_see_farcom_only">Zobrazit &appName; kontakty</string>
     <string name="contacts_list_filter_popup_see_sip_only">Zobrazit SIP kontakty</string>
     <string name="contact_new_title">Nový kontakt</string>
     <string name="contact_edit_title">Upravit kontakt</string>
@@ -738,7 +707,6 @@
         <item quantity="other">%s nových hlasových zpráv</item>
     </plurals>
     <string name="welcome_carousel_skip"><u>Přeskočit</u></string>
-    <string name="assistant_forgotten_password"><u>Zapomenuté heslo?</u></string>
     <string name="call_zrtp_sas_validation_skip"><u>Přeskočit</u></string>
     <string name="conversation_message_meeting_cancelled_label"><b>Schůzka byla zrušena</b></string>
     <string name="content_description_trusted_contact_icon">Kontakt je důvěryhodný</string>
@@ -819,8 +787,6 @@
     <string name="contact_editor_mandatory_field_not_filled_toast">Vyplňte prosím buďto jméno, příjmení nebo název společnosti</string>
     <string name="contact_dialog_devices_trust_help_message">Zkontrolujte všechna zařízení kontaktu, abyste měli jistotu, že vaše komunikace bude zabezpečená a nezměněná.\nJakmile budou všechna ověřena, dosáhnete nejvyšší úrovně důvěry.</string>
     <string name="conversation_end_to_end_encrypted_event_subtitle">Zprávy v této konverzaci jsou koncově šifrovány. Dešifrovat je může pouze váš protějšek.</string>
-    <string name="assistant_account_creation_sms_confirmation_explanation">Poslali jsme vám ověřovací kód na vaše telefonní číslo %1$s.\n\nZadejte prosím níže ověřovací kód:</string>
-    <string name="assistant_account_register_unavailable_no_push_warning">Push notifikace se na vašem zařízení zdají být nedostupné, ale jsou nezbytné pro vytvoření účtu v mobilní aplikaci.\n\nZveme vás proto, abyste si místo toho vytvořili účet na naší webové platformě:</string>
     <string name="manage_account_e2e_encrypted_mode_default_summary">Tento režim zajišťuje důvěrnost vašich dat. Naše technologie koncového šifrování poskytuje nejvyšší úroveň zabezpečení pro vaši komunikaci.</string>
     <string name="conversation_dialog_open_or_export_file_message">&appName; nemůže soubor otevřít.\n\nPřejete si jej otevřít v jiné aplikaci (pokud to bude možné) nebo jej exportovat do vašeho zařízení?</string>
     <string name="meeting_failed_to_edit_schedule_toast">Úprava schůzky selhala!</string>
@@ -855,7 +821,7 @@
     <string name="assistant_sip_account_lime_algorithm">Algoritmus (algoritmy) LIME (oddělené čárkou)</string>
     <string name="assistant_sip_account_lime_algorithm_hint">Povolené hodnoty jsou: c25519, c448, c25519k512, c25519mlk512 a c448mlk1024</string>
     <string name="settings_contacts_sort_by_first_name_title">Seřadit kontakty podle</string>
-    <string name="settings_contacts_edit_native_contacts_in_linphone_title">Použijte editor kontaktů aplikace &appName; pro nativní kontakty</string>
+    <string name="settings_contacts_edit_native_contacts_in_farcom_title">Použijte editor kontaktů aplikace &appName; pro nativní kontakty</string>
     <string name="settings_contacts_hide_empty_contacts_title">Skrýt kontakty bez SIP adresy a telefonního čísla</string>
     <string name="settings_contacts_carddav_read_only_label">Tento adresář je pouze pro čtení</string>
     <string name="settings_contacts_ldap_verbose_mode_title">Přidat protokoly LDAP do protokolů &appName;</string>

@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.recordings.fragment
+package org.farcom.ui.main.recordings.fragment
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -38,18 +38,18 @@ import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.databinding.RecordingsListFragmentBinding
-import org.linphone.ui.GenericActivity
-import org.linphone.ui.main.fragment.GenericMainFragment
-import org.linphone.ui.main.recordings.adapter.RecordingsListAdapter
-import org.linphone.ui.main.recordings.viewmodel.RecordingsListViewModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.FileUtils
-import org.linphone.utils.RecyclerViewHeaderDecoration
-import org.linphone.utils.hideKeyboard
-import org.linphone.utils.showKeyboard
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.databinding.RecordingsListFragmentBinding
+import org.farcom.ui.GenericActivity
+import org.farcom.ui.main.fragment.GenericMainFragment
+import org.farcom.ui.main.recordings.adapter.RecordingsListAdapter
+import org.farcom.ui.main.recordings.viewmodel.RecordingsListViewModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.FileUtils
+import org.farcom.utils.RecyclerViewHeaderDecoration
+import org.farcom.utils.hideKeyboard
+import org.farcom.utils.showKeyboard
 
 @UiThread
 class RecordingsListFragment : GenericMainFragment() {

@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.utils
+package org.farcom.utils
 
 import android.graphics.Typeface
 import android.text.Spannable
@@ -31,35 +31,35 @@ import androidx.annotation.WorkerThread
 import androidx.core.text.toSpannable
 import java.text.SimpleDateFormat
 import java.util.Locale
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.contacts.getListOfSipAddresses
-import org.linphone.core.Account
-import org.linphone.core.Address
-import org.linphone.core.AudioDevice
-import org.linphone.core.Call
-import org.linphone.core.Call.Dir
-import org.linphone.core.Call.Status
-import org.linphone.core.CallLog
-import org.linphone.core.ChatMessage
-import org.linphone.core.ChatRoom
-import org.linphone.core.Conference
-import org.linphone.core.ConferenceInfo
-import org.linphone.core.ConferenceParams
-import org.linphone.core.ConferenceScheduler
-import org.linphone.core.Core
-import org.linphone.core.Factory
-import org.linphone.core.Friend
-import org.linphone.core.MediaDirection
-import org.linphone.core.Reason
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.ui.main.model.isEndToEndEncryptionMandatory
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.contacts.getListOfSipAddresses
+import org.farcom.core.Account
+import org.farcom.core.Address
+import org.farcom.core.AudioDevice
+import org.farcom.core.Call
+import org.farcom.core.Call.Dir
+import org.farcom.core.Call.Status
+import org.farcom.core.CallLog
+import org.farcom.core.ChatMessage
+import org.farcom.core.ChatRoom
+import org.farcom.core.Conference
+import org.farcom.core.ConferenceInfo
+import org.farcom.core.ConferenceParams
+import org.farcom.core.ConferenceScheduler
+import org.farcom.core.Core
+import org.farcom.core.Factory
+import org.farcom.core.Friend
+import org.farcom.core.MediaDirection
+import org.farcom.core.Reason
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.contacts.model.ContactAvatarModel
+import org.farcom.ui.main.model.isEndToEndEncryptionMandatory
 
-class LinphoneUtils {
+class FarcomUtils {
     companion object {
-        private const val TAG = "[Linphone Utils]"
+        private const val TAG = "[Farcom Utils]"
 
         const val RECORDING_FILE_NAME_HEADER = "call_recording_"
         const val RECORDING_FILE_NAME_URI_TIMESTAMP_SEPARATOR = "_on_"
@@ -68,9 +68,9 @@ class LinphoneUtils {
 
         @AnyThread
         fun getRemoteProvisioningUrlFromUri(uri: String): String? {
-            val linphoneScheme = "linphone-config:"
-            return if (uri.startsWith(linphoneScheme)) {
-                val remoteConfigUri = uri.substring(linphoneScheme.length)
+            val farcomScheme = "farcom-config:"
+            return if (uri.startsWith(farcomScheme)) {
+                val remoteConfigUri = uri.substring(farcomScheme.length)
                 val url = when {
                     remoteConfigUri.startsWith("http://") || remoteConfigUri.startsWith("https://") -> remoteConfigUri
                     remoteConfigUri.startsWith("file://") -> remoteConfigUri

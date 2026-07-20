@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.welcome
+package org.farcom.ui.welcome
 
 import android.content.Intent
 import android.os.Bundle
@@ -32,15 +32,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.databinding.WelcomeActivityBinding
-import org.linphone.ui.GenericActivity
-import org.linphone.ui.assistant.AssistantActivity
-import org.linphone.ui.welcome.fragment.WelcomePage1Fragment
-import org.linphone.ui.welcome.fragment.WelcomePage2Fragment
-import org.linphone.ui.welcome.fragment.WelcomePage3Fragment
-import org.linphone.utils.AppUtils
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.databinding.WelcomeActivityBinding
+import org.farcom.ui.GenericActivity
+import org.farcom.ui.assistant.AssistantActivity
+import org.farcom.ui.welcome.fragment.WelcomePage1Fragment
+import org.farcom.ui.welcome.fragment.WelcomePage2Fragment
+import org.farcom.ui.welcome.fragment.WelcomePage3Fragment
+import org.farcom.utils.AppUtils
 
 class WelcomeActivity : GenericActivity() {
     companion object {

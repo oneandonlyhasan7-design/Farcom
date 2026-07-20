@@ -14,10 +14,10 @@ plugins {
     alias(libs.plugins.navigation)
 }
 
-val packageName = "org.linphone"
+val packageName = "com.farcom"
 val useDifferentPackageNameForDebugBuild = false
 
-val sdkPath = providers.gradleProperty("LinphoneSdkBuildDir").get()
+val sdkPath = providers.gradleProperty("FarcomSdkBuildDir").get()
 val googleServices = File(projectDir.absolutePath + "/google-services.json")
 val linphoneLibs = File("$sdkPath/libs/")
 val linphoneDebugLibs = File("$sdkPath/libs-debug/")
@@ -87,7 +87,7 @@ configurations {
     implementation { isCanBeResolved = true }
 }
 
-tasks.register("linphoneSdkSource") {
+tasks.register("farcomSdkSource") {
     doLast {
         configurations.implementation.get().incoming.resolutionResult.allComponents.forEach {
             if (it.id.displayName.contains("linphone-sdk-android")) {
@@ -96,10 +96,10 @@ tasks.register("linphoneSdkSource") {
         }
     }
 }
-project.tasks.preBuild.dependsOn("linphoneSdkSource")
+project.tasks.preBuild.dependsOn("farcomSdkSource")
 
 android {
-    namespace = "org.linphone"
+    namespace = "com.farcom"
     compileSdk = 37
 
     defaultConfig {
@@ -122,7 +122,7 @@ android {
         variant.outputs
             .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
             .forEach { output ->
-                output.outputFileName = "linphone-android-${variant.buildType.name}-$gitVersion.apk"
+                output.outputFileName = "farcom-android-${variant.buildType.name}-$gitVersion.apk"
             }
     }
 

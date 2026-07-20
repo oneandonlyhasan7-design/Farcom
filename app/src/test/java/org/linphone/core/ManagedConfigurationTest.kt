@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2026 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.core
+package org.farcom.core
 
 import android.content.Context
 import android.content.RestrictionsManager
@@ -35,9 +35,9 @@ import io.mockk.verify
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.linphone.LinphoneApplication
-import org.linphone.core.tools.Log
-import org.linphone.utils.Event
+import org.farcom.FarcomApplication
+import org.farcom.core.tools.Log
+import org.farcom.utils.Event
 
 class ManagedConfigurationTest {
 
@@ -79,8 +79,8 @@ class ManagedConfigurationTest {
 
         every { coreContextMock.mdmConfigAppliedEvent } returns appliedEvent
         every { coreContextMock.mdmConfigRemovedEvent } returns removedEvent
-        LinphoneApplication.coreContext = coreContextMock
-        LinphoneApplication.corePreferences = corePreferencesMock
+        FarcomApplication.coreContext = coreContextMock
+        FarcomApplication.corePreferences = corePreferencesMock
     }
 
     @After
@@ -160,7 +160,7 @@ class ManagedConfigurationTest {
 
     @Test
     fun `xmlConfig is loaded as inline string into the rc config`() {
-        val xml = "<config xmlns=\"http://www.linphone.org/xsds/lpconfig.xsd\"/>"
+        val xml = "<config xmlns=\"http://www.farcom.org/xsds/lpconfig.xsd\"/>"
         pushRestrictions(ManagedConfiguration.KEY_XML_CONFIG to xml)
         every { core.globalState } returns GlobalState.Off
         every { core.provisioningUri } returns null

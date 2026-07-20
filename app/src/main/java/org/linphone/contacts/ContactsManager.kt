@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.contacts
+package org.farcom.contacts
 
 import android.content.ContentUris
 import android.graphics.Bitmap
@@ -38,31 +38,31 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.core.Account
-import org.linphone.core.Address
-import org.linphone.core.ConferenceInfo
-import org.linphone.core.Core
-import org.linphone.core.CoreListenerStub
-import org.linphone.core.Factory
-import org.linphone.core.Friend
-import org.linphone.core.FriendList
-import org.linphone.core.FriendListListenerStub
-import org.linphone.core.MagicSearch
-import org.linphone.core.MagicSearchListenerStub
-import org.linphone.core.SecurityLevel
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.MainActivity
-import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.ui.main.contacts.model.ContactNumberOrAddressClickListener
-import org.linphone.ui.main.contacts.model.ContactNumberOrAddressModel
-import org.linphone.ui.main.model.isEndToEndEncryptionMandatory
-import org.linphone.utils.AppUtils
-import org.linphone.utils.ImageUtils
-import org.linphone.utils.LinphoneUtils
-import org.linphone.utils.PhoneNumberUtils
-import org.linphone.utils.ShortcutUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.core.Account
+import org.farcom.core.Address
+import org.farcom.core.ConferenceInfo
+import org.farcom.core.Core
+import org.farcom.core.CoreListenerStub
+import org.farcom.core.Factory
+import org.farcom.core.Friend
+import org.farcom.core.FriendList
+import org.farcom.core.FriendListListenerStub
+import org.farcom.core.MagicSearch
+import org.farcom.core.MagicSearchListenerStub
+import org.farcom.core.SecurityLevel
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.MainActivity
+import org.farcom.ui.main.contacts.model.ContactAvatarModel
+import org.farcom.ui.main.contacts.model.ContactNumberOrAddressClickListener
+import org.farcom.ui.main.contacts.model.ContactNumberOrAddressModel
+import org.farcom.ui.main.model.isEndToEndEncryptionMandatory
+import org.farcom.utils.AppUtils
+import org.farcom.utils.ImageUtils
+import org.farcom.utils.FarcomUtils
+import org.farcom.utils.PhoneNumberUtils
+import org.farcom.utils.ShortcutUtils
 import java.io.FileNotFoundException
 
 class ContactsManager
@@ -223,15 +223,15 @@ class ContactsManager
         }
 
         @WorkerThread
-        override fun onContactCreated(friendList: FriendList, linphoneFriend: Friend) {
-            for (address in linphoneFriend.addresses) {
+        override fun onContactCreated(friendList: FriendList, farcomFriend: Friend) {
+            for (address in farcomFriend.addresses) {
                 removeUnknownAddressFromMap(address)
             }
         }
 
         @WorkerThread
-        override fun onContactDeleted(friendList: FriendList, linphoneFriend: Friend) {
-            for (address in linphoneFriend.addresses) {
+        override fun onContactDeleted(friendList: FriendList, farcomFriend: Friend) {
+            for (address in farcomFriend.addresses) {
                 removeKnownAddressFromMap(address)
             }
         }
@@ -448,7 +448,7 @@ class ContactsManager
         }
 
         val username = address.username
-        val sipUri = LinphoneUtils.getAddressAsCleanStringUriOnly(address)
+        val sipUri = FarcomUtils.getAddressAsCleanStringUriOnly(address)
         // Start an async query in Magic Search in case LDAP or remote CardDAV is configured
         val remoteContactDirectories = coreContext.core.remoteContactDirectories
         if (remoteContactDirectories.isNotEmpty() && !magicSearchMap.keys.contains(sipUri) && !unknownRemoteContactDirectoriesContactsMap.contains(
@@ -485,7 +485,7 @@ class ContactsManager
 
     @WorkerThread
     fun findDisplayName(address: Address): String {
-        return getContactAvatarModelForAddress(address).friend.name ?: LinphoneUtils.getDisplayName(
+        return getContactAvatarModelForAddress(address).friend.name ?: FarcomUtils.getDisplayName(
             address
         )
     }
@@ -515,7 +515,7 @@ class ContactsManager
             Log.d("$TAG [$key] SIP URI matches one of the local account")
             val fakeFriend = coreContext.core.createFriend()
             fakeFriend.address = clone
-            fakeFriend.name = LinphoneUtils.getDisplayName(localAccount.params.identityAddress)
+            fakeFriend.name = FarcomUtils.getDisplayName(localAccount.params.identityAddress)
             fakeFriend.photo = localAccount.params.pictureUri
             val model = ContactAvatarModel(fakeFriend)
             model.trust.postValue(SecurityLevel.EndToEndEncryptedAndVerified)
@@ -532,7 +532,7 @@ class ContactsManager
             } else {
                 Log.d("$TAG No matching friend found for SIP URI [$key]...")
                 val fakeFriend = coreContext.core.createFriend()
-                fakeFriend.name = LinphoneUtils.getDisplayName(address)
+                fakeFriend.name = FarcomUtils.getDisplayName(address)
                 fakeFriend.address = clone
                 val model = ContactAvatarModel(fakeFriend)
                 unknownContactsAvatarsMap[key] = model
@@ -570,7 +570,7 @@ class ContactsManager
         val foundInMap = conferenceAvatarMap[key] ?: conferenceAvatarMap[key]
         if (foundInMap != null) return foundInMap
 
-        val avatar = LinphoneUtils.getAvatarModelForConferenceInfo(conferenceInfo)
+        val avatar = FarcomUtils.getAvatarModelForConferenceInfo(conferenceInfo)
         conferenceAvatarMap[key] = avatar
 
         return avatar
@@ -660,7 +660,7 @@ class ContactsManager
         val account = coreContext.core.accountList.find {
             it.params.identityAddress?.weakEqual(localAddress) == true
         }
-        val name = account?.params?.identityAddress?.displayName ?: LinphoneUtils.getDisplayName(
+        val name = account?.params?.identityAddress?.displayName ?: FarcomUtils.getDisplayName(
             localAddress
         )
         val personBuilder = Person.Builder().setName(name.ifEmpty { "Unknown" })
@@ -719,7 +719,7 @@ fun Friend.getAvatarBitmap(round: Boolean = false): Bitmap? {
             round
         )
     } catch (_: NumberFormatException) {
-        // Expected for contacts created by Linphone
+        // Expected for contacts created by Farcom
     }
     return null
 }
@@ -758,7 +758,7 @@ fun Friend.getNativeContactPictureUri(): Uri? {
                 ContactsContract.Contacts.Photo.CONTENT_DIRECTORY
             )
         } catch (_: NumberFormatException) {
-            // Expected for contacts created by Linphone
+            // Expected for contacts created by Farcom
         }
     }
     return null
@@ -824,7 +824,7 @@ fun Friend.getListOfSipAddressesAndPhoneNumbers(listener: ContactNumberOrAddress
 
     // Will return an empty list if corePreferences.hideSipAddresses == true
     for (address in getListOfSipAddresses()) {
-        if (LinphoneUtils.isSipAddressLinkedToPhoneNumberByPresence(this, address.asStringUriOnly())) {
+        if (FarcomUtils.isSipAddressLinkedToPhoneNumberByPresence(this, address.asStringUriOnly())) {
             continue
         }
 
@@ -863,11 +863,11 @@ fun Friend.getListOfSipAddressesAndPhoneNumbers(listener: ContactNumberOrAddress
         }
 
         // phone numbers are disabled is secure mode unless linked to a SIP address
-        val defaultAccount = LinphoneUtils.getDefaultAccount()
+        val defaultAccount = FarcomUtils.getDefaultAccount()
         val enablePhoneNumbers = hasPresenceInfo || !isEndToEndEncryptionMandatory()
         val address = presenceAddress ?: core.interpretUrl(
             phoneNumber,
-            LinphoneUtils.applyInternationalPrefix(defaultAccount)
+            FarcomUtils.applyInternationalPrefix(defaultAccount)
         )
         address ?: continue
 

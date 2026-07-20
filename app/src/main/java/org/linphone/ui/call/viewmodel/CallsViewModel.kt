@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,22 +17,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.call.viewmodel
+package org.farcom.ui.call.viewmodel
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.R
-import org.linphone.core.Call
-import org.linphone.core.Core
-import org.linphone.core.CoreListenerStub
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.ui.call.model.CallModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.R
+import org.farcom.core.Call
+import org.farcom.core.Core
+import org.farcom.core.CoreListenerStub
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.ui.call.model.CallModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
 
 class CallsViewModel
     @UiThread
@@ -127,14 +127,14 @@ class CallsViewModel
                 }
             }
 
-            if (LinphoneUtils.isCallIncoming(call.state)) {
+            if (FarcomUtils.isCallIncoming(call.state)) {
                 Log.i("$TAG Asking activity to show incoming call fragment")
                 showIncomingCallEvent.postValue(Event(true))
-            } else if (LinphoneUtils.isCallEnding(call.state)) {
+            } else if (FarcomUtils.isCallEnding(call.state)) {
                 if (core.callsNb > 0) {
                     val newCurrentCall = core.currentCall ?: core.calls.firstOrNull()
                     if (newCurrentCall != null) {
-                        if (LinphoneUtils.isCallIncoming(newCurrentCall.state)) {
+                        if (FarcomUtils.isCallIncoming(newCurrentCall.state)) {
                             Log.i("$TAG Asking activity to show incoming call fragment")
                             showIncomingCallEvent.postValue(Event(true))
                         } else {
@@ -221,7 +221,7 @@ class CallsViewModel
     fun mergeCallsIntoConference() {
         coreContext.postOnCoreThread { core ->
             val callsCount = core.callsNb
-            val defaultAccount = LinphoneUtils.getDefaultAccount()
+            val defaultAccount = FarcomUtils.getDefaultAccount()
             val subject = if (defaultAccount != null && defaultAccount.params.audioVideoConferenceFactoryAddress != null) {
                 Log.i("$TAG Merging [$callsCount] calls into a remotely hosted conference")
                 AppUtils.getString(R.string.conference_remotely_hosted_title)
@@ -230,7 +230,7 @@ class CallsViewModel
                 AppUtils.getString(R.string.conference_locally_hosted_title)
             }
 
-            val conference = LinphoneUtils.createGroupCall(defaultAccount, subject)
+            val conference = FarcomUtils.createGroupCall(defaultAccount, subject)
             if (conference == null) {
                 Log.e("$TAG Failed to create conference!")
                 showRedToast(R.string.conference_failed_to_merge_calls_into_conference_toast, R.drawable.warning_circle)
@@ -278,10 +278,10 @@ class CallsViewModel
                             remoteAddress
                         )
                         callsTopBarLabel.postValue(
-                            contact?.name ?: LinphoneUtils.getDisplayName(remoteAddress)
+                            contact?.name ?: FarcomUtils.getDisplayName(remoteAddress)
                         )
                     }
-                    callsTopBarStatus.postValue(LinphoneUtils.callStateToString(found.state))
+                    callsTopBarStatus.postValue(FarcomUtils.callStateToString(found.state))
                 } else {
                     Log.w("$TAG Failed to find a paused call")
                 }
@@ -311,9 +311,9 @@ class CallsViewModel
                 remoteAddress
             )
             callsTopBarLabel.postValue(
-                contact?.name ?: LinphoneUtils.getDisplayName(remoteAddress)
+                contact?.name ?: FarcomUtils.getDisplayName(remoteAddress)
             )
         }
-        callsTopBarStatus.postValue(LinphoneUtils.callStateToString(call.state))
+        callsTopBarStatus.postValue(FarcomUtils.callStateToString(call.state))
     }
 }

@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.call.viewmodel.CurrentCallViewModel" />
+            type="org.farcom.ui.call.viewmodel.CurrentCallViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,7 +56,7 @@
                 android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.displayedAddress, default=`sip:johndoe@sip.linphone.org`}"
+                android:text="@{viewModel.displayedAddress, default=`sip:johndoe@sip.farcom.org`}"
                 android:textColor="@color/bc_white"
                 android:textSize="14sp"
                 android:visibility="@{viewModel.hideSipAddresses || viewModel.conferenceModel.isCurrentCallInConference ? View.GONE : View.VISIBLE}" />
@@ -75,7 +75,7 @@
             app:layout_constraintTop_toTopOf="@id/name_address"
             app:layout_constraintBottom_toBottomOf="@id/name_address" />
 
-        <org.linphone.ui.call.view.RoundCornersTextureView
+        <org.farcom.ui.call.view.RoundCornersTextureView
             android:id="@+id/remote_video_surface"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="5dp"
-            android:text="@{viewModel.displayedAddress, default=`sip:johndoe@sip.linphone.org`}"
+            android:text="@{viewModel.displayedAddress, default=`sip:johndoe@sip.farcom.org`}"
             android:textColor="@color/bc_white"
             android:textSize="14sp"
             android:visibility="@{viewModel.isIncomingEarlyMedia ? View.VISIBLE : View.GONE, default=gone}"

@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,27 +19,27 @@
  */
 @file:Suppress("SameReturnValue")
 
-package org.linphone.ui.main.model
+package org.farcom.ui.main.model
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.R
-import org.linphone.contacts.AbstractAvatarModel
-import org.linphone.core.Account
-import org.linphone.core.AccountListenerStub
-import org.linphone.core.ChatMessage
-import org.linphone.core.ChatRoom
-import org.linphone.core.ConsolidatedPresence
-import org.linphone.core.Core
-import org.linphone.core.CoreListenerStub
-import org.linphone.core.MessageWaitingIndication
-import org.linphone.core.RegistrationState
-import org.linphone.core.SecurityLevel
-import org.linphone.core.tools.Log
-import org.linphone.utils.AppUtils
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.R
+import org.farcom.contacts.AbstractAvatarModel
+import org.farcom.core.Account
+import org.farcom.core.AccountListenerStub
+import org.farcom.core.ChatMessage
+import org.farcom.core.ChatRoom
+import org.farcom.core.ConsolidatedPresence
+import org.farcom.core.Core
+import org.farcom.core.CoreListenerStub
+import org.farcom.core.MessageWaitingIndication
+import org.farcom.core.RegistrationState
+import org.farcom.core.SecurityLevel
+import org.farcom.core.tools.Log
+import org.farcom.utils.AppUtils
+import org.farcom.utils.FarcomUtils
 
 class AccountModel
     @WorkerThread
@@ -274,7 +274,7 @@ class AccountModel
         trust.postValue(SecurityLevel.EndToEndEncryptedAndVerified)
         showTrust.postValue(isEndToEndEncryptionMandatory())
 
-        val name = LinphoneUtils.getDisplayName(account.params.identityAddress)
+        val name = FarcomUtils.getDisplayName(account.params.identityAddress)
         displayName.postValue(name)
 
         initials.postValue(AppUtils.getInitials(name))

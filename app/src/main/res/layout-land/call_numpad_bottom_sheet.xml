@@ -10,10 +10,10 @@
             type="View.OnClickListener" />
         <variable
             name="model"
-            type="org.linphone.ui.main.history.model.NumpadModel" />
+            type="org.farcom.ui.main.history.model.NumpadModel" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.call.viewmodel.CurrentCallViewModel" />
+            type="org.farcom.ui.call.viewmodel.CurrentCallViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

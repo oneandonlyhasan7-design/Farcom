@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.telecom
+package org.farcom.telecom
 
 import android.content.Context
 import androidx.annotation.WorkerThread
@@ -28,14 +28,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.core.Call
-import org.linphone.core.Core
-import org.linphone.core.CoreListenerStub
-import org.linphone.core.tools.Log
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.core.Call
+import org.farcom.core.Core
+import org.farcom.core.CoreListenerStub
+import org.farcom.core.tools.Log
+import org.farcom.utils.FarcomUtils
 import androidx.core.net.toUri
-import org.linphone.compatibility.Compatibility
+import org.farcom.compatibility.Compatibility
 
 class TelecomManager
     @WorkerThread
@@ -102,12 +102,12 @@ class TelecomManager
 
         val capabilities = CallAttributesCompat.SUPPORTS_SET_INACTIVE or CallAttributesCompat.SUPPORTS_TRANSFER
 
-        val conferenceInfo = LinphoneUtils.getConferenceInfoIfAny(call)
+        val conferenceInfo = FarcomUtils.getConferenceInfoIfAny(call)
         val displayName = if (call.conference != null || conferenceInfo != null) {
-            conferenceInfo?.subject ?: call.conference?.subject ?: LinphoneUtils.getDisplayName(address)
+            conferenceInfo?.subject ?: call.conference?.subject ?: FarcomUtils.getDisplayName(address)
         } else {
             val friend = coreContext.contactsManager.findContactByAddress(address)
-            friend?.name ?: LinphoneUtils.getDisplayName(address)
+            friend?.name ?: FarcomUtils.getDisplayName(address)
         }
 
         // Always set type to video (if enabled in Core) as it indicates that video is supported, not that it's being used at the time
@@ -135,7 +135,7 @@ class TelecomManager
                     { callType -> // onAnswer
                         Log.i("$TAG We're asked to answer the call with type [$callType]")
                         coreContext.postOnCoreThread {
-                            if (LinphoneUtils.isCallIncoming(call.state)) {
+                            if (FarcomUtils.isCallIncoming(call.state)) {
                                 Log.i("$TAG Answering call")
                                 coreContext.answerCall(call)
                             }
@@ -199,7 +199,7 @@ class TelecomManager
             core.addListener(coreListener)
         } else {
             Log.w(
-                "$TAG android.software.telecom feature is not available, enable audio focus requests in Linphone SDK"
+                "$TAG android.software.telecom feature is not available, enable audio focus requests in Farcom SDK"
             )
             coreContext.core.config.setBool("audio", "android_disable_audio_focus_requests", false)
         }

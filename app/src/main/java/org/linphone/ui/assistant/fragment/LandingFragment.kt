@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.assistant.fragment
+package org.farcom.ui.assistant.fragment
 
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -33,17 +33,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.databinding.AssistantLandingFragmentBinding
-import org.linphone.ui.GenericActivity
-import org.linphone.ui.GenericFragment
-import org.linphone.ui.assistant.model.AcceptConditionsAndPolicyDialogModel
-import org.linphone.ui.assistant.viewmodel.AccountLoginViewModel
-import org.linphone.utils.DialogUtils
-import org.linphone.utils.PhoneNumberUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.databinding.AssistantLandingFragmentBinding
+import org.farcom.ui.GenericActivity
+import org.farcom.ui.GenericFragment
+import org.farcom.ui.assistant.model.AcceptConditionsAndPolicyDialogModel
+import org.farcom.ui.assistant.viewmodel.AccountLoginViewModel
+import org.farcom.utils.DialogUtils
+import org.farcom.utils.PhoneNumberUtils
 import androidx.core.net.toUri
 
 @UiThread
@@ -88,7 +88,6 @@ class LandingFragment : GenericFragment() {
 
         binding.setRegisterClickListener {
             if (viewModel.conditionsAndPrivacyPolicyAccepted) {
-                goToRegisterFragment()
             } else {
                 showAcceptConditionsAndPrivacyDialog(goToAccountCreate = true)
             }
@@ -97,7 +96,6 @@ class LandingFragment : GenericFragment() {
         binding.setQrCodeClickListener {
             if (findNavController().currentDestination?.id == R.id.landingFragment) {
                 val action =
-                    LandingFragmentDirections.actionLandingFragmentToQrCodeScannerFragment()
                 findNavController().navigate(action)
             }
         }
@@ -113,7 +111,6 @@ class LandingFragment : GenericFragment() {
         binding.setForgottenPasswordClickListener {
             if (findNavController().currentDestination?.id == R.id.landingFragment) {
                 val action =
-                    LandingFragmentDirections.actionLandingFragmentToRecoverAccountFragment()
                 findNavController().navigate(action)
             }
         }
@@ -158,9 +155,7 @@ class LandingFragment : GenericFragment() {
         }
     }
 
-    private fun goToRegisterFragment() {
         if (findNavController().currentDestination?.id == R.id.landingFragment) {
-            val action = LandingFragmentDirections.actionLandingFragmentToRegisterFragment()
             findNavController().navigate(action)
         }
     }
@@ -170,7 +165,6 @@ class LandingFragment : GenericFragment() {
             val action = if (skipWarning) {
                 LandingFragmentDirections.actionLandingFragmentToThirdPartySipAccountLoginFragment()
             } else {
-                LandingFragmentDirections.actionLandingFragmentToThirdPartySipAccountWarningFragment()
             }
             findNavController().navigate(action)
         }
@@ -201,7 +195,6 @@ class LandingFragment : GenericFragment() {
                 dialog.dismiss()
 
                 if (goToAccountCreate) {
-                    goToRegisterFragment()
                 } else if (goToThirdPartySipAccountLogin) {
                     goToLoginThirdPartySipAccountFragment(false)
                 }

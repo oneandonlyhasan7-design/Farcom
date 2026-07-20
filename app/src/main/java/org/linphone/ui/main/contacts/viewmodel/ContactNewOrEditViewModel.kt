@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.contacts.viewmodel
+package org.farcom.ui.main.contacts.viewmodel
 
 import androidx.annotation.AnyThread
 import androidx.annotation.UiThread
@@ -25,24 +25,24 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.contacts.ContactLoader.Companion.LINPHONE_ADDRESS_BOOK_FRIEND_LIST
-import org.linphone.core.Address
-import org.linphone.core.Factory
-import org.linphone.core.Friend
-import org.linphone.core.FriendList
-import org.linphone.core.FriendList.Status
-import org.linphone.core.FriendPhoneNumber
-import org.linphone.core.SubscribePolicy
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.ui.main.contacts.model.NewOrEditNumberOrAddressModel
-import org.linphone.utils.Event
-import org.linphone.utils.FileUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.contacts.ContactLoader.Companion.FARCOM_ADDRESS_BOOK_FRIEND_LIST
+import org.farcom.core.Address
+import org.farcom.core.Factory
+import org.farcom.core.Friend
+import org.farcom.core.FriendList
+import org.farcom.core.FriendList.Status
+import org.farcom.core.FriendPhoneNumber
+import org.farcom.core.SubscribePolicy
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.ui.main.contacts.model.NewOrEditNumberOrAddressModel
+import org.farcom.utils.Event
+import org.farcom.utils.FileUtils
 import androidx.core.net.toUri
-import org.linphone.utils.LinphoneUtils
+import org.farcom.utils.FarcomUtils
 
 class ContactNewOrEditViewModel
     @UiThread
@@ -123,7 +123,7 @@ class ContactNewOrEditViewModel
                 for (address in friend.addresses) {
                     val sipAddress = address.asStringUriOnly()
                     // Prevents showing presence address as editable when in fact it's not
-                    if (!LinphoneUtils.isSipAddressLinkedToPhoneNumberByPresence(friend, sipAddress)) {
+                    if (!FarcomUtils.isSipAddressLinkedToPhoneNumberByPresence(friend, sipAddress)) {
                         addSipAddress(sipAddress)
                         sipAddressesBeforeEdit.add(sipAddress)
                     } else {
@@ -236,13 +236,13 @@ class ContactNewOrEditViewModel
                     "$TAG Looking for friend list with name [$friendListNameToStoreFriends] to use to store newly created contact"
                 )
                 val friendList = core.getFriendListByName(friendListNameToStoreFriends) ?: core.getFriendListByName(
-                    LINPHONE_ADDRESS_BOOK_FRIEND_LIST
+                    FARCOM_ADDRESS_BOOK_FRIEND_LIST
                 )
                 val fl = friendList ?: core.createFriendList()
                 if (friendList == null) {
-                    if (friendListNameToStoreFriends != LINPHONE_ADDRESS_BOOK_FRIEND_LIST) {
+                    if (friendListNameToStoreFriends != FARCOM_ADDRESS_BOOK_FRIEND_LIST) {
                         Log.w(
-                            "$TAG Locally saved friend list [$friendListNameToStoreFriends] didn't exist yet (nor [$LINPHONE_ADDRESS_BOOK_FRIEND_LIST]), let's create it"
+                            "$TAG Locally saved friend list [$friendListNameToStoreFriends] didn't exist yet (nor [$FARCOM_ADDRESS_BOOK_FRIEND_LIST]), let's create it"
                         )
                     } else {
                         Log.w(
@@ -250,7 +250,7 @@ class ContactNewOrEditViewModel
                         )
                     }
                     fl.isDatabaseStorageEnabled = true // We do want to store friends created in app in DB
-                    fl.displayName = LINPHONE_ADDRESS_BOOK_FRIEND_LIST
+                    fl.displayName = FARCOM_ADDRESS_BOOK_FRIEND_LIST
                     core.addFriendList(fl)
                 }
                 status = fl.addFriend(friend)

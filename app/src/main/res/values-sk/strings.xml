@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources [
-<!ENTITY appName "Linphone">
+<!ENTITY appName "Farcom">
 ]>
 <resources>
     <string name="device_id">ID zariadenia</string>
@@ -81,53 +81,21 @@
     <string name="export_file_to_documents_error_toast">Chyba pri exportovaní súboru do dokumentov</string>
     <string name="media_playback_low_volume_warning_toast">Hlasitosť médií je nízka, nemusíte nič počuť!</string>
     <string name="media_player_generic_error_toast">Chyba pri pokuse o vytvorenie prehrávača médií</string>
-    <string name="assistant_dialog_general_terms_label">všeobecné podmienky</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_title">Všeobecné podmienky a zásady ochrany súkromia</string>
-    <string name="assistant_dialog_privacy_policy_label">zásady ochrany súkromia</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_message">Pokračovaním akceptujete naše %1$s a %2$s.</string>
     <string name="assistant_dialog_confirm_phone_number_title">Potvrdiť telefónne číslo</string>
     <string name="assistant_account_login">Prihlásenie</string>
     <string name="assistant_qr_code_invalid_toast">Neplatný QR kód!</string>
-    <string name="assistant_scan_qr_code">Naskenovať QR kód</string>
     <string name="assistant_login_third_party_sip_account">Použiť SIP účet tretej strany</string>
     <string name="assistant_login_third_party_sip_account_title">SIP účet tretej strany</string>
-    <string name="assistant_login_using_single_sign_on">Jednotné prihlásenie</string>
     <string name="assistant_login_cant_parse_address_toast">Neplatná SIP adresa!</string>
     <string name="assistant_login_address_without_username_toast">SIP adresa neobsahuje používateľské meno!</string>
     <string name="assistant_account_login_already_connected_error">Účet už existuje</string>
-    <string name="assistant_no_account_yet">Nemáte ešte účet?</string>
-    <string name="assistant_account_register">Registrácia</string>
-    <string name="assistant_account_creation_wrong_phone_number">Nesprávne číslo?</string>
-    <string name="assistant_account_create">Vytvoriť</string>
-    <string name="assistant_create_account_using_email_on_our_web_platform">Vytvorte účet pomocou svojej e-mailovej adresy na:</string>
-    <string name="assistant_already_have_an_account">Máte už účet?</string>
     <string name="assistant_sip_account_transport_protocol">Prenos</string>
-    <string name="assistant_third_party_sip_account_create_linphone_account">Preferujem vytvorenie &appName; účtu</string>
-    <string name="assistant_third_party_sip_account_warning_ok">Rozumiem</string>
-    <string name="assistant_account_register_push_notification_not_received_error">Push notifikácia s autentifikačným tokenom nebola prijatá behom 5 sekúnd, skúste to, prosím, neskôr znovu</string>
-    <string name="assistant_account_register_unexpected_error">Nastala neočakávaná chyba, skúste to, prosím, neskôr znovu</string>
     <string name="remote_provisioning_config_applied_toast">Konfigurácia bola úspešne nastavená</string>
     <string name="remote_provisioning_config_failed_toast">Došlo k chybe pri pokuse o stiahnutie a použitie vzdialenej konfigurácie</string>
-    <string name="assistant_account_creation_sms_confirmation_explanation">Poslali sme Vám overovací kód na Vaše telefónne číslo %1$s,\n\nZadajte nižšie, prosím, verifikačný kód:</string>
     <string name="assistant_dialog_confirm_phone_number_message">Ste si istý, že Vaše telefónne číslo je %s?</string>
-    <string name="assistant_account_register_unavailable_no_push_warning">Push notifikácie sa na Vašom zariadení zdajú byť nedostupné, ale sú neodmysliteľné pre vytvorenie účtu v mobilnej aplikácii.\n\nPozývame Vás preto, aby ste si namiesto toho vytvorili účet na našej webovej platforme:</string>
     <string name="assistant_account_login_forbidden_error">Nesprávne používateľské meno alebo heslo</string>
-    <string name="assistant_account_creation_sms_confirmation_title">Potvrďte svoje telefónne číslo</string>
-    <string name="assistant_third_party_sip_account_warning_explanation">Niektoré funkcie ako skupinové správy alebo videokonferencie vyžadujú účet &appName; \n\nTieto funkcie sú skryté, pokiaľ sa zaregistrujete pomocou SIP adresy tretej strany.\n\nPre aktiváciu v komerčnom prostredí nás, prosím, kontaktujte.</string>
     <string name="assistant_account_login_error">Prihlásenie sa nepodarilo: chybový kód je %s</string>
-    <string name="assistant_permissions_title">Udeliť oprávnenia</string>
     <string name="assistant_permissions_grant_all_of_them">OK</string>
-    <string name="assistant_permissions_skip_permissions">Vykonať neskôr</string>
-    <string name="assistant_permissions_subtitle">Pre plné využívanie &appName; potrebujeme udelenie nasledovných oprávnení:</string>
-    <string name="assistant_permissions_read_contacts_title"><b>Čítanie kontaktov:</b> Pre zobrazenie Vašich kontaktov a zistení, kto používa &appName;.</string>
-    <string name="assistant_permissions_post_notifications_title"><b>Odosielanie notifikácií:</b> Aby ste boli informovaný, keď obdržíte správa alebo hovor.</string>
-    <string name="assistant_permissions_access_camera_title"><b> Prístup ku kamere:</b> Pre zachytenie videa počas videohovorov a konferencií.</string>
-    <string name="assistant_forgotten_password_title">Zabudnuté heslo</string>
-    <string name="assistant_forgotten_password_subtitle">Zvoľte spôsob obnovy svojho účtu.</string>
-    <string name="assistant_forgotten_password_message">Váš účet bol vytvorený pomocou:</string>
-    <string name="assistant_recover_email_account_label">E-mailu</string>
-    <string name="assistant_recover_phone_number_account_label">Telefónneho čísla</string>
-    <string name="assistant_recover_phone_number_account_unavailable_no_push_warning">Push notifikácie sú na Vašom zariadení nedostupné, avšak sú nevyhnutné pre obnovu účtu s telefónnym číslom v mobilnej aplikácii.</string>
     <string name="bottom_navigation_contacts_label">Kontakty</string>
     <string name="bottom_navigation_calls_label">Hovory</string>
     <string name="bottom_navigation_conversations_label">Konverzácie</string>
@@ -278,7 +246,7 @@
     <string name="manage_account_device_remove">Odstrániť</string>
     <string name="manage_account_device_last_connection">Posledné pripojenie:</string>
     <string name="manage_account_dialog_remove_account_title">Odhlásiť sa z Vášho účtu?</string>
-    <string name="manage_account_dialog_remove_account_message">Pokiaľ si želáte nenávratne zmazať svoj účet, navštívte: https://sip.linphone.org</string>
+    <string name="manage_account_dialog_remove_account_message">Pokiaľ si želáte nenávratne zmazať svoj účet, navštívte: https://sip.farcom.org</string>
     <string name="account_settings_title">Nastavenia účtu</string>
     <string name="account_settings_push_notification_title">Povoliť push notifikácie</string>
     <string name="account_settings_im_encryption_mandatory_title">Šifrovanie správ je povinné</string>
@@ -317,7 +285,6 @@
     <string name="contacts_change_filter_label">Zmeniť filter</string>
     <string name="contacts_list_favourites_title">Obľúbené</string>
     <string name="generic_address_picker_conversations_list_title">Konverzácie</string>
-    <string name="assistant_permissions_record_audio_title"><b>Nahrávanie zvuku:</b> Aby Vás osoba na druhej strane mohla počuť a aby ste mohli nahrávať hlasové správy.</string>
     <string name="help_troubleshooting_print_logs_in_logcat">Zapisovať záznamy do logcatu</string>
     <string name="help_troubleshooting_debug_logs_upload_error_toast_message">Chyba pri nahrávaní ladiacich záznamov</string>
     <string name="manage_account_dialog_international_prefix_help_message">Vyberte svoju krajinu, aby &appName; mohol správne spárovať Vaše kontakty.</string>
@@ -357,7 +324,7 @@
     <string name="account_settings_push_notification_not_available_title">Push notifikácie nie sú dostupné!</string>
     <string name="account_settings_conference_factory_uri_title">URI adresa pre vytváranie konferencií</string>
     <string name="contacts_list_filter_popup_see_all">Zobraziť všetko</string>
-    <string name="contacts_list_filter_popup_see_linphone_only">Zobraziť &appName; kontakty</string>
+    <string name="contacts_list_filter_popup_see_farcom_only">Zobraziť &appName; kontakty</string>
     <string name="contacts_list_filter_popup_see_sip_only">Zobraziť SIP kontakty</string>
     <string name="contact_new_title">Nový kontakt</string>
     <string name="contact_edit_title">Upraviť kontakt</string>
@@ -820,7 +787,6 @@
     <string name="content_description_conference_participant_speaking">Účastník hovorí</string>
     <string name="call_stats_zrtp_key_agreement_algo">Algoritmus výmenu kľúča: %s</string>
     <string name="post_notifications_permission_not_granted">Povolenie na zasielanie notifikácií nebolo udelené!</string>
-    <string name="assistant_forgotten_password"><u>Zabudnuté heslo?</u></string>
     <string name="content_description_play_pause_audio_playback">Spustí/zastaví prehrávanie zvuku</string>
     <string name="conference_failed_to_create_group_call_toast">Vytvorenie skupinového hovoru zlyhalo!</string>
     <string name="call_error_server_timeout_toast">Server neodpovedá, skúste to znova</string>

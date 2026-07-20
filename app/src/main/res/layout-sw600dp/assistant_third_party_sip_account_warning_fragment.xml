@@ -129,7 +129,7 @@
                 android:paddingBottom="6dp"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:text="@string/assistant_linphone_contact_us_link"
+                android:text="@string/assistant_farcom_contact_us_link"
                 android:textSize="13sp"
                 android:textColor="@color/secondary_button_label_color"
                 android:gravity="center"
@@ -137,18 +137,18 @@
                 app:layout_constraintStart_toStartOf="@id/message"
                 app:layout_constraintEnd_toEndOf="@id/message"
                 app:layout_constraintTop_toBottomOf="@id/message"
-                app:layout_constraintBottom_toTopOf="@id/create_linphone_account"/>
+                app:layout_constraintBottom_toTopOf="@id/create_farcom_account"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:onClick="@{createAccountClickListener}"
                 style="@style/secondary_button_label_style"
-                android:id="@+id/create_linphone_account"
+                android:id="@+id/create_farcom_account"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/assistant_third_party_sip_account_create_linphone_account"
+                android:text="@string/assistant_third_party_sip_account_create_farcom_account"
                 app:layout_constraintWidth_max="@dimen/button_max_width"
                 app:layout_constraintVertical_bias="1"
                 app:layout_constraintStart_toStartOf="@id/title"
@@ -167,7 +167,7 @@
                 android:layout_marginEnd="16dp"
                 android:text="@string/assistant_third_party_sip_account_warning_ok"
                 app:layout_constraintWidth_max="@dimen/button_max_width"
-                app:layout_constraintTop_toBottomOf="@id/create_linphone_account"
+                app:layout_constraintTop_toBottomOf="@id/create_farcom_account"
                 app:layout_constraintBottom_toTopOf="@id/mountains"
                 app:layout_constraintStart_toStartOf="@id/title"
                 app:layout_constraintEnd_toEndOf="@id/message" />

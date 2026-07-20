@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,17 +17,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.core
+package org.farcom.core
 
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.IBinder
 import androidx.annotation.MainThread
 import androidx.core.app.NotificationCompat
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.core.tools.service.PushService
-import org.linphone.ui.main.MainActivity
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.core.tools.service.PushService
+import org.farcom.ui.main.MainActivity
 
 @MainThread
 class CorePushService : PushService() {
@@ -77,7 +77,7 @@ class CorePushService : PushService() {
         )
             .setContentTitle(getString(R.string.notification_push_received_title))
             .setContentText(getString(R.string.notification_push_received_message))
-            .setSmallIcon(R.drawable.linphone_notification)
+            .setSmallIcon(R.drawable.farcom_notification)
             .setAutoCancel(false)
             .setCategory(NotificationCompat.CATEGORY_SERVICE)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)

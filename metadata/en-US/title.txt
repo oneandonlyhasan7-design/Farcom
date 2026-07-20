@@ -1,1 +1,1 @@
-Linphone - open source SIP client
+Farcom - open source SIP client

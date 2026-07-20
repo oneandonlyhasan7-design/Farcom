@@ -13,10 +13,10 @@
             type="View.OnClickListener" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.call.viewmodel.CurrentCallViewModel" />
+            type="org.farcom.ui.call.viewmodel.CurrentCallViewModel" />
         <variable
             name="callsViewModel"
-            type="org.linphone.ui.call.viewmodel.CallsViewModel" />
+            type="org.farcom.ui.call.viewmodel.CallsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

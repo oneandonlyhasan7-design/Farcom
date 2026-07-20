@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.contacts
+package org.farcom.contacts
 
 import android.database.Cursor
 import android.database.StaleDataException
@@ -35,15 +35,15 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import java.lang.Exception
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.core.Core
-import org.linphone.core.Factory
-import org.linphone.core.Friend
-import org.linphone.core.FriendList
-import org.linphone.core.GlobalState
-import org.linphone.core.SubscribePolicy
-import org.linphone.core.tools.Log
-import org.linphone.utils.PhoneNumberUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.core.Core
+import org.farcom.core.Factory
+import org.farcom.core.Friend
+import org.farcom.core.FriendList
+import org.farcom.core.GlobalState
+import org.farcom.core.SubscribePolicy
+import org.farcom.core.tools.Log
+import org.farcom.utils.PhoneNumberUtils
 
 class ContactLoader : LoaderManager.LoaderCallbacks<Cursor> {
     companion object {
@@ -62,7 +62,7 @@ class ContactLoader : LoaderManager.LoaderCallbacks<Cursor> {
         private const val TAG = "[Contacts Loader]"
 
         const val NATIVE_ADDRESS_BOOK_FRIEND_LIST = "Native address-book"
-        const val LINPHONE_ADDRESS_BOOK_FRIEND_LIST = "Linphone address-book"
+        const val FARCOM_ADDRESS_BOOK_FRIEND_LIST = "Farcom address-book"
     }
 
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())

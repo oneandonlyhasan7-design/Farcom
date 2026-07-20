@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.adapter
+package org.farcom.ui.main.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -30,15 +30,15 @@ import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import org.linphone.R
-import org.linphone.databinding.GenericAddressPickerContactListCellBinding
-import org.linphone.databinding.GenericAddressPickerConversationListCellBinding
-import org.linphone.databinding.GenericAddressPickerListDecorationBinding
-import org.linphone.databinding.GenericAddressPickerSuggestionListCellBinding
-import org.linphone.ui.main.model.ConversationContactOrSuggestionModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.Event
-import org.linphone.utils.HeaderAdapter
+import org.farcom.R
+import org.farcom.databinding.GenericAddressPickerContactListCellBinding
+import org.farcom.databinding.GenericAddressPickerConversationListCellBinding
+import org.farcom.databinding.GenericAddressPickerListDecorationBinding
+import org.farcom.databinding.GenericAddressPickerSuggestionListCellBinding
+import org.farcom.ui.main.model.ConversationContactOrSuggestionModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.Event
+import org.farcom.utils.HeaderAdapter
 
 class ConversationsContactsAndSuggestionsListAdapter :
     ListAdapter<ConversationContactOrSuggestionModel, RecyclerView.ViewHolder>(

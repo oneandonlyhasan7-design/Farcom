@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2024 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.core
+package org.farcom.core
 
 import android.annotation.SuppressLint
 import android.app.PendingIntent
@@ -28,12 +28,12 @@ import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.R
-import org.linphone.compatibility.Compatibility
-import org.linphone.core.tools.Log
-import org.linphone.core.tools.service.FileTransferService
-import org.linphone.ui.main.MainActivity
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.R
+import org.farcom.compatibility.Compatibility
+import org.farcom.core.tools.Log
+import org.farcom.core.tools.service.FileTransferService
+import org.farcom.ui.main.MainActivity
 
 @MainThread
 class CoreFileTransferService : FileTransferService() {
@@ -118,7 +118,7 @@ class CoreFileTransferService : FileTransferService() {
             getString(R.string.notification_file_transfer_title)
         )
             .setContentText(getString(R.string.notification_file_transfer_startup_message))
-            .setSmallIcon(R.drawable.linphone_notification)
+            .setSmallIcon(R.drawable.farcom_notification)
             .setAutoCancel(false)
             .setCategory(NotificationCompat.CATEGORY_SERVICE)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)

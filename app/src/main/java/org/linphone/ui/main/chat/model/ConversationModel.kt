@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.chat.model
+package org.farcom.ui.main.chat.model
 
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -25,24 +25,24 @@ import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.core.text.toSpannable
 import androidx.lifecycle.MutableLiveData
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.R
-import org.linphone.core.Address
-import org.linphone.core.ChatMessage
-import org.linphone.core.ChatMessageListenerStub
-import org.linphone.core.ChatRoom
-import org.linphone.core.ChatRoom.Capabilities
-import org.linphone.core.ChatRoomListenerStub
-import org.linphone.core.Content
-import org.linphone.core.EventLog
-import org.linphone.core.Friend
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.FileUtils
-import org.linphone.utils.LinphoneUtils
-import org.linphone.utils.ShortcutUtils
-import org.linphone.utils.TimestampUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.R
+import org.farcom.core.Address
+import org.farcom.core.ChatMessage
+import org.farcom.core.ChatMessageListenerStub
+import org.farcom.core.ChatRoom
+import org.farcom.core.ChatRoom.Capabilities
+import org.farcom.core.ChatRoomListenerStub
+import org.farcom.core.Content
+import org.farcom.core.EventLog
+import org.farcom.core.Friend
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.contacts.model.ContactAvatarModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.FileUtils
+import org.farcom.utils.FarcomUtils
+import org.farcom.utils.ShortcutUtils
+import org.farcom.utils.TimestampUtils
 
 class ConversationModel
     @WorkerThread
@@ -51,7 +51,7 @@ class ConversationModel
         private const val TAG = "[Conversation Model]"
     }
 
-    val id = LinphoneUtils.getConversationId(chatRoom)
+    val id = FarcomUtils.getConversationId(chatRoom)
 
     val isGroup = !chatRoom.hasCapability(Capabilities.OneToOne.toInt()) && chatRoom.hasCapability(
         Capabilities.Conference.toInt()
@@ -59,7 +59,7 @@ class ConversationModel
 
     val isEncrypted = chatRoom.hasCapability(Capabilities.Encrypted.toInt())
 
-    val isEncryptionAvailable = LinphoneUtils.isEndToEndEncryptedChatAvailable(chatRoom.core)
+    val isEncryptionAvailable = FarcomUtils.isEndToEndEncryptedChatAvailable(chatRoom.core)
 
     val isReadOnly = MutableLiveData<Boolean>()
 
@@ -312,7 +312,7 @@ class ConversationModel
         if (isGroup && !isOutgoing) {
             val fromAddress = message.fromAddress
             val sender = coreContext.contactsManager.findContactByAddress(fromAddress)
-            val name = sender?.name ?: LinphoneUtils.getDisplayName(fromAddress)
+            val name = sender?.name ?: FarcomUtils.getDisplayName(fromAddress)
             val senderName = AppUtils.getFormattedString(
                 R.string.conversations_last_message_format,
                 name
@@ -321,11 +321,11 @@ class ConversationModel
         } else {
             lastMessageTextSender.postValue("")
         }
-        lastMessageText.postValue(LinphoneUtils.getFormattedTextDescribingMessage(message))
+        lastMessageText.postValue(FarcomUtils.getFormattedTextDescribingMessage(message))
 
         isLastMessageOutgoing.postValue(isOutgoing)
         if (isOutgoing) {
-            lastMessageDeliveryIcon.postValue(LinphoneUtils.getChatIconResId(message.state))
+            lastMessageDeliveryIcon.postValue(FarcomUtils.getChatIconResId(message.state))
         }
 
         if (message.isRetracted) {
@@ -463,7 +463,7 @@ class ConversationModel
     private fun computeComposingLabel() {
         val composing = chatRoom.isRemoteComposing
         isComposing.postValue(composing)
-        val pair = LinphoneUtils.getComposingIconAndText(chatRoom)
+        val pair = FarcomUtils.getComposingIconAndText(chatRoom)
         val icon = pair.first
         composingIcon.postValue(icon)
         val label = pair.second

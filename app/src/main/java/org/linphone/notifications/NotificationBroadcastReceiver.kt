@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,20 +17,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.notifications
+package org.farcom.notifications
 
 import android.app.NotificationManager
 import android.app.RemoteInput
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.core.Address
-import org.linphone.core.AudioDevice
-import org.linphone.core.ConferenceParams
-import org.linphone.core.tools.Log
-import org.linphone.telecom.RedirectionHandler
-import org.linphone.utils.AudioUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.core.Address
+import org.farcom.core.AudioDevice
+import org.farcom.core.ConferenceParams
+import org.farcom.core.tools.Log
+import org.farcom.telecom.RedirectionHandler
+import org.farcom.utils.AudioUtils
 
 class NotificationBroadcastReceiver : BroadcastReceiver() {
     companion object {
@@ -108,14 +108,14 @@ class NotificationBroadcastReceiver : BroadcastReceiver() {
     private fun handleCallRedirectionIntent(action: String) {
         when (action) {
             NotificationsManager.INTENT_ALLOW_CALL_REDIRECTION_ACTION -> {
-                Log.i("$TAG User allowed GSM call redirection through Linphone, doing it")
-                RedirectionHandler.useLinphone = true
+                Log.i("$TAG User allowed GSM call redirection through Farcom, doing it")
+                RedirectionHandler.useFarcom = true
                 RedirectionHandler.responseLatch?.countDown()
             }
 
             NotificationsManager.INTENT_DENY_CALL_REDIRECTION_ACTION -> {
-                Log.i("$TAG User declined GSM call redirection through Linphone")
-                RedirectionHandler.useLinphone = false
+                Log.i("$TAG User declined GSM call redirection through Farcom")
+                RedirectionHandler.useFarcom = false
                 RedirectionHandler.responseLatch?.countDown()
             }
         }

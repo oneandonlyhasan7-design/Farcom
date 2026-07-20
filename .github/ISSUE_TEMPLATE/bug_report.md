@@ -14,9 +14,9 @@ First of all, please say "Hi" or "Hello", it doesn't cost much.
 
 A clear and concise description of what the bug is.
 
-Also, if applicable, **do you reproduce it with linphone-android latest release from the Play Store?**
+Also, if applicable, **do you reproduce it with farcom-android latest release from the Play Store?**
 
-**If the issue is about the SDK (build, issue, etc...) open the ticket in the [linphone-sdk](https://github.com/BelledonneCommunications/linphone-sdk) repository or one of it's submodules!**
+**If the issue is about the SDK (build, issue, etc...) open the ticket in the [farcom-sdk](https://github.com/BelledonneCommunications/farcom-sdk) repository or one of it's submodules!**
 
 2. **To Reproduce** (mandatory)
 
@@ -41,7 +41,7 @@ If you are using a SDK that isn't the latest release, please update first as it'
 
 Click on "Share logs" in Help -> Troubleshooting view and copy/paste the link here.
 
-It's also explained [in the README](https://github.com/BelledonneCommunications/linphone-android#behavior-issue).
+It's also explained [in the README](https://github.com/BelledonneCommunications/farcom-android#behavior-issue).
 
 In case of a call issue, please attach logs from both devices!
 
@@ -51,7 +51,7 @@ In case of a crash of the app, please also provide the symbolized stack trace of
 
 Here's the command for a arm64 device: `adb logcat | grep ndk-stack -sym <sdk build directory>/libs-debug/arm64-v8a/`
 
-For more information, please refer to [this section of the README](https://github.com/BelledonneCommunications/linphone-android#native-crash) file.
+For more information, please refer to [this section of the README](https://github.com/BelledonneCommunications/farcom-android#native-crash) file.
 
 7. **Screenshots** (optionnal)
 

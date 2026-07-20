@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,31 +17,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.history.viewmodel
+package org.farcom.ui.main.history.viewmodel
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.contacts.ContactsManager
-import org.linphone.core.Address
-import org.linphone.core.CallLog
-import org.linphone.core.Core
-import org.linphone.core.CoreListenerStub
-import org.linphone.core.Friend
-import org.linphone.core.GlobalState
-import org.linphone.core.MagicSearch
-import org.linphone.core.MagicSearchListenerStub
-import org.linphone.core.SearchResult
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.ui.main.history.model.CallLogModel
-import org.linphone.ui.main.history.model.CallLogModelWrapper
-import org.linphone.ui.main.model.ConversationContactOrSuggestionModel
-import org.linphone.ui.main.viewmodel.AbstractMainViewModel
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.contacts.ContactsManager
+import org.farcom.core.Address
+import org.farcom.core.CallLog
+import org.farcom.core.Core
+import org.farcom.core.CoreListenerStub
+import org.farcom.core.Friend
+import org.farcom.core.GlobalState
+import org.farcom.core.MagicSearch
+import org.farcom.core.MagicSearchListenerStub
+import org.farcom.core.SearchResult
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.contacts.model.ContactAvatarModel
+import org.farcom.ui.main.history.model.CallLogModel
+import org.farcom.ui.main.history.model.CallLogModelWrapper
+import org.farcom.ui.main.model.ConversationContactOrSuggestionModel
+import org.farcom.ui.main.viewmodel.AbstractMainViewModel
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
 import java.text.Collator
 import java.util.Locale
 
@@ -134,7 +134,7 @@ class HistoryListViewModel
         coreContext.postOnCoreThread { core ->
             // TODO FIXME: remove workaround later
             if (coreContext.core.accountList.size > 1) {
-                val account = LinphoneUtils.getDefaultAccount()
+                val account = FarcomUtils.getDefaultAccount()
                 if (account != null) {
                     account.clearCallLogs()
                 } else {
@@ -179,7 +179,7 @@ class HistoryListViewModel
 
         val list = arrayListOf<CallLogModelWrapper>()
 
-        val account = LinphoneUtils.getDefaultAccount()
+        val account = FarcomUtils.getDefaultAccount()
         // Fetch all call logs if only one account to workaround no history issue
         // TODO FIXME: remove workaround later
         val logs = if (coreContext.core.accountList.size > 1) {
@@ -209,7 +209,7 @@ class HistoryListViewModel
     private fun isCallLogMatchingFilter(model: CallLogModel, filter: String): Boolean {
         if (filter.isEmpty()) return true
 
-        val friendName = model.avatarModel.friend.name ?: LinphoneUtils.getDisplayName(model.address)
+        val friendName = model.avatarModel.friend.name ?: FarcomUtils.getDisplayName(model.address)
         return friendName.contains(filter, ignoreCase = true) || model.address.asStringUriOnly().contains(filter, ignoreCase = true)
     }
 
@@ -221,7 +221,7 @@ class HistoryListViewModel
         val suggestionsList = arrayListOf<CallLogModelWrapper>()
         val requestList = arrayListOf<CallLogModelWrapper>()
 
-        val defaultAccountDomain = LinphoneUtils.getDefaultAccount()?.params?.domain
+        val defaultAccountDomain = FarcomUtils.getDefaultAccount()?.params?.domain
         for (result in results) {
             val address = result.address
             val friend = result.friend
@@ -229,7 +229,7 @@ class HistoryListViewModel
                 val found = contactsList.find { it.contactModel?.friend == friend }
                 if (found != null) continue
 
-                val mainAddress = address ?: LinphoneUtils.getFirstAvailableAddressForFriend(friend)
+                val mainAddress = address ?: FarcomUtils.getFirstAvailableAddressForFriend(friend)
                 if (mainAddress != null) {
                     val model = ConversationContactOrSuggestionModel(mainAddress, friend = friend)
                     val avatarModel = coreContext.contactsManager.getContactAvatarModelForFriend(
@@ -288,7 +288,7 @@ class HistoryListViewModel
     @WorkerThread
     private fun getContactAvatarModelForAddress(address: Address): ContactAvatarModel {
         val fakeFriend = coreContext.core.createFriend()
-        fakeFriend.name = LinphoneUtils.getDisplayName(address)
+        fakeFriend.name = FarcomUtils.getDisplayName(address)
         fakeFriend.address = address
         return ContactAvatarModel(fakeFriend)
     }

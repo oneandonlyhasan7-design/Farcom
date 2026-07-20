@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,31 +17,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.settings.viewmodel
+package org.farcom.ui.main.settings.viewmodel
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import java.util.Locale
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.core.Account
-import org.linphone.core.AccountDevice
-import org.linphone.core.AccountManagerServices
-import org.linphone.core.AccountManagerServicesRequest
-import org.linphone.core.AccountManagerServicesRequestListenerStub
-import org.linphone.core.Address
-import org.linphone.core.DialPlan
-import org.linphone.core.Dictionary
-import org.linphone.core.Factory
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.ui.main.model.AccountModel
-import org.linphone.ui.main.model.isEndToEndEncryptionMandatory
-import org.linphone.ui.main.settings.model.AccountDeviceModel
-import org.linphone.utils.Event
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.core.Account
+import org.farcom.core.AccountDevice
+import org.farcom.core.AccountManagerServices
+import org.farcom.core.AccountManagerServicesRequest
+import org.farcom.core.AccountManagerServicesRequestListenerStub
+import org.farcom.core.Address
+import org.farcom.core.DialPlan
+import org.farcom.core.Dictionary
+import org.farcom.core.Factory
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.ui.main.model.AccountModel
+import org.farcom.ui.main.model.isEndToEndEncryptionMandatory
+import org.farcom.ui.main.settings.model.AccountDeviceModel
+import org.farcom.utils.Event
 
 class AccountProfileViewModel
     @UiThread

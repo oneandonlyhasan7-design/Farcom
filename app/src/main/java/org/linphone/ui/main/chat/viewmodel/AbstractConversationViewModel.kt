@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,22 +19,22 @@
  */
 @file:Suppress("EmptyMethod")
 
-package org.linphone.ui.main.chat.viewmodel
+package org.farcom.ui.main.chat.viewmodel
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.R
-import org.linphone.core.Address
-import org.linphone.core.ChatRoom
-import org.linphone.core.Conference
-import org.linphone.core.ConferenceListenerStub
-import org.linphone.core.MediaDirection
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.R
+import org.farcom.core.Address
+import org.farcom.core.ChatRoom
+import org.farcom.core.Conference
+import org.farcom.core.ConferenceListenerStub
+import org.farcom.core.MediaDirection
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
 
 abstract class AbstractConversationViewModel : GenericViewModel() {
     companion object {
@@ -98,7 +98,7 @@ abstract class AbstractConversationViewModel : GenericViewModel() {
             }
 
             if (room != null && (!::chatRoom.isInitialized || chatRoom != room)) {
-                if (conversationId == LinphoneUtils.getConversationId(room)) {
+                if (conversationId == FarcomUtils.getConversationId(room)) {
                     Log.i("$TAG Conversation object available in sharedViewModel, using it")
                     chatRoom = room
 
@@ -143,7 +143,7 @@ abstract class AbstractConversationViewModel : GenericViewModel() {
     @UiThread
     fun startCall() {
         coreContext.postOnCoreThread {
-            if (LinphoneUtils.isChatRoomAGroup(chatRoom) && chatRoom.participants.size >= 2) {
+            if (FarcomUtils.isChatRoomAGroup(chatRoom) && chatRoom.participants.size >= 2) {
                 confirmGroupCallEvent.postValue(Event(true))
             } else {
                 val firstParticipant = chatRoom.participants.firstOrNull()
@@ -169,7 +169,7 @@ abstract class AbstractConversationViewModel : GenericViewModel() {
                 return@postOnCoreThread
             }
 
-            val conference = LinphoneUtils.createGroupCall(account, chatRoom.subjectUtf8.orEmpty())
+            val conference = FarcomUtils.createGroupCall(account, chatRoom.subjectUtf8.orEmpty())
             if (conference == null) {
                 Log.e("$TAG Failed to create group call!")
                 showRedToast(R.string.conference_failed_to_create_group_call_toast, R.drawable.warning_circle)

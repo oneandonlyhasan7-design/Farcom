@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main
+package org.farcom.ui.main
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -58,26 +58,26 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.compatibility.Compatibility
-import org.linphone.core.tools.Log
-import org.linphone.databinding.MainActivityBinding
-import org.linphone.ui.GenericActivity
-import org.linphone.ui.assistant.AssistantActivity
-import org.linphone.ui.main.chat.fragment.ConversationsListFragmentDirections
-import org.linphone.utils.PasswordDialogModel
-import org.linphone.ui.main.viewmodel.MainViewModel
-import org.linphone.ui.main.viewmodel.SharedMainViewModel
-import org.linphone.ui.welcome.WelcomeActivity
-import org.linphone.utils.AppUtils
-import org.linphone.utils.DialogUtils
-import org.linphone.utils.Event
-import org.linphone.utils.FileUtils
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.compatibility.Compatibility
+import org.farcom.core.tools.Log
+import org.farcom.databinding.MainActivityBinding
+import org.farcom.ui.GenericActivity
+import org.farcom.ui.assistant.AssistantActivity
+import org.farcom.ui.main.chat.fragment.ConversationsListFragmentDirections
+import org.farcom.utils.PasswordDialogModel
+import org.farcom.ui.main.viewmodel.MainViewModel
+import org.farcom.ui.main.viewmodel.SharedMainViewModel
+import org.farcom.ui.welcome.WelcomeActivity
+import org.farcom.utils.AppUtils
+import org.farcom.utils.DialogUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FileUtils
+import org.farcom.utils.FarcomUtils
 import androidx.core.content.edit
-import org.linphone.ui.sso.SingleSignOnActivity
+import org.farcom.ui.sso.SingleSignOnActivity
 
 @UiThread
 class MainActivity : GenericActivity() {
@@ -385,7 +385,7 @@ class MainActivity : GenericActivity() {
 
         coreContext.postOnCoreThread { core ->
             if (corePreferences.firstLaunch) {
-                Log.i("$TAG First time Linphone 6.0 has been started, showing Welcome activity")
+                Log.i("$TAG First time Farcom 6.0 has been started, showing Welcome activity")
                 corePreferences.firstLaunch = false
                 coreContext.postOnMainThread {
                     try {
@@ -579,7 +579,7 @@ class MainActivity : GenericActivity() {
             }
             Intent.ACTION_VIEW -> {
                 val uri = intent.data?.toString() ?: ""
-                if (uri.startsWith("linphone-config:")) {
+                if (uri.startsWith("farcom-config:")) {
                     handleConfigIntent(uri)
                 } else {
                     handleCallIntent(intent)
@@ -785,17 +785,17 @@ class MainActivity : GenericActivity() {
         val sipUriToCall = when {
             uri.startsWith("tel:") -> uri.substring("tel:".length)
             uri.startsWith("callto:") -> uri.substring("callto:".length)
-            uri.startsWith("sip-linphone:") -> uri.replace("sip-linphone:", "sip:")
-            uri.startsWith("linphone-sip:") -> uri.replace("linphone-sip:", "sip:")
-            uri.startsWith("sips-linphone:") -> uri.replace("sips-linphone:", "sips:")
-            uri.startsWith("linphone-sips:") -> uri.replace("linphone-sips:", "sips:")
+            uri.startsWith("sip-farcom:") -> uri.replace("sip-farcom:", "sip:")
+            uri.startsWith("farcom-sip:") -> uri.replace("farcom-sip:", "sip:")
+            uri.startsWith("sips-farcom:") -> uri.replace("sips-farcom:", "sips:")
+            uri.startsWith("farcom-sips:") -> uri.replace("farcom-sips:", "sips:")
             else -> uri.replace("%40", "@") // Unescape @ character if needed
         }
 
         coreContext.postOnCoreThread {
             val address = coreContext.core.interpretUrl(
                 sipUriToCall,
-                LinphoneUtils.applyInternationalPrefix()
+                FarcomUtils.applyInternationalPrefix()
             )
             Log.i("$TAG Interpreted SIP URI is [${address?.asStringUriOnly()}]")
             if (address != null) {
@@ -807,7 +807,7 @@ class MainActivity : GenericActivity() {
 
     private fun handleConfigIntent(uri: String) {
         Log.i("$TAG Trying to parse config intent [$uri] as remote provisioning URL")
-        val url = LinphoneUtils.getRemoteProvisioningUrlFromUri(uri)
+        val url = FarcomUtils.getRemoteProvisioningUrlFromUri(uri)
         if (url == null) {
             Log.e("$TAG Couldn't parse URI [$uri] into a valid remote provisioning URL, aborting")
             return
@@ -888,11 +888,11 @@ class MainActivity : GenericActivity() {
             val shouldRequestRole = roleManager.isRoleAvailable(RoleManager.ROLE_CALL_REDIRECTION) &&
                     !roleManager.isRoleHeld(RoleManager.ROLE_CALL_REDIRECTION)
             if (shouldRequestRole) {
-                Log.i("$TAG Starting intent to request Linphone be used as Call Redirection")
+                Log.i("$TAG Starting intent to request Farcom be used as Call Redirection")
                 val intent = roleManager.createRequestRoleIntent(RoleManager.ROLE_CALL_REDIRECTION)
                 startActivityForResult(intent, REDIRECT_ROLE_REQUEST_CODE)
             } else {
-                Log.i("$TAG Linphone is already defined as Call Redirection")
+                Log.i("$TAG Farcom is already defined as Call Redirection")
             }
         }
     }

@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.meetings.fragment
+package org.farcom.ui.main.meetings.fragment
 
 import android.os.Bundle
 import android.text.format.DateFormat
@@ -35,13 +35,13 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.databinding.MeetingEditFragmentBinding
-import org.linphone.ui.GenericActivity
-import org.linphone.ui.main.fragment.SlidingPaneChildFragment
-import org.linphone.ui.main.meetings.viewmodel.ScheduleMeetingViewModel
-import org.linphone.utils.Event
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.databinding.MeetingEditFragmentBinding
+import org.farcom.ui.GenericActivity
+import org.farcom.ui.main.fragment.SlidingPaneChildFragment
+import org.farcom.ui.main.meetings.viewmodel.ScheduleMeetingViewModel
+import org.farcom.utils.Event
 
 @UiThread
 class EditMeetingFragment : SlidingPaneChildFragment() {

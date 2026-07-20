@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,35 +17,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.chat.viewmodel
+package org.farcom.ui.main.chat.viewmodel
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.contacts.ContactsManager
-import org.linphone.core.Address
-import org.linphone.core.ChatMessage
-import org.linphone.core.ChatRoom
-import org.linphone.core.ChatRoomListenerStub
-import org.linphone.core.Conference
-import org.linphone.core.Core
-import org.linphone.core.CoreListenerStub
-import org.linphone.core.Friend
-import org.linphone.core.MagicSearch
-import org.linphone.core.MagicSearchListenerStub
-import org.linphone.core.SearchResult
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.chat.model.ConversationModel
-import org.linphone.ui.main.chat.model.ConversationModelWrapper
-import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.ui.main.model.ConversationContactOrSuggestionModel
-import org.linphone.ui.main.viewmodel.AbstractMainViewModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.contacts.ContactsManager
+import org.farcom.core.Address
+import org.farcom.core.ChatMessage
+import org.farcom.core.ChatRoom
+import org.farcom.core.ChatRoomListenerStub
+import org.farcom.core.Conference
+import org.farcom.core.Core
+import org.farcom.core.CoreListenerStub
+import org.farcom.core.Friend
+import org.farcom.core.MagicSearch
+import org.farcom.core.MagicSearchListenerStub
+import org.farcom.core.SearchResult
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.chat.model.ConversationModel
+import org.farcom.ui.main.chat.model.ConversationModelWrapper
+import org.farcom.ui.main.contacts.model.ContactAvatarModel
+import org.farcom.ui.main.model.ConversationContactOrSuggestionModel
+import org.farcom.ui.main.viewmodel.AbstractMainViewModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
 import java.text.Collator
 import java.util.Locale
 
@@ -84,14 +84,14 @@ class ConversationsListViewModel
             val state = chatRoom.state
             if (state == ChatRoom.State.Instantiated) return
 
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
             Log.i("$TAG Conversation [$id] (${chatRoom.subjectUtf8}) state changed: [$state]")
 
             if (state == ChatRoom.State.Created) {
                 Log.i("$TAG Conversation [$id] successfully created")
                 chatRoom.removeListener(this)
                 fetchInProgress.postValue(false)
-                chatRoomCreatedEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                chatRoomCreatedEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
             } else if (state == ChatRoom.State.CreationFailed) {
                 Log.e("$TAG Conversation [$id] creation has failed!")
                 chatRoom.removeListener(this)
@@ -109,7 +109,7 @@ class ConversationsListViewModel
             state: ChatRoom.State?
         ) {
             Log.i(
-                "$TAG Conversation [${LinphoneUtils.getConversationId(chatRoom)}] state changed [$state]"
+                "$TAG Conversation [${FarcomUtils.getConversationId(chatRoom)}] state changed [$state]"
             )
 
             when (state) {
@@ -121,7 +121,7 @@ class ConversationsListViewModel
 
         @WorkerThread
         override fun onMessageSent(core: Core, chatRoom: ChatRoom, message: ChatMessage) {
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
             val found = conversations.value.orEmpty().find {
                 it.conversationModel?.id == id
             }
@@ -140,7 +140,7 @@ class ConversationsListViewModel
             chatRoom: ChatRoom,
             messages: Array<out ChatMessage>
         ) {
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
             val found = conversations.value.orEmpty().find {
                 it.conversationModel?.id == id
             }
@@ -221,7 +221,7 @@ class ConversationsListViewModel
 
         val list = arrayListOf<ConversationModelWrapper>()
 
-        val account = LinphoneUtils.getDefaultAccount()
+        val account = FarcomUtils.getDefaultAccount()
         val chatRooms = if (filter.isEmpty()) {
             account?.chatRooms
         } else {
@@ -245,7 +245,7 @@ class ConversationsListViewModel
     private fun addChatRoom(chatRoom: ChatRoom) {
         val identifier = chatRoom.identifier
         val chatRoomAccount = chatRoom.account
-        val defaultAccount = LinphoneUtils.getDefaultAccount()
+        val defaultAccount = FarcomUtils.getDefaultAccount()
         if (defaultAccount == null || chatRoomAccount == null || chatRoomAccount != defaultAccount) {
             Log.w(
                 "$TAG Chat room with identifier [$identifier] was created but not displaying it because it doesn't belong to currently default account"
@@ -263,7 +263,7 @@ class ConversationsListViewModel
 
         val hideEmptyChatRooms = coreContext.core.config.getBool("misc", "hide_empty_chat_rooms", true)
         // Hide empty chat rooms only applies to 1-1 conversations
-        if (hideEmptyChatRooms && !LinphoneUtils.isChatRoomAGroup(chatRoom) && chatRoom.lastMessageInHistory == null) {
+        if (hideEmptyChatRooms && !FarcomUtils.isChatRoomAGroup(chatRoom) && chatRoom.lastMessageInHistory == null) {
             Log.w("$TAG Chat room with identifier [$identifier] is empty, not adding it to match Core setting")
             return
         }
@@ -340,7 +340,7 @@ class ConversationsListViewModel
         val suggestionsList = arrayListOf<ConversationModelWrapper>()
         val requestList = arrayListOf<ConversationModelWrapper>()
 
-        val defaultAccountDomain = LinphoneUtils.getDefaultAccount()?.params?.domain
+        val defaultAccountDomain = FarcomUtils.getDefaultAccount()?.params?.domain
         for (result in results) {
             val address = result.address
             val friend = result.friend
@@ -348,7 +348,7 @@ class ConversationsListViewModel
                 val found = contactsList.find { it.contactModel?.friend == friend }
                 if (found != null) continue
 
-                val mainAddress = address ?: LinphoneUtils.getFirstAvailableAddressForFriend(friend)
+                val mainAddress = address ?: FarcomUtils.getFirstAvailableAddressForFriend(friend)
                 if (mainAddress != null) {
                     val model = ConversationContactOrSuggestionModel(mainAddress, friend = friend)
                     val avatarModel = coreContext.contactsManager.getContactAvatarModelForFriend(
@@ -407,7 +407,7 @@ class ConversationsListViewModel
     @WorkerThread
     private fun getContactAvatarModelForAddress(address: Address): ContactAvatarModel {
         val fakeFriend = coreContext.core.createFriend()
-        fakeFriend.name = LinphoneUtils.getDisplayName(address)
+        fakeFriend.name = FarcomUtils.getDisplayName(address)
         fakeFriend.address = address
         return ContactAvatarModel(fakeFriend)
     }
@@ -440,7 +440,7 @@ class ConversationsListViewModel
             chatParams.backend = ChatRoom.Backend.FlexisipChat
             params.securityLevel = Conference.SecurityLevel.EndToEnd
         } else if (!account.params.instantMessagingEncryptionMandatory) {
-            if (LinphoneUtils.isEndToEndEncryptedChatAvailable(core)) {
+            if (FarcomUtils.isEndToEndEncryptedChatAvailable(core)) {
                 Log.i(
                     "$TAG Account is in interop mode but LIME is available, creating an E2E encrypted conversation"
                 )
@@ -474,19 +474,19 @@ class ConversationsListViewModel
                 if (chatParams.backend == ChatRoom.Backend.FlexisipChat) {
                     val state = chatRoom.state
                     if (state == ChatRoom.State.Created) {
-                        val id = LinphoneUtils.getConversationId(chatRoom)
+                        val id = FarcomUtils.getConversationId(chatRoom)
                         Log.i("$TAG 1-1 conversation [$id] has been created")
                         fetchInProgress.postValue(false)
-                        chatRoomCreatedEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                        chatRoomCreatedEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
                     } else {
                         Log.i("$TAG Conversation isn't in Created state yet (state is [$state]), wait for it")
                         chatRoom.addListener(chatRoomListener)
                     }
                 } else {
-                    val id = LinphoneUtils.getConversationId(chatRoom)
+                    val id = FarcomUtils.getConversationId(chatRoom)
                     Log.i("$TAG Conversation successfully created [$id]")
                     fetchInProgress.postValue(false)
-                    chatRoomCreatedEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                    chatRoomCreatedEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
                 }
             } else {
                 Log.e("$TAG Failed to create 1-1 conversation with [${remote.asStringUriOnly()}]!")
@@ -498,7 +498,7 @@ class ConversationsListViewModel
                 "$TAG A 1-1 conversation between local account [${localAddress?.asStringUriOnly()}] and remote [${remote.asStringUriOnly()}] for given parameters already exists!"
             )
             fetchInProgress.postValue(false)
-            chatRoomCreatedEvent.postValue(Event(LinphoneUtils.getConversationId(existingChatRoom)))
+            chatRoomCreatedEvent.postValue(Event(FarcomUtils.getConversationId(existingChatRoom)))
         }
     }
 }

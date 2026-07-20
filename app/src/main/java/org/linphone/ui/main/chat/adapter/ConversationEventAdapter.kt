@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.chat.adapter
+package org.farcom.ui.main.chat.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -30,19 +30,19 @@ import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.databinding.ChatBubbleIncomingBinding
-import org.linphone.databinding.ChatBubbleOutgoingBinding
-import org.linphone.databinding.ChatConversationEventBinding
-import org.linphone.databinding.ChatConversationE2eEncryptedFirstEventBinding
-import org.linphone.databinding.ChatConversationUnsafeFirstEventBinding
-import org.linphone.ui.main.chat.model.EventLogModel
-import org.linphone.ui.main.chat.model.EventModel
-import org.linphone.ui.main.chat.model.MessageModel
-import org.linphone.utils.Event
-import org.linphone.utils.HeaderAdapter
-import org.linphone.utils.startAnimatedDrawable
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.databinding.ChatBubbleIncomingBinding
+import org.farcom.databinding.ChatBubbleOutgoingBinding
+import org.farcom.databinding.ChatConversationEventBinding
+import org.farcom.databinding.ChatConversationE2eEncryptedFirstEventBinding
+import org.farcom.databinding.ChatConversationUnsafeFirstEventBinding
+import org.farcom.ui.main.chat.model.EventLogModel
+import org.farcom.ui.main.chat.model.EventModel
+import org.farcom.ui.main.chat.model.MessageModel
+import org.farcom.utils.Event
+import org.farcom.utils.HeaderAdapter
+import org.farcom.utils.startAnimatedDrawable
 
 class ConversationEventAdapter :
     ListAdapter<EventLogModel, RecyclerView.ViewHolder>(

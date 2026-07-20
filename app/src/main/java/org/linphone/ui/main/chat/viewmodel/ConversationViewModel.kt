@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.chat.viewmodel
+package org.farcom.ui.main.chat.viewmodel
 
 import android.net.Uri
 import androidx.annotation.UiThread
@@ -27,26 +27,26 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.R
-import org.linphone.contacts.ContactsManager
-import org.linphone.core.Address
-import org.linphone.core.ChatMessage
-import org.linphone.core.ChatMessageReaction
-import org.linphone.core.ChatRoom
-import org.linphone.core.ChatRoom.HistoryFilter
-import org.linphone.core.ChatRoomListenerStub
-import org.linphone.core.EventLog
-import org.linphone.core.Friend
-import org.linphone.core.SearchDirection
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.chat.model.EventLogModel
-import org.linphone.ui.main.chat.model.FileModel
-import org.linphone.ui.main.chat.model.MessageModel
-import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.utils.Event
-import org.linphone.utils.FileUtils
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.R
+import org.farcom.contacts.ContactsManager
+import org.farcom.core.Address
+import org.farcom.core.ChatMessage
+import org.farcom.core.ChatMessageReaction
+import org.farcom.core.ChatRoom
+import org.farcom.core.ChatRoom.HistoryFilter
+import org.farcom.core.ChatRoomListenerStub
+import org.farcom.core.EventLog
+import org.farcom.core.Friend
+import org.farcom.core.SearchDirection
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.chat.model.EventLogModel
+import org.farcom.ui.main.chat.model.FileModel
+import org.farcom.ui.main.chat.model.MessageModel
+import org.farcom.ui.main.contacts.model.ContactAvatarModel
+import org.farcom.utils.Event
+import org.farcom.utils.FileUtils
+import org.farcom.utils.FarcomUtils
 import androidx.core.net.toUri
 
 class ConversationViewModel
@@ -158,7 +158,7 @@ class ConversationViewModel
         @WorkerThread
         override fun onConferenceJoined(chatRoom: ChatRoom, eventLog: EventLog) {
             Log.i("$TAG Conversation was joined")
-            if (LinphoneUtils.isChatRoomAGroup(chatRoom)) {
+            if (FarcomUtils.isChatRoomAGroup(chatRoom)) {
                 addEvents(arrayOf(eventLog))
             }
             computeConversationInfo()
@@ -174,7 +174,7 @@ class ConversationViewModel
         @WorkerThread
         override fun onConferenceLeft(chatRoom: ChatRoom, eventLog: EventLog) {
             Log.w("$TAG Conversation was left")
-            if (LinphoneUtils.isChatRoomAGroup(chatRoom)) {
+            if (FarcomUtils.isChatRoomAGroup(chatRoom)) {
                 addEvents(arrayOf(eventLog))
             }
             isReadOnly.postValue(chatRoom.isReadOnly)
@@ -269,7 +269,7 @@ class ConversationViewModel
                 if (!chatRoom.isEphemeralEnabled) 0L else chatRoom.ephemeralLifetime
             )
             ephemeralLifeTimeLabel.postValue(
-                LinphoneUtils.formatEphemeralExpiration(chatRoom.ephemeralLifetime)
+                FarcomUtils.formatEphemeralExpiration(chatRoom.ephemeralLifetime)
             )
         }
 
@@ -335,7 +335,7 @@ class ConversationViewModel
 
     init {
         coreContext.postOnCoreThread { core ->
-            isEndToEndEncryptionAvailable.postValue(LinphoneUtils.isEndToEndEncryptedChatAvailable(core))
+            isEndToEndEncryptionAvailable.postValue(FarcomUtils.isEndToEndEncryptedChatAvailable(core))
             coreContext.contactsManager.addListener(contactsListener)
         }
 
@@ -513,7 +513,7 @@ class ConversationViewModel
     fun updateCurrentlyDisplayedConversation() {
         coreContext.postOnCoreThread {
             if (isChatRoomInitialized()) {
-                val id = LinphoneUtils.getConversationId(chatRoom)
+                val id = FarcomUtils.getConversationId(chatRoom)
                 Log.i(
                     "$TAG Asking notifications manager not to notify messages for conversation [$id]"
                 )
@@ -528,12 +528,12 @@ class ConversationViewModel
     fun updateEphemeralLifetime(lifetime: Long) {
         if (!isChatRoomInitialized()) return
         coreContext.postOnCoreThread {
-            LinphoneUtils.chatRoomConfigureEphemeralMessagesLifetime(chatRoom, lifetime)
+            FarcomUtils.chatRoomConfigureEphemeralMessagesLifetime(chatRoom, lifetime)
             ephemeralLifetime.postValue(
                 if (!chatRoom.isEphemeralEnabled) 0L else chatRoom.ephemeralLifetime
             )
             ephemeralLifeTimeLabel.postValue(
-                LinphoneUtils.formatEphemeralExpiration(chatRoom.ephemeralLifetime)
+                FarcomUtils.formatEphemeralExpiration(chatRoom.ephemeralLifetime)
             )
         }
     }
@@ -578,7 +578,7 @@ class ConversationViewModel
     fun checkIfConversationShouldBeDisabledForSecurityReasons() {
         if (!isChatRoomInitialized()) return
         if (!chatRoom.hasCapability(ChatRoom.Capabilities.Encrypted.toInt())) {
-            if (LinphoneUtils.getAccountForAddress(chatRoom.localAddress)?.params?.instantMessagingEncryptionMandatory == true) {
+            if (FarcomUtils.getAccountForAddress(chatRoom.localAddress)?.params?.instantMessagingEncryptionMandatory == true) {
                 Log.w(
                     "$TAG Conversation with subject [${chatRoom.subjectUtf8}] is considered as read-only because it isn't encrypted and default account is in secure mode"
                 )
@@ -644,7 +644,7 @@ class ConversationViewModel
     private fun computeConversationInfo() {
         if (!isChatRoomInitialized()) return
 
-        val group = LinphoneUtils.isChatRoomAGroup(chatRoom)
+        val group = FarcomUtils.isChatRoomAGroup(chatRoom)
         isGroup.postValue(group)
 
         val empty =
@@ -668,7 +668,7 @@ class ConversationViewModel
             if (!chatRoom.isEphemeralEnabled) 0L else chatRoom.ephemeralLifetime
         )
         ephemeralLifeTimeLabel.postValue(
-            LinphoneUtils.formatEphemeralExpiration(chatRoom.ephemeralLifetime)
+            FarcomUtils.formatEphemeralExpiration(chatRoom.ephemeralLifetime)
         )
     }
 
@@ -691,7 +691,7 @@ class ConversationViewModel
             firstParticipant?.address ?: chatRoom.peerAddress
         }
 
-        val avatar = if (LinphoneUtils.isChatRoomAGroup(chatRoom)) {
+        val avatar = if (FarcomUtils.isChatRoomAGroup(chatRoom)) {
             val fakeFriend = coreContext.core.createFriend()
             fakeFriend.name = chatRoom.subjectUtf8
             val model = ContactAvatarModel(fakeFriend)
@@ -800,7 +800,7 @@ class ConversationViewModel
     private fun processGroupedEvents(
         groupedEventLogs: ArrayList<EventLog>
     ): ArrayList<EventLogModel> {
-        val groupChatRoom = LinphoneUtils.isChatRoomAGroup(chatRoom)
+        val groupChatRoom = FarcomUtils.isChatRoomAGroup(chatRoom)
         val eventsList = arrayListOf<EventLogModel>()
 
         var index = 0
@@ -962,7 +962,7 @@ class ConversationViewModel
     private fun computeComposingLabel() {
         if (!isChatRoomInitialized()) return
 
-        val pair = LinphoneUtils.getComposingIconAndText(chatRoom)
+        val pair = FarcomUtils.getComposingIconAndText(chatRoom)
         val icon = pair.first
         composingIcon.postValue(icon)
         val label = pair.second

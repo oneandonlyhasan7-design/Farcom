@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.call.fragment
+package org.farcom.ui.call.fragment
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
@@ -28,11 +28,11 @@ import android.view.View
 import android.view.ViewOutlineProvider
 import androidx.annotation.UiThread
 import androidx.lifecycle.ViewModelProvider
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericFragment
-import org.linphone.ui.call.view.RoundCornersTextureView
-import org.linphone.ui.call.viewmodel.SharedCallViewModel
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericFragment
+import org.farcom.ui.call.view.RoundCornersTextureView
+import org.farcom.ui.call.viewmodel.SharedCallViewModel
 
 @UiThread
 abstract class GenericCallFragment : GenericFragment() {

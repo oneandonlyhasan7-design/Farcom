@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2026 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.telecom
+package org.farcom.telecom
 
 import android.content.ComponentName
 import android.content.Context
@@ -31,12 +31,12 @@ import android.telecom.PhoneAccountHandle
 import androidx.annotation.RequiresApi
 import androidx.annotation.WorkerThread
 import androidx.core.net.toUri
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.contacts.getListOfSipAddresses
-import org.linphone.core.GlobalState
-import org.linphone.core.tools.Log
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.contacts.getListOfSipAddresses
+import org.farcom.core.GlobalState
+import org.farcom.core.tools.Log
 import java.util.concurrent.TimeUnit
 
 @RequiresApi(Build.VERSION_CODES.Q)
@@ -97,9 +97,9 @@ class TelecomRedirectionService : CallRedirectionService() {
         Log.i("$TAG Extracted number [$number] from tel: URI")
 
         val phoneAccount = getPhoneAccount(coreContext.context)
-        val linphoneAccountHandle = phoneAccount.accountHandle
-        Log.i("$TAG Found account handle [$linphoneAccountHandle] from phone account [$phoneAccount]")
-        if (linphoneAccountHandle != null) {
+        val farcomAccountHandle = phoneAccount.accountHandle
+        Log.i("$TAG Found account handle [$farcomAccountHandle] from phone account [$phoneAccount]")
+        if (farcomAccountHandle != null) {
             val sipUri = getSipAddressAssociatedToPhoneNumber(number)
             if (sipUri != null) {
                 if (allowInteractiveResponse && corePreferences.letUserChooseToRedirectCallOrNot) {
@@ -111,19 +111,19 @@ class TelecomRedirectionService : CallRedirectionService() {
                         RedirectionHandler.responseLatch?.await(4, TimeUnit.SECONDS) ?: false
                     coreContext.notificationsManager.cancelCallRedirectionNotification()
 
-                    if (completed && RedirectionHandler.useLinphone) {
+                    if (completed && RedirectionHandler.useFarcom) {
                         Log.i("$TAG Redirecting call originally going to [$handle] to [$sipUri]")
-                        redirectCall(sipUri.toUri(), linphoneAccountHandle, false)
+                        redirectCall(sipUri.toUri(), farcomAccountHandle, false)
                     } else if (!completed) {
                         Log.i("$TAG User choice timed out, redirecting call originally going to [$handle] to [$sipUri]")
-                        redirectCall(sipUri.toUri(), linphoneAccountHandle, false)
+                        redirectCall(sipUri.toUri(), farcomAccountHandle, false)
                     } else {
                         Log.i("$TAG User declined, placing call unmodified via GSM")
                         placeCallUnmodified()
                     }
                 } else {
                     Log.i("$TAG Redirecting call originally going to [$handle] to [$sipUri] without asking user for confirmation")
-                    redirectCall(sipUri.toUri(), linphoneAccountHandle, false)
+                    redirectCall(sipUri.toUri(), farcomAccountHandle, false)
                 }
             } else {
                 Log.w("$TAG Placing call to [$handle] unmodified")
@@ -144,12 +144,12 @@ class TelecomRedirectionService : CallRedirectionService() {
 
         val identity = coreContext.core.defaultAccount?.params?.identityAddress?.asStringUriOnly()
             ?: coreContext.core.createPrimaryContactParsed()?.asStringUriOnly()
-            ?: "sip:linphone.android@sip.linphone.org"
+            ?: "sip:farcom.android@sip.farcom.org"
 
         val address = identity.toUri()
         val account = PhoneAccount.builder(accountHandle, context.getString(R.string.app_name))
             .setAddress(address)
-            .setIcon(Icon.createWithResource(context, R.drawable.linphone_notification))
+            .setIcon(Icon.createWithResource(context, R.drawable.farcom_notification))
             .setCapabilities(PhoneAccount.CAPABILITY_CONNECTION_MANAGER)
             .setHighlightColor(context.getColor(R.color.main1_500))
             .setShortDescription(context.getString(R.string.app_name))

@@ -20,7 +20,7 @@
             type="SeekBar.OnSeekBarChangeListener" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.main.recordings.viewmodel.RecordingMediaPlayerViewModel" />
+            type="org.farcom.ui.main.recordings.viewmodel.RecordingMediaPlayerViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

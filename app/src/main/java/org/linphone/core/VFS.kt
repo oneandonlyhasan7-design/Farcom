@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.core
+package org.farcom.core
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -27,7 +27,7 @@ import android.util.Base64
 import android.util.Pair
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import org.linphone.LinphoneApplication.Companion.corePreferences
+import org.farcom.FarcomApplication.Companion.corePreferences
 import java.math.BigInteger
 import java.nio.charset.StandardCharsets
 import java.security.KeyStore
@@ -38,7 +38,7 @@ import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
-import org.linphone.core.tools.Log
+import org.farcom.core.tools.Log
 import androidx.core.content.edit
 
 class VFS {
@@ -48,7 +48,7 @@ class VFS {
         private const val TRANSFORMATION = "AES/GCM/NoPadding"
         private const val ANDROID_KEY_STORE = "AndroidKeyStore"
         private const val ALIAS = "vfs"
-        private const val LINPHONE_VFS_ENCRYPTION_AES256GCM128_SHA256 = 2
+        private const val FARCOM_VFS_ENCRYPTION_AES256GCM128_SHA256 = 2
         private const val VFS_IV = "vfsiv"
         private const val VFS_KEY = "vfskey"
         private const val ENCRYPTED_SHARED_PREFS_FILE = "encrypted.pref"
@@ -107,7 +107,7 @@ class VFS {
                 }
 
                 Factory.instance().setVfsEncryption(
-                    LINPHONE_VFS_ENCRYPTION_AES256GCM128_SHA256,
+                    FARCOM_VFS_ENCRYPTION_AES256GCM128_SHA256,
                     getVfsKey(preferences).toByteArray().copyOfRange(0, 32),
                     32
                 )

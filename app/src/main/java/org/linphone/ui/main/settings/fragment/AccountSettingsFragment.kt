@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.settings.fragment
+package org.farcom.ui.main.settings.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,15 +28,15 @@ import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.databinding.AccountSettingsFragmentBinding
-import org.linphone.ui.GenericActivity
-import org.linphone.ui.main.fragment.GenericMainFragment
-import org.linphone.utils.PasswordDialogModel
-import org.linphone.ui.main.settings.viewmodel.AccountSettingsViewModel
-import org.linphone.utils.DialogUtils
-import org.linphone.utils.Event
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.databinding.AccountSettingsFragmentBinding
+import org.farcom.ui.GenericActivity
+import org.farcom.ui.main.fragment.GenericMainFragment
+import org.farcom.utils.PasswordDialogModel
+import org.farcom.ui.main.settings.viewmodel.AccountSettingsViewModel
+import org.farcom.utils.DialogUtils
+import org.farcom.utils.Event
 
 @UiThread
 class AccountSettingsFragment : GenericMainFragment() {

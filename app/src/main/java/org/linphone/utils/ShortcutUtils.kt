@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.utils
+package org.farcom.utils
 
 import android.content.Context
 import android.content.Intent
@@ -31,15 +31,15 @@ import androidx.core.content.LocusIdCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.contacts.AvatarGenerator
-import org.linphone.contacts.getPerson
-import org.linphone.core.ChatRoom
-import org.linphone.core.tools.Log
-import org.linphone.mediastream.Version
-import org.linphone.ui.main.MainActivity
-import org.linphone.ui.main.MainActivity.Companion.ARGUMENTS_CHAT
-import org.linphone.ui.main.MainActivity.Companion.ARGUMENTS_CONVERSATION_ID
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.contacts.AvatarGenerator
+import org.farcom.contacts.getPerson
+import org.farcom.core.ChatRoom
+import org.farcom.core.tools.Log
+import org.farcom.mediastream.Version
+import org.farcom.ui.main.MainActivity
+import org.farcom.ui.main.MainActivity.Companion.ARGUMENTS_CHAT
+import org.farcom.ui.main.MainActivity.Companion.ARGUMENTS_CONVERSATION_ID
 
 class ShortcutUtils {
     companion object {
@@ -47,7 +47,7 @@ class ShortcutUtils {
 
         @WorkerThread
         fun removeShortcutToChatRoom(chatRoom: ChatRoom) {
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
             Log.i("$TAG Removing shortcut to conversation [$id]")
             ShortcutManagerCompat.removeLongLivedShortcuts(coreContext.context, arrayListOf(id))
         }
@@ -101,7 +101,7 @@ class ShortcutUtils {
         @WorkerThread
         private fun createChatRoomShortcut(context: Context, chatRoom: ChatRoom): ShortcutInfoCompat? {
             val peerAddress = chatRoom.peerAddress
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
 
             try {
                 val categories: ArraySet<String> = ArraySet()
@@ -121,7 +121,7 @@ class ShortcutUtils {
                     val person = contact.getPerson()
                     personsList.add(person)
 
-                    subject = contact.name ?: LinphoneUtils.getDisplayName(peerAddress)
+                    subject = contact.name ?: FarcomUtils.getDisplayName(peerAddress)
                     person.icon ?: AvatarGenerator(context).setInitials(
                         AppUtils.getInitials(subject)
                     ).buildIcon()
@@ -134,7 +134,7 @@ class ShortcutUtils {
                     val person = contact.getPerson()
                     personsList.add(person)
 
-                    subject = contact.name ?: LinphoneUtils.getDisplayName(address)
+                    subject = contact.name ?: FarcomUtils.getDisplayName(address)
                     person.icon ?: AvatarGenerator(context).setInitials(
                         AppUtils.getInitials(subject)
                     ).buildIcon()
@@ -185,7 +185,7 @@ class ShortcutUtils {
 
         @WorkerThread
         fun isShortcutToChatRoomAlreadyCreated(context: Context, chatRoom: ChatRoom): Boolean {
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
             val found = ShortcutManagerCompat.getDynamicShortcuts(context).find {
                 it.id == id
             }
@@ -195,7 +195,7 @@ class ShortcutUtils {
 
         @WorkerThread
         fun createOrUpdateChatRoomShortcut(context: Context, chatRoom: ChatRoom) {
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
             val found = ShortcutManagerCompat.getDynamicShortcuts(context).find {
                 it.id == id
             }

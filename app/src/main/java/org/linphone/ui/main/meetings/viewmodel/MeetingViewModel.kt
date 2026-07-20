@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,21 +17,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.meetings.viewmodel
+package org.farcom.ui.main.meetings.viewmodel
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import java.util.TimeZone
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.core.ConferenceInfo
-import org.linphone.core.Factory
-import org.linphone.core.Participant
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.meetings.model.ParticipantModel
-import org.linphone.ui.main.meetings.model.TimeZoneModel
-import org.linphone.utils.Event
-import org.linphone.utils.TimestampUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.core.ConferenceInfo
+import org.farcom.core.Factory
+import org.farcom.core.Participant
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.meetings.model.ParticipantModel
+import org.farcom.ui.main.meetings.model.TimeZoneModel
+import org.farcom.utils.Event
+import org.farcom.utils.TimestampUtils
 
 class MeetingViewModel
     @UiThread

@@ -4,10 +4,10 @@
 
     <data>
         <import type="android.view.View" />
-        <import type="org.linphone.ui.call.conference.viewmodel.ConferenceViewModel" />
+        <import type="org.farcom.ui.call.conference.viewmodel.ConferenceViewModel" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.call.viewmodel.CurrentCallViewModel" />
+            type="org.farcom.ui.call.viewmodel.CurrentCallViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,7 +78,7 @@
             app:layout_constraintStart_toStartOf="@id/toggle_video"
             app:layout_constraintEnd_toEndOf="@id/toggle_video"/>
 
-        <org.linphone.ui.call.view.VuMeterView
+        <org.farcom.ui.call.view.VuMeterView
             android:id="@+id/record_volume_vu_meter"
             android:onClick="@{() -> viewModel.toggleMuteMicrophone()}"
             android:layout_width="0dp"
@@ -104,7 +104,7 @@
             app:layout_constraintStart_toEndOf="@id/toggle_video"
             app:layout_constraintEnd_toStartOf="@id/change_audio_output" />
 
-        <org.linphone.ui.call.view.VuMeterView
+        <org.farcom.ui.call.view.VuMeterView
             android:id="@+id/playback_volume_vu_meter"
             android:onClick="@{() -> viewModel.changeAudioOutputDevice()}"
             android:layout_width="0dp"

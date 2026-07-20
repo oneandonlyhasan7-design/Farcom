@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.chat.model
+package org.farcom.ui.main.chat.model
 
 import android.graphics.Typeface
 import android.os.CountDownTimer
@@ -43,29 +43,29 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.core.Address
-import org.linphone.core.ChatMessage
-import org.linphone.core.ChatMessageListenerStub
-import org.linphone.core.ChatMessageReaction
-import org.linphone.core.ChatRoom
-import org.linphone.core.ConferenceInfo
-import org.linphone.core.Content
-import org.linphone.core.Factory
-import org.linphone.core.Player
-import org.linphone.core.PlayerListener
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.AudioUtils
-import org.linphone.utils.Event
-import org.linphone.utils.FileUtils
-import org.linphone.utils.LinphoneUtils
-import org.linphone.utils.PatternClickableSpan
-import org.linphone.utils.SpannableClickedListener
-import org.linphone.utils.TimestampUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.core.Address
+import org.farcom.core.ChatMessage
+import org.farcom.core.ChatMessageListenerStub
+import org.farcom.core.ChatMessageReaction
+import org.farcom.core.ChatRoom
+import org.farcom.core.ConferenceInfo
+import org.farcom.core.Content
+import org.farcom.core.Factory
+import org.farcom.core.Player
+import org.farcom.core.PlayerListener
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.contacts.model.ContactAvatarModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.AudioUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FileUtils
+import org.farcom.utils.FarcomUtils
+import org.farcom.utils.PatternClickableSpan
+import org.farcom.utils.SpannableClickedListener
+import org.farcom.utils.TimestampUtils
 
 class MessageModel
     @WorkerThread
@@ -108,7 +108,7 @@ class MessageModel
 
     val chatRoomIsReadOnly = chatMessage.chatRoom.isReadOnly ||
         (
-            !chatMessage.chatRoom.hasCapability(ChatRoom.Capabilities.Encrypted.toInt()) && LinphoneUtils.getAccountForAddress(
+            !chatMessage.chatRoom.hasCapability(ChatRoom.Capabilities.Encrypted.toInt()) && FarcomUtils.getAccountForAddress(
                 chatMessage.chatRoom.localAddress
             )?.params?.instantMessagingEncryptionMandatory == true
             )
@@ -222,7 +222,7 @@ class MessageModel
         override fun onMsgStateChanged(message: ChatMessage, messageState: ChatMessage.State?) {
             Log.i("$TAG Chat message [${message.messageId}] state changed to [$messageState]")
             if (messageState != ChatMessage.State.FileTransferDone && messageState != ChatMessage.State.FileTransferInProgress) {
-                statusIcon.postValue(LinphoneUtils.getChatIconResId(chatMessage.state))
+                statusIcon.postValue(FarcomUtils.getChatIconResId(chatMessage.state))
 
                 if (messageState == ChatMessage.State.Displayed) {
                     isRead = chatMessage.isRead
@@ -311,7 +311,7 @@ class MessageModel
         updateEphemeralTimer()
 
         chatMessage.addListener(chatMessageListener)
-        statusIcon.postValue(LinphoneUtils.getChatIconResId(chatMessage.state))
+        statusIcon.postValue(FarcomUtils.getChatIconResId(chatMessage.state))
         updateReactionsList()
 
         hasBeenEdited.postValue(chatMessage.isEdited && !chatMessage.isRetracted)
@@ -565,7 +565,7 @@ class MessageModel
         filesList.postValue(filesPath)
 
         if (!displayableContentFound) { // Temporary workaround to prevent empty bubbles
-            val describe = LinphoneUtils.getFormattedTextDescribingMessage(chatMessage)
+            val describe = FarcomUtils.getFormattedTextDescribingMessage(chatMessage)
             Log.w(
                 "$TAG No displayable content found, generating text based description [$describe]"
             )
@@ -661,8 +661,8 @@ class MessageModel
         if (replyMessage != null) {
             val from = replyMessage.fromAddress
             val avatarModel = coreContext.contactsManager.getContactAvatarModelForAddress(from)
-            replyTo.postValue(avatarModel.contactName ?: LinphoneUtils.getDisplayName(from))
-            replyText.postValue(LinphoneUtils.getFormattedTextDescribingMessage(replyMessage))
+            replyTo.postValue(avatarModel.contactName ?: FarcomUtils.getDisplayName(from))
+            replyText.postValue(FarcomUtils.getFormattedTextDescribingMessage(replyMessage))
             isReply.postValue(true)
         } else {
             Log.w("$TAG Failed to find the reply message from ID [${chatMessage.replyMessageId}]")
@@ -710,7 +710,7 @@ class MessageModel
                     address
                 )
                 val friend = avatarModel.friend
-                val displayName = friend.name ?: LinphoneUtils.getDisplayName(address)
+                val displayName = friend.name ?: FarcomUtils.getDisplayName(address)
                 Log.i(
                     "$TAG Using display name [$displayName] instead of mention username [$source]"
                 )

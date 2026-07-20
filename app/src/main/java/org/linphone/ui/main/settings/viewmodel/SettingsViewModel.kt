@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.settings.viewmodel
+package org.farcom.ui.main.settings.viewmodel
 
 import android.media.RingtoneManager
 import android.net.Uri
@@ -26,27 +26,27 @@ import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.contacts.ContactLoader.Companion.NATIVE_ADDRESS_BOOK_FRIEND_LIST
-import org.linphone.core.AudioDevice
-import org.linphone.core.Conference
-import org.linphone.core.Core
-import org.linphone.core.CoreListenerStub
-import org.linphone.core.EcCalibratorStatus
-import org.linphone.core.Factory
-import org.linphone.core.FriendList
-import org.linphone.core.MediaEncryption
-import org.linphone.core.Tunnel
-import org.linphone.core.VFS
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.ui.main.settings.model.CardDavLdapModel
-import org.linphone.ui.main.settings.model.CodecModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.contacts.ContactLoader.Companion.NATIVE_ADDRESS_BOOK_FRIEND_LIST
+import org.farcom.core.AudioDevice
+import org.farcom.core.Conference
+import org.farcom.core.Core
+import org.farcom.core.CoreListenerStub
+import org.farcom.core.EcCalibratorStatus
+import org.farcom.core.Factory
+import org.farcom.core.FriendList
+import org.farcom.core.MediaEncryption
+import org.farcom.core.Tunnel
+import org.farcom.core.VFS
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.ui.main.settings.model.CardDavLdapModel
+import org.farcom.ui.main.settings.model.CodecModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
 
 class SettingsViewModel
     @UiThread
@@ -119,7 +119,7 @@ class SettingsViewModel
     )
     val sortContactsByValues = arrayListOf(0, 1)
 
-    val editNativeContactsInLinphone = MutableLiveData<Boolean>()
+    val editNativeContactsInFarcom = MutableLiveData<Boolean>()
     val hideEmptyContacts = MutableLiveData<Boolean>()
 
     val ldapAvailable = MutableLiveData<Boolean>()
@@ -367,7 +367,7 @@ class SettingsViewModel
             hideMessageContentInNotification.postValue(!corePreferences.showChatMessageContentInNotification)
 
             sortContactsBy.postValue(if (corePreferences.sortContactsByFirstName) 0 else 1)
-            editNativeContactsInLinphone.postValue(corePreferences.editNativeContactsInLinphone)
+            editNativeContactsInFarcom.postValue(corePreferences.editNativeContactsInFarcom)
             hideEmptyContacts.postValue(corePreferences.hideContactsWithoutPhoneNumberOrSipAddress)
             presenceSubscribe.postValue(core.isFriendListSubscriptionEnabled)
 
@@ -629,11 +629,11 @@ class SettingsViewModel
     }
 
     @UiThread
-    fun toggleEditNativeContactsInLinphone() {
-        val newValue = editNativeContactsInLinphone.value == false
+    fun toggleEditNativeContactsInFarcom() {
+        val newValue = editNativeContactsInFarcom.value == false
         coreContext.postOnCoreThread {
-            corePreferences.editNativeContactsInLinphone = newValue
-            editNativeContactsInLinphone.postValue(newValue)
+            corePreferences.editNativeContactsInFarcom = newValue
+            editNativeContactsInFarcom.postValue(newValue)
         }
     }
 
@@ -1143,7 +1143,7 @@ class SettingsViewModel
         for (audioDevice in core.extendedAudioDevices) {
             if (audioDevice.hasCapability(AudioDevice.Capabilities.CapabilityRecord)) {
                 Log.i("$TAG Found record device [${audioDevice.deviceName}] with audio driver [${audioDevice.driverName}] and type [${audioDevice.type}]")
-                inputAudioDeviceLabels.add(LinphoneUtils.getAudioDeviceName(audioDevice))
+                inputAudioDeviceLabels.add(FarcomUtils.getAudioDeviceName(audioDevice))
                 inputAudioDeviceValues.add(audioDevice)
                 if (audioDevice.id == defaultInputAudioDevice?.id) {
                     inputAudioDeviceIndex.postValue(inputIndex)
@@ -1158,7 +1158,7 @@ class SettingsViewModel
         for (audioDevice in core.extendedAudioDevices) {
             if (audioDevice.hasCapability(AudioDevice.Capabilities.CapabilityPlay)) {
                 Log.i("$TAG Found playback device [${audioDevice.deviceName}] with audio driver [${audioDevice.driverName}] and type [${audioDevice.type}]")
-                outputAudioDeviceLabels.add(LinphoneUtils.getAudioDeviceName(audioDevice))
+                outputAudioDeviceLabels.add(FarcomUtils.getAudioDeviceName(audioDevice))
                 outputAudioDeviceValues.add(audioDevice)
                 if (audioDevice.id == defaultOutputAudioDevice?.id) {
                     outputAudioDeviceIndex.postValue(outputIndex)

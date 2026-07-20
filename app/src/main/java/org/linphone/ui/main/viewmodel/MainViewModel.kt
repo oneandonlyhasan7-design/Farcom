@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.viewmodel
+package org.farcom.ui.main.viewmodel
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -27,26 +27,26 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.compatibility.Compatibility
-import org.linphone.core.Account
-import org.linphone.core.Call
-import org.linphone.core.ChatMessage
-import org.linphone.core.ChatRoom
-import org.linphone.core.Core
-import org.linphone.core.CoreListenerStub
-import org.linphone.core.GlobalState
-import org.linphone.core.MessageWaitingIndication
-import org.linphone.core.RegistrationState
-import org.linphone.core.VFS
-import org.linphone.core.tools.AndroidPlatformHelper
-import org.linphone.core.tools.Log
-import org.linphone.utils.AppUtils
-import org.linphone.utils.Event
-import org.linphone.utils.FileUtils
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.compatibility.Compatibility
+import org.farcom.core.Account
+import org.farcom.core.Call
+import org.farcom.core.ChatMessage
+import org.farcom.core.ChatRoom
+import org.farcom.core.Core
+import org.farcom.core.CoreListenerStub
+import org.farcom.core.GlobalState
+import org.farcom.core.MessageWaitingIndication
+import org.farcom.core.RegistrationState
+import org.farcom.core.VFS
+import org.farcom.core.tools.AndroidPlatformHelper
+import org.farcom.core.tools.Log
+import org.farcom.utils.AppUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FileUtils
+import org.farcom.utils.FarcomUtils
 
 class MainViewModel
     @UiThread
@@ -168,9 +168,9 @@ class MainViewModel
             Log.i("$TAG Call [${call.remoteAddress.asStringUriOnly()}] state changed to [$state], updating 'alerts' if needed")
             if (
                 core.callsNb > 1 && (
-                    LinphoneUtils.isCallEnding(call.state) ||
-                        LinphoneUtils.isCallIncoming(call.state) ||
-                        LinphoneUtils.isCallOutgoing(call.state)
+                    FarcomUtils.isCallEnding(call.state) ||
+                        FarcomUtils.isCallIncoming(call.state) ||
+                        FarcomUtils.isCallOutgoing(call.state)
                     )
             ) {
                 updateCallAlert()
@@ -181,7 +181,7 @@ class MainViewModel
                 } else if (call.state != Call.State.Released) {
                     // When you have two calls, when the one is ended core.callsNb will become 1
                     // but the ended one will still go to Released state after that
-                    callsStatus.postValue(LinphoneUtils.callStateToString(call.state))
+                    callsStatus.postValue(FarcomUtils.callStateToString(call.state))
                 }
             }
         }
@@ -193,7 +193,7 @@ class MainViewModel
             messages: Array<out ChatMessage>
         ) {
             Log.i("$TAG Message(s) received, updating notifications count if needed")
-            val account = LinphoneUtils.getAccountForAddress(chatRoom.localAddress)
+            val account = FarcomUtils.getAccountForAddress(chatRoom.localAddress)
             if (account != null && account != core.defaultAccount) {
                 computeNonDefaultAccountNotificationsCount()
             }
@@ -201,7 +201,7 @@ class MainViewModel
 
         @WorkerThread
         override fun onMessageRetracted(core: Core, chatRoom: ChatRoom, message: ChatMessage) {
-            val account = LinphoneUtils.getAccountForAddress(chatRoom.localAddress)
+            val account = FarcomUtils.getAccountForAddress(chatRoom.localAddress)
             if (account != null && account != core.defaultAccount) {
                 computeNonDefaultAccountNotificationsCount()
             }
@@ -341,7 +341,7 @@ class MainViewModel
         @WorkerThread
         override fun onMessageWaitingIndicationChanged(
             core: Core,
-            event: org.linphone.core.Event,
+            event: org.farcom.core.Event,
             mwi: MessageWaitingIndication
         ) {
             val address = mwi.accountAddress
@@ -587,16 +587,16 @@ class MainViewModel
             val currentCall = core.currentCall ?: core.calls.firstOrNull()
             if (currentCall != null) {
                 val address = currentCall.callLog.remoteAddress
-                val conferenceInfo = LinphoneUtils.getConferenceInfoIfAny(currentCall)
+                val conferenceInfo = FarcomUtils.getConferenceInfoIfAny(currentCall)
                 val label = if (conferenceInfo != null) {
-                    conferenceInfo.subject ?: LinphoneUtils.getDisplayName(address)
+                    conferenceInfo.subject ?: FarcomUtils.getDisplayName(address)
                 } else {
                     val contact = coreContext.contactsManager.findContactByAddress(address)
-                    contact?.name ?: LinphoneUtils.getDisplayName(address)
+                    contact?.name ?: FarcomUtils.getDisplayName(address)
                 }
                 Log.i("$TAG Showing single call alert with label [$label]")
                 callLabel.postValue(label)
-                callsStatus.postValue(LinphoneUtils.callStateToString(currentCall.state))
+                callsStatus.postValue(FarcomUtils.callStateToString(currentCall.state))
             }
         } else if (callsNb > 1) {
             callLabel.postValue(AppUtils.getFormattedString(R.string.calls_count_label, callsNb))
@@ -760,7 +760,7 @@ class MainViewModel
 
     @WorkerThread
     private fun callVoiceMail() {
-        val defaultAccount = LinphoneUtils.getDefaultAccount()
+        val defaultAccount = FarcomUtils.getDefaultAccount()
         if (defaultAccount != null) {
             val voiceMailUri = defaultAccount.params.voicemailAddress
             if (voiceMailUri != null) {

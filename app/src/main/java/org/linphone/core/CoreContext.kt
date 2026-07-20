@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.core
+package org.farcom.core
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -45,21 +45,21 @@ import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlin.system.exitProcess
-import org.linphone.BuildConfig
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.compatibility.Compatibility
-import org.linphone.contacts.ContactsManager
-import org.linphone.core.tools.Log
-import org.linphone.notifications.NotificationsManager
-import org.linphone.telecom.TelecomManager
-import org.linphone.ui.call.CallActivity
-import org.linphone.utils.ActivityMonitor
-import org.linphone.utils.AppUtils
-import org.linphone.utils.AudioUtils
-import org.linphone.utils.Event
-import org.linphone.utils.FileUtils
-import org.linphone.utils.LinphoneUtils
+import org.farcom.BuildConfig
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.compatibility.Compatibility
+import org.farcom.contacts.ContactsManager
+import org.farcom.core.tools.Log
+import org.farcom.notifications.NotificationsManager
+import org.farcom.telecom.TelecomManager
+import org.farcom.ui.call.CallActivity
+import org.farcom.utils.ActivityMonitor
+import org.farcom.utils.AppUtils
+import org.farcom.utils.AudioUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FileUtils
+import org.farcom.utils.FarcomUtils
 
 class CoreContext
     @UiThread
@@ -82,9 +82,9 @@ class CoreContext
 
     @get:AnyThread
     val sdkVersion: String by lazy {
-        val sdkVersion = context.getString(R.string.linphone_sdk_version)
-        val sdkBranch = context.getString(R.string.linphone_sdk_branch)
-        val sdkBuildType = org.linphone.core.BuildConfig.BUILD_TYPE
+        val sdkVersion = context.getString(R.string.farcom_sdk_version)
+        val sdkBranch = context.getString(R.string.farcom_sdk_branch)
+        val sdkBuildType = org.farcom.core.BuildConfig.BUILD_TYPE
         "$sdkVersion ($sdkBranch, $sdkBuildType)"
     }
 
@@ -307,8 +307,8 @@ class CoreContext
                 showGreenToastEvent.postValue(
                     Event(
                         Pair(
-                            org.linphone.R.string.remote_provisioning_config_applied_toast,
-                            org.linphone.R.drawable.smiley
+                            org.farcom.R.string.remote_provisioning_config_applied_toast,
+                            org.farcom.R.drawable.smiley
                         )
                     )
                 )
@@ -316,8 +316,8 @@ class CoreContext
                 showRedToastEvent.postValue(
                     Event(
                         Pair(
-                            org.linphone.R.string.remote_provisioning_config_failed_toast,
-                            org.linphone.R.drawable.warning_circle
+                            org.farcom.R.string.remote_provisioning_config_failed_toast,
+                            org.farcom.R.drawable.warning_circle
                         )
                     )
                 )
@@ -388,7 +388,7 @@ class CoreContext
                         showCallActivity()
                     }
 
-                    if (previousCallState == Call.State.IncomingEarlyMedia && core.ringDuringIncomingEarlyMedia && !LinphoneUtils.isVideoEnabled(call)) {
+                    if (previousCallState == Call.State.IncomingEarlyMedia && core.ringDuringIncomingEarlyMedia && !FarcomUtils.isVideoEnabled(call)) {
                         Log.i("$TAG Audio call is in Connected state and was in IncomingEarlyMedia before with ring during early media enabled")
                         val earpiece = core.audioDevices.find {
                             it.type == AudioDevice.Type.Earpiece
@@ -430,9 +430,9 @@ class CoreContext
                     Log.w(
                         "$TAG Call error reason is [${errorInfo.reason}](${errorInfo.protocolCode}): ${errorInfo.phrase}"
                     )
-                    val text = LinphoneUtils.getCallErrorInfoToast(call)
+                    val text = FarcomUtils.getCallErrorInfoToast(call)
                     showFormattedRedToastEvent.postValue(
-                        Event(Pair(text, org.linphone.R.drawable.warning_circle))
+                        Event(Pair(text, org.farcom.R.drawable.warning_circle))
                     )
                 }
                 else -> {
@@ -448,9 +448,9 @@ class CoreContext
                 "$TAG Transferred call [${transfered.remoteAddress.asStringUriOnly()}] state changed [$state]"
             )
             if (state == Call.State.Connected) {
-                val icon = org.linphone.R.drawable.phone_transfer
+                val icon = org.farcom.R.drawable.phone_transfer
                 showGreenToastEvent.postValue(
-                    Event(Pair(org.linphone.R.string.call_transfer_successful_toast, icon))
+                    Event(Pair(org.farcom.R.string.call_transfer_successful_toast, icon))
                 )
             }
         }
@@ -668,9 +668,9 @@ class CoreContext
             crashlyticsAvailable = false
         }
         Log.i("=========================================")
-        Log.i("==== Linphone-android information dump ====")
-        val gitVersion = AppUtils.getString(org.linphone.R.string.linphone_app_version)
-        val gitBranch = AppUtils.getString(org.linphone.R.string.linphone_app_branch)
+        Log.i("==== Farcom-android information dump ====")
+        val gitVersion = AppUtils.getString(org.farcom.R.string.farcom_app_version)
+        val gitBranch = AppUtils.getString(org.farcom.R.string.farcom_app_branch)
         Log.i("VERSION=${BuildConfig.VERSION_NAME} / ${BuildConfig.VERSION_CODE} ($gitVersion from $gitBranch branch)")
         Log.i("PACKAGE=${BuildConfig.APPLICATION_ID}")
         Log.i("BUILD TYPE=${BuildConfig.BUILD_TYPE}")
@@ -744,7 +744,7 @@ class CoreContext
         }
 
         val currentVersion = BuildConfig.VERSION_CODE
-        val oldVersion = corePreferences.linphoneConfigurationVersion
+        val oldVersion = corePreferences.farcomConfigurationVersion
         Log.w("$TAG Current configuration version is [$oldVersion]")
 
         if (oldVersion < currentVersion) {
@@ -788,12 +788,12 @@ class CoreContext
 
             if (core.logCollectionUploadServerUrl.isNullOrEmpty()) {
                 Log.w("$TAG Logs sharing server URL not set, fixing that")
-                core.logCollectionUploadServerUrl = "https://files.linphone.org/http-file-transfer-server/hft.php"
+                core.logCollectionUploadServerUrl = "https://files.farcom.org/http-file-transfer-server/hft.php"
             }
 
-            corePreferences.linphoneConfigurationVersion = currentVersion
+            corePreferences.farcomConfigurationVersion = currentVersion
             Log.w(
-                "$TAG Core configuration updated to version [${corePreferences.linphoneConfigurationVersion}]"
+                "$TAG Core configuration updated to version [${corePreferences.farcomConfigurationVersion}]"
             )
         } else {
             Log.i("$TAG No configuration migration required")
@@ -1050,7 +1050,7 @@ class CoreContext
             params.mediaEncryption = MediaEncryption.ZRTP
         }
 
-        params.recordFile = LinphoneUtils.getRecordingFilePathForAddress(address)
+        params.recordFile = FarcomUtils.getRecordingFilePathForAddress(address)
 
         if (localAddress != null) {
             val account = core.accountList.find { account ->
@@ -1135,9 +1135,9 @@ class CoreContext
             return
         }
 
-        params.recordFile = LinphoneUtils.getRecordingFilePathForAddress(call.remoteAddress)
+        params.recordFile = FarcomUtils.getRecordingFilePathForAddress(call.remoteAddress)
 
-        /*if (LinphoneUtils.checkIfNetworkHasLowBandwidth(context)) {
+        /*if (FarcomUtils.checkIfNetworkHasLowBandwidth(context)) {
             Log.w("$TAG Enabling low bandwidth mode!")
             params.isLowBandwidthEnabled = true
         }*/
@@ -1168,7 +1168,7 @@ class CoreContext
             Log.i("$TAG Terminating conference [${call.remoteAddress.asStringUriOnly()}]")
             conference.terminate()
         } else {
-            if (call.dir == Call.Dir.Incoming && LinphoneUtils.isCallIncoming(call.state)) {
+            if (call.dir == Call.Dir.Incoming && FarcomUtils.isCallIncoming(call.state)) {
                 val reason = if (call.core.callsNb > 1) Reason.Busy else Reason.Declined
                 Log.i(
                     "$TAG Declining call [${call.remoteAddress.asStringUriOnly()}] with reason [$reason]"
@@ -1242,7 +1242,7 @@ class CoreContext
             AppUtils.getDeviceName(context)
         } else if (savedDeviceName.contains("'")) {
             // Some VoIP providers such as voip.ms seem to not like apostrophe in user-agent
-            // https://github.com/BelledonneCommunications/linphone-android/issues/2287
+            // https://github.com/BelledonneCommunications/farcom-android/issues/2287
             Log.i("$TAG Found an apostrophe in device name, removing it")
             savedDeviceName.replace("'", "")
         } else {
@@ -1253,11 +1253,11 @@ class CoreContext
         }
         Log.i("$TAG Device name for user-agent is [$deviceName]")
 
-        val appName = context.getString(org.linphone.R.string.app_name)
+        val appName = context.getString(org.farcom.R.string.app_name)
         val androidVersion = BuildConfig.VERSION_NAME
-        val userAgent = "${appName}Android/$androidVersion ($deviceName) LinphoneSDK"
-        val sdkVersion = context.getString(R.string.linphone_sdk_version)
-        val sdkBranch = context.getString(R.string.linphone_sdk_branch)
+        val userAgent = "${appName}Android/$androidVersion ($deviceName) FarcomSDK"
+        val sdkVersion = context.getString(R.string.farcom_sdk_version)
+        val sdkBranch = context.getString(R.string.farcom_sdk_branch)
         val sdkUserAgent = "$sdkVersion ($sdkBranch)"
         core.setUserAgent(userAgent, sdkUserAgent)
     }
@@ -1309,7 +1309,7 @@ class CoreContext
         core.config.setBool("magic_search", "return_empty_friends", true)
         Log.i("$TAG Showing 'empty' friends enabled")
 
-        if (LinphoneUtils.getDefaultAccount()?.params?.domain == corePreferences.defaultDomain) {
+        if (FarcomUtils.getDefaultAccount()?.params?.domain == corePreferences.defaultDomain) {
             corePreferences.contactsFilter = corePreferences.defaultDomain
             Log.i(
                 "$TAG Setting default contacts list filter to [${corePreferences.contactsFilter}]"
@@ -1335,14 +1335,14 @@ class CoreContext
         core.config.setBool("misc", "hide_empty_chat_rooms", true)
 
         // Replace old URLs by new ones
-        if (corePreferences.checkForUpdateServerUrl == "https://www.linphone.org/releases") {
-            corePreferences.checkForUpdateServerUrl = "https://download.linphone.org/releases"
+        if (corePreferences.checkForUpdateServerUrl == "https://www.farcom.org/releases") {
+            corePreferences.checkForUpdateServerUrl = "https://download.farcom.org/releases"
         }
-        if (core.fileTransferServer == "https://www.linphone.org:444/lft.php") {
-            core.fileTransferServer = "https://files.linphone.org/http-file-transfer-server/hft.php"
+        if (core.fileTransferServer == "https://www.farcom.org:444/lft.php") {
+            core.fileTransferServer = "https://files.farcom.org/http-file-transfer-server/hft.php"
         }
-        if (core.logCollectionUploadServerUrl == "https://www.linphone.org:444/lft.php") {
-            core.logCollectionUploadServerUrl = "https://files.linphone.org/http-file-transfer-server/hft.php"
+        if (core.logCollectionUploadServerUrl == "https://www.farcom.org:444/lft.php") {
+            core.logCollectionUploadServerUrl = "https://files.farcom.org/http-file-transfer-server/hft.php"
         }
 
         Log.i("$TAG IMDN threshold set to 1 (meaning only sender will receive delivery & read notifications)")

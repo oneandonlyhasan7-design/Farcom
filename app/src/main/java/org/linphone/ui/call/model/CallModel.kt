@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,17 +17,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.call.model
+package org.farcom.ui.call.model
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.core.Call
-import org.linphone.core.CallListenerStub
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.core.Call
+import org.farcom.core.CallListenerStub
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.contacts.model.ContactAvatarModel
+import org.farcom.utils.FarcomUtils
 
 class CallModel
     @WorkerThread
@@ -51,8 +51,8 @@ class CallModel
     private val callListener = object : CallListenerStub() {
         @WorkerThread
         override fun onStateChanged(call: Call, state: Call.State, message: String) {
-            this@CallModel.state.postValue(LinphoneUtils.callStateToString(state))
-            isPaused.postValue(LinphoneUtils.isCallPaused(state))
+            this@CallModel.state.postValue(FarcomUtils.callStateToString(state))
+            isPaused.postValue(FarcomUtils.isCallPaused(state))
         }
     }
 
@@ -70,11 +70,11 @@ class CallModel
         }
         contact.postValue(avatarModel)
         displayName.postValue(
-            avatarModel.friend.name ?: LinphoneUtils.getDisplayName(remoteAddress)
+            avatarModel.friend.name ?: FarcomUtils.getDisplayName(remoteAddress)
         )
 
-        state.postValue(LinphoneUtils.callStateToString(call.state))
-        isPaused.postValue(LinphoneUtils.isCallPaused(call.state))
+        state.postValue(FarcomUtils.callStateToString(call.state))
+        isPaused.postValue(FarcomUtils.isCallPaused(call.state))
     }
 
     @WorkerThread

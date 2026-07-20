@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.call.viewmodel
+package org.farcom.ui.call.viewmodel
 
 import android.Manifest
 import android.app.KeyguardManager
@@ -36,38 +36,38 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.contacts.ContactsManager.ContactsListener
-import org.linphone.core.Address
-import org.linphone.core.AudioDevice
-import org.linphone.core.Call
-import org.linphone.core.CallListenerStub
-import org.linphone.core.CallStats
-import org.linphone.core.ChatMessage
-import org.linphone.core.ChatRoom
-import org.linphone.core.ChatRoomListenerStub
-import org.linphone.core.Conference
-import org.linphone.core.ConferenceParams
-import org.linphone.core.Core
-import org.linphone.core.CoreListenerStub
-import org.linphone.core.Friend
-import org.linphone.core.MediaDirection
-import org.linphone.core.MediaEncryption
-import org.linphone.core.SecurityLevel
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.ui.call.conference.viewmodel.ConferenceViewModel
-import org.linphone.ui.call.model.AudioDeviceModel
-import org.linphone.ui.call.model.CallMediaEncryptionModel
-import org.linphone.ui.call.model.CallStatsModel
-import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.ui.main.history.model.NumpadModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.AudioUtils
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.contacts.ContactsManager.ContactsListener
+import org.farcom.core.Address
+import org.farcom.core.AudioDevice
+import org.farcom.core.Call
+import org.farcom.core.CallListenerStub
+import org.farcom.core.CallStats
+import org.farcom.core.ChatMessage
+import org.farcom.core.ChatRoom
+import org.farcom.core.ChatRoomListenerStub
+import org.farcom.core.Conference
+import org.farcom.core.ConferenceParams
+import org.farcom.core.Core
+import org.farcom.core.CoreListenerStub
+import org.farcom.core.Friend
+import org.farcom.core.MediaDirection
+import org.farcom.core.MediaEncryption
+import org.farcom.core.SecurityLevel
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.ui.call.conference.viewmodel.ConferenceViewModel
+import org.farcom.ui.call.model.AudioDeviceModel
+import org.farcom.ui.call.model.CallMediaEncryptionModel
+import org.farcom.ui.call.model.CallStatsModel
+import org.farcom.ui.main.contacts.model.ContactAvatarModel
+import org.farcom.ui.main.history.model.NumpadModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.AudioUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
 
 class CurrentCallViewModel
     @UiThread
@@ -327,10 +327,10 @@ class CurrentCallViewModel
         @WorkerThread
         override fun onStateChanged(call: Call, state: Call.State, message: String) {
             Log.i("$TAG Call [${call.remoteAddress.asStringUriOnly()}] state changed [$state]")
-            if (LinphoneUtils.isCallOutgoing(call.state)) {
+            if (FarcomUtils.isCallOutgoing(call.state)) {
                 isVideoEnabled.postValue(call.params.isVideoEnabled)
                 updateVideoDirection(call.params.videoDirection)
-            } else if (LinphoneUtils.isCallEnding(call.state)) {
+            } else if (FarcomUtils.isCallEnding(call.state)) {
                 // If current call is being terminated but there is at least one other call, switch
                 val core = call.core
                 val callsCount = core.callsNb
@@ -352,7 +352,7 @@ class CurrentCallViewModel
                     endCall(call)
                 }
             } else {
-                val videoEnabled = LinphoneUtils.isVideoEnabled(call)
+                val videoEnabled = FarcomUtils.isVideoEnabled(call)
                 if (videoEnabled && isVideoEnabled.value == false) {
                     if (isBluetoothEnabled.value == true || isHeadsetEnabled.value == true) {
                         Log.i(
@@ -422,14 +422,14 @@ class CurrentCallViewModel
             val state = chatRoom.state
             if (state == ChatRoom.State.Instantiated) return
 
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
             Log.i("$TAG Conversation [$id] (${chatRoom.subjectUtf8}) state changed: [$state]")
 
             if (state == ChatRoom.State.Created) {
                 Log.i("$TAG Conversation [$id] successfully created")
                 chatRoom.removeListener(this)
                 operationInProgress.postValue(false)
-                goToConversationEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                goToConversationEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
             } else if (state == ChatRoom.State.CreationFailed) {
                 Log.e("$TAG Conversation [$id] creation has failed!")
                 chatRoom.removeListener(this)
@@ -459,7 +459,7 @@ class CurrentCallViewModel
                         )
                         currentCall.removeListener(callListener)
                         configureCall(call)
-                    } else if (LinphoneUtils.isCallIncoming(call.state)) {
+                    } else if (FarcomUtils.isCallIncoming(call.state)) {
                         Log.w(
                             "$TAG A call is being received [${call.remoteAddress.asStringUriOnly()}], using it as current call unless declined"
                         )
@@ -474,7 +474,7 @@ class CurrentCallViewModel
                 configureCall(call)
             }
 
-            if (LinphoneUtils.isCallEnding(call.state)) {
+            if (FarcomUtils.isCallEnding(call.state)) {
                 waitingForEncryptionInfo.postValue(false)
             }
 
@@ -489,7 +489,7 @@ class CurrentCallViewModel
 
             if (state == Call.State.OutgoingProgress) {
                 transferInProgressEvent.postValue(Event(true))
-            } else if (LinphoneUtils.isCallEnding(state)) {
+            } else if (FarcomUtils.isCallEnding(state)) {
                 transferFailedEvent.postValue(Event(true))
             }
         }
@@ -614,7 +614,7 @@ class CurrentCallViewModel
     fun answer() {
         coreContext.postOnCoreThread { core ->
             val call = core.calls.find {
-                LinphoneUtils.isCallIncoming(it.state)
+                FarcomUtils.isCallIncoming(it.state)
             }
             if (call != null) {
                 Log.i("$TAG Answering call [${call.remoteAddress.asStringUriOnly()}]")
@@ -738,7 +738,7 @@ class CurrentCallViewModel
                     else -> {}
                 }
 
-                val name = LinphoneUtils.getAudioDeviceName(device)
+                val name = FarcomUtils.getAudioDeviceName(device)
                 val isCurrentlyInUse = device.type == currentDevice?.type && device.deviceName == currentDevice.deviceName
                 val model = AudioDeviceModel(device, name, device.type, isCurrentlyInUse, true) {
                     // onSelected
@@ -930,9 +930,9 @@ class CurrentCallViewModel
                 val existingConversation = currentCallConversation ?: lookupCurrentCallConversation(currentCall)
                 if (existingConversation != null) {
                     Log.i(
-                        "$TAG Found existing conversation [${LinphoneUtils.getConversationId(existingConversation)}], going to it"
+                        "$TAG Found existing conversation [${FarcomUtils.getConversationId(existingConversation)}], going to it"
                     )
-                    goToConversationEvent.postValue(Event(LinphoneUtils.getConversationId(existingConversation)))
+                    goToConversationEvent.postValue(Event(FarcomUtils.getConversationId(existingConversation)))
                 } else {
                     Log.i("$TAG No existing conversation was found, let's create it")
                     createCurrentCallConversation(currentCall)
@@ -945,12 +945,12 @@ class CurrentCallViewModel
     fun attendedTransferCallTo(to: Call) {
         if (::currentCall.isInitialized) {
             val toCallState = to.state
-            if (LinphoneUtils.isCallEnding(toCallState, considerReleasedAsEnding = true)) {
+            if (FarcomUtils.isCallEnding(toCallState, considerReleasedAsEnding = true)) {
                 Log.e("$TAG Do not attempt attended transfer to call in state [$toCallState]")
                 return
             }
             val currentCallState = currentCall.state
-            if (LinphoneUtils.isCallEnding(currentCallState, considerReleasedAsEnding = true)) {
+            if (FarcomUtils.isCallEnding(currentCallState, considerReleasedAsEnding = true)) {
                 Log.e("$TAG Do not attempt attended transfer of call in state [$currentCallState]")
                 return
             }
@@ -970,7 +970,7 @@ class CurrentCallViewModel
     fun blindTransferCallTo(to: Address) {
         if (::currentCall.isInitialized) {
             val callState = currentCall.state
-            if (LinphoneUtils.isCallEnding(callState, considerReleasedAsEnding = true)) {
+            if (FarcomUtils.isCallEnding(callState, considerReleasedAsEnding = true)) {
                 Log.e("$TAG Do not attempt blind transfer of call in state [$callState]")
                 return
             }
@@ -1077,7 +1077,7 @@ class CurrentCallViewModel
         call.addListener(callListener)
 
         val state = call.state
-        if (LinphoneUtils.isCallOutgoing(state) || LinphoneUtils.isCallIncoming(state)) {
+        if (FarcomUtils.isCallOutgoing(state) || FarcomUtils.isCallIncoming(state)) {
             if (call.currentParams.mediaEncryption == MediaEncryption.None) {
                 waitingForEncryptionInfo.postValue(true)
                 isMediaEncrypted.postValue(false)
@@ -1088,13 +1088,13 @@ class CurrentCallViewModel
             updateEncryption()
         }
 
-        val conferenceInfo = LinphoneUtils.getConferenceInfoIfAny(call)
+        val conferenceInfo = FarcomUtils.getConferenceInfoIfAny(call)
         if (call.conference != null || conferenceInfo != null) {
             val subject = call.conference?.subject ?: conferenceInfo?.subject
             Log.i("$TAG Conference [$subject] found, going to conference fragment")
             conferenceModel.configureFromCall(call)
             goToConferenceEvent.postValue(Event(true))
-        } else if (LinphoneUtils.isCallActive(call.state)) {
+        } else if (FarcomUtils.isCallActive(call.state)) {
             Log.i("$TAG No conference attached to this call, going to call fragment")
             conferenceModel.destroy()
             goToCallEvent.postValue(Event(true))
@@ -1109,10 +1109,10 @@ class CurrentCallViewModel
                     it.params.identityAddress?.weakEqual(localAddress) == true
                 }
                 val displayName = if (localAccount != null) {
-                    LinphoneUtils.getDisplayName(localAccount.params.identityAddress)
+                    FarcomUtils.getDisplayName(localAccount.params.identityAddress)
                 } else {
                     Log.w("$TAG Matching local account was not found, using TO address display name or username")
-                    LinphoneUtils.getDisplayName(localAddress)
+                    FarcomUtils.getDisplayName(localAddress)
                 }
                 Log.i("$TAG Showing account being called as [$displayName]")
 
@@ -1140,10 +1140,10 @@ class CurrentCallViewModel
             }
         }
 
-        if (LinphoneUtils.isCallOutgoing(call.state)) {
+        if (FarcomUtils.isCallOutgoing(call.state)) {
             isVideoEnabled.postValue(call.params.isVideoEnabled)
             updateVideoDirection(call.params.videoDirection)
-        } else if (LinphoneUtils.isCallIncoming(call.state)) {
+        } else if (FarcomUtils.isCallIncoming(call.state)) {
             isVideoEnabled.postValue(
                 call.remoteParams?.isVideoEnabled == true && call.remoteParams?.videoDirection != MediaDirection.Inactive
             )
@@ -1185,7 +1185,7 @@ class CurrentCallViewModel
         val uri = if (corePreferences.onlyDisplaySipUriUsername) {
             address.username ?: ""
         } else {
-            LinphoneUtils.getAddressAsCleanStringUriOnly(address)
+            FarcomUtils.getAddressAsCleanStringUriOnly(address)
         }
         displayedAddress.postValue(uri)
 
@@ -1199,7 +1199,7 @@ class CurrentCallViewModel
                 ContactAvatarModel(friend, address)
             } else {
                 val fakeFriend = coreContext.core.createFriend()
-                fakeFriend.name = LinphoneUtils.getDisplayName(address)
+                fakeFriend.name = FarcomUtils.getDisplayName(address)
                 fakeFriend.address = address
                 val localAccount = coreContext.core.accountList.find {
                     it.params.identityAddress?.weakEqual(address) == true
@@ -1360,7 +1360,7 @@ class CurrentCallViewModel
                 coreContext.postOnCoreThread {
                     if (::currentCall.isInitialized) {
                         val state = currentCall.state
-                        if (!LinphoneUtils.isCallEnding(state, true)) {
+                        if (!FarcomUtils.isCallEnding(state, true)) {
                             val quality = currentCall.currentQuality
                             val icon = when {
                                 quality >= 4 -> R.drawable.cell_signal_full
@@ -1438,19 +1438,19 @@ class CurrentCallViewModel
         if (chatRoom != null) {
             if (params.chatParams?.backend == ChatRoom.Backend.FlexisipChat) {
                 if (chatRoom.state == ChatRoom.State.Created) {
-                    val id = LinphoneUtils.getConversationId(chatRoom)
+                    val id = FarcomUtils.getConversationId(chatRoom)
                     Log.i("$TAG 1-1 conversation [$id] has been created")
                     operationInProgress.postValue(false)
-                    goToConversationEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                    goToConversationEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
                 } else {
                     Log.i("$TAG Conversation isn't in Created state yet, wait for it")
                     chatRoom.addListener(chatRoomListener)
                 }
             } else {
-                val id = LinphoneUtils.getConversationId(chatRoom)
+                val id = FarcomUtils.getConversationId(chatRoom)
                 Log.i("$TAG Conversation successfully created [$id]")
                 operationInProgress.postValue(false)
-                goToConversationEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                goToConversationEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
             }
         } else {
             Log.e(
@@ -1466,7 +1466,7 @@ class CurrentCallViewModel
         val localAddress = call.callLog.localAddress
         val remoteAddress = call.remoteAddress
         val core = call.core
-        val account = LinphoneUtils.getAccountForAddress(localAddress) ?: LinphoneUtils.getDefaultAccount() ?: return null
+        val account = FarcomUtils.getAccountForAddress(localAddress) ?: FarcomUtils.getDefaultAccount() ?: return null
 
         val params = coreContext.core.createConferenceParams(call.conference)
         params.isChatEnabled = true
@@ -1485,7 +1485,7 @@ class CurrentCallViewModel
             chatParams.backend = ChatRoom.Backend.FlexisipChat
             params.securityLevel = Conference.SecurityLevel.EndToEnd
         } else if (!account.params.instantMessagingEncryptionMandatory) {
-            if (LinphoneUtils.isEndToEndEncryptedChatAvailable(core)) {
+            if (FarcomUtils.isEndToEndEncryptedChatAvailable(core)) {
                 Log.i(
                     "$TAG Account is in interop mode but LIME is available, requesting E2E encryption"
                 )
@@ -1530,7 +1530,7 @@ class CurrentCallViewModel
 
                 // Show that call was ended for a few seconds, then leave
                 val text = if (call.state == Call.State.Error) {
-                    LinphoneUtils.getCallErrorInfoToast(call)
+                    FarcomUtils.getCallErrorInfoToast(call)
                 } else {
                     ""
                 }
@@ -1563,10 +1563,10 @@ class CurrentCallViewModel
             val callState = currentCall.state
             Log.i("$TAG Call is in state [$callState], enabling/disabling proximity sensor if needed")
 
-            if (LinphoneUtils.isCallIncoming(callState)) {
+            if (FarcomUtils.isCallIncoming(callState)) {
                 Log.i("$TAG Call is incoming, disabling proximity sensor")
                 proximitySensorEnabled.postValue(false)
-            } else if (LinphoneUtils.isCallOutgoing(callState)) {
+            } else if (FarcomUtils.isCallOutgoing(callState)) {
                 val videoEnabled = currentCall.params.isVideoEnabled
                 if (videoEnabled) {
                     Log.i("$TAG Call is outgoing and video is enabled, disabling proximity sensor")

@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.call
+package org.farcom.ui.call
 
 import android.Manifest
 import android.content.Intent
@@ -50,27 +50,27 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlin.math.max
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.compatibility.Api28Compatibility
-import org.linphone.compatibility.Compatibility
-import org.linphone.core.tools.Log
-import org.linphone.databinding.CallActivityBinding
-import org.linphone.ui.GenericActivity
-import org.linphone.ui.call.conference.fragment.ActiveConferenceCallFragmentDirections
-import org.linphone.ui.call.conference.fragment.ConferenceLayoutMenuDialogFragment
-import org.linphone.ui.call.fragment.ActiveCallFragmentDirections
-import org.linphone.ui.call.fragment.AudioDevicesMenuDialogFragment
-import org.linphone.ui.call.fragment.CallsListFragmentDirections
-import org.linphone.ui.call.fragment.IncomingCallFragmentDirections
-import org.linphone.ui.call.fragment.OutgoingCallFragmentDirections
-import org.linphone.ui.call.model.AudioDeviceModel
-import org.linphone.ui.call.viewmodel.CallsViewModel
-import org.linphone.ui.call.viewmodel.CurrentCallViewModel
-import org.linphone.ui.call.viewmodel.SharedCallViewModel
-import org.linphone.ui.main.MainActivity
-import org.linphone.utils.AppUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.compatibility.Api28Compatibility
+import org.farcom.compatibility.Compatibility
+import org.farcom.core.tools.Log
+import org.farcom.databinding.CallActivityBinding
+import org.farcom.ui.GenericActivity
+import org.farcom.ui.call.conference.fragment.ActiveConferenceCallFragmentDirections
+import org.farcom.ui.call.conference.fragment.ConferenceLayoutMenuDialogFragment
+import org.farcom.ui.call.fragment.ActiveCallFragmentDirections
+import org.farcom.ui.call.fragment.AudioDevicesMenuDialogFragment
+import org.farcom.ui.call.fragment.CallsListFragmentDirections
+import org.farcom.ui.call.fragment.IncomingCallFragmentDirections
+import org.farcom.ui.call.fragment.OutgoingCallFragmentDirections
+import org.farcom.ui.call.model.AudioDeviceModel
+import org.farcom.ui.call.viewmodel.CallsViewModel
+import org.farcom.ui.call.viewmodel.CurrentCallViewModel
+import org.farcom.ui.call.viewmodel.SharedCallViewModel
+import org.farcom.ui.main.MainActivity
+import org.farcom.utils.AppUtils
 
 @UiThread
 class CallActivity : GenericActivity() {
@@ -114,16 +114,16 @@ class CallActivity : GenericActivity() {
         val mainColor = corePreferences.themeMainColor
         val theme = super.getTheme()
         when (mainColor) {
-            "terracotta" -> theme.applyStyle(R.style.Theme_LinphoneInCallTerracotta, true)
-            "lavender" -> theme.applyStyle(R.style.Theme_LinphoneInCallLavender, true)
-            "honey" -> theme.applyStyle(R.style.Theme_LinphoneInCallHoney, true)
-            "burgundy" -> theme.applyStyle(R.style.Theme_LinphoneInCallBurgundy, true)
-            "mint" -> theme.applyStyle(R.style.Theme_LinphoneInCallMint, true)
-            "coral" -> theme.applyStyle(R.style.Theme_LinphoneInCallCoral, true)
-            "plum" -> theme.applyStyle(R.style.Theme_LinphoneInCallPlum, true)
-            "titanium" -> theme.applyStyle(R.style.Theme_LinphoneInCallTitanium, true)
-            "mineral_blue" -> theme.applyStyle(R.style.Theme_LinphoneInCallMineralBlue, true)
-            else -> theme.applyStyle(R.style.Theme_LinphoneInCall, true)
+            "terracotta" -> theme.applyStyle(R.style.Theme_FarcomInCallTerracotta, true)
+            "lavender" -> theme.applyStyle(R.style.Theme_FarcomInCallLavender, true)
+            "honey" -> theme.applyStyle(R.style.Theme_FarcomInCallHoney, true)
+            "burgundy" -> theme.applyStyle(R.style.Theme_FarcomInCallBurgundy, true)
+            "mint" -> theme.applyStyle(R.style.Theme_FarcomInCallMint, true)
+            "coral" -> theme.applyStyle(R.style.Theme_FarcomInCallCoral, true)
+            "plum" -> theme.applyStyle(R.style.Theme_FarcomInCallPlum, true)
+            "titanium" -> theme.applyStyle(R.style.Theme_FarcomInCallTitanium, true)
+            "mineral_blue" -> theme.applyStyle(R.style.Theme_FarcomInCallMineralBlue, true)
+            else -> theme.applyStyle(R.style.Theme_FarcomInCall, true)
         }
         return theme
     }

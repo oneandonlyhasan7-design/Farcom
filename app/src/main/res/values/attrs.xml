@@ -10,7 +10,7 @@
         <attr name="radius" format="float" />
     </declare-styleable>
 
-    <declare-styleable name="LinphoneAppTheme">
+    <declare-styleable name="FarcomAppTheme">
         <attr name="color_main1_100" format="color"/>
         <attr name="color_main1_500" format="color"/>
 

@@ -1,4 +1,4 @@
-package org.linphone.ui.fileviewer
+package org.farcom.ui.fileviewer
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -17,17 +17,17 @@ import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.databinding.FileMediaViewerActivityBinding
-import org.linphone.ui.GenericActivity
-import org.linphone.ui.fileviewer.adapter.MediaListAdapter
-import org.linphone.ui.fileviewer.viewmodel.MediaListViewModel
-import org.linphone.ui.main.chat.model.FileModel
-import org.linphone.ui.main.viewmodel.SharedMainViewModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.FileUtils
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.databinding.FileMediaViewerActivityBinding
+import org.farcom.ui.GenericActivity
+import org.farcom.ui.fileviewer.adapter.MediaListAdapter
+import org.farcom.ui.fileviewer.viewmodel.MediaListViewModel
+import org.farcom.ui.main.chat.model.FileModel
+import org.farcom.ui.main.viewmodel.SharedMainViewModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.FileUtils
 import androidx.core.net.toUri
 
 @UiThread

@@ -10,7 +10,7 @@
             type="View.OnLongClickListener" />
         <variable
             name="model"
-            type="org.linphone.ui.main.chat.model.FileModel" />
+            type="org.farcom.ui.main.chat.model.FileModel" />
         <variable
             name="inflatedVisibility"
             type="Integer" />

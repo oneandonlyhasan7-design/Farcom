@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2024 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.call.fragment
+package org.farcom.ui.call.fragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -28,14 +28,14 @@ import android.view.ViewGroup
 import androidx.core.view.doOnLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.ui.call.view.RoundCornersTextureView
-import org.linphone.ui.call.viewmodel.CurrentCallViewModel
-import org.linphone.ui.fileviewer.FileViewerActivity
-import org.linphone.ui.fileviewer.MediaViewerActivity
-import org.linphone.ui.main.chat.fragment.ConversationFragment
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.ui.call.view.RoundCornersTextureView
+import org.farcom.ui.call.viewmodel.CurrentCallViewModel
+import org.farcom.ui.fileviewer.FileViewerActivity
+import org.farcom.ui.fileviewer.MediaViewerActivity
+import org.farcom.ui.main.chat.fragment.ConversationFragment
 
 class ConversationFragment : ConversationFragment() {
     companion object {

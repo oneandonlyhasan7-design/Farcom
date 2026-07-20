@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources [
-<!ENTITY appName "Linphone">
+<!ENTITY appName "Farcom">
 ]>
 <resources>
     <string name="help_about_user_guide_title">Guia do usuário do &appName;</string>
@@ -28,7 +28,6 @@
     <string name="dialog_deny">Recusar</string>
     <string name="notification_channel_call_name">&appName; notificações de chamadas ativas</string>
     <string name="notification_channel_service_desc">Este serviço será executado o tempo todo para manter o aplicativo ativo e permitir que você receba chamadas e mensagens sem notificações push.</string>
-    <string name="assistant_permissions_access_camera_title"><b>Acessar a câmera:</b> Para capturar vídeo durante chamadas de vídeo e conferências.</string>
     <string name="help_title">Ajuda</string>
     <string name="help_about_title">Sobre o &appName;</string>
     <string name="settings_contacts_ldap_search_filter_title">Filtro</string>
@@ -43,7 +42,6 @@
     </plurals>
     <string name="file_successfully_exported_to_documents_toast">O arquivo foi exportado para documentos</string>
     <string name="assistant_login_address_without_username_toast">O endereço SIP não contém um nome de usuário!</string>
-    <string name="assistant_account_creation_sms_confirmation_explanation">Enviamos um código de verificação para o seu número de telefone %1$s.\n\nPor favor, insira o código de verificação abaixo:</string>
     <string name="help_troubleshooting_debug_logs_upload_error_toast_message">Falha ao enviar logs de depuração</string>
     <string name="settings_calls_adaptive_rate_control_title">Controle adaptativo de taxa</string>
     <string name="settings_conversations_mark_as_read_when_dismissing_notif_title">Marcar conversa como lida ao dispensar notificação de mensagem</string>
@@ -56,11 +54,6 @@
     <string name="settings_advanced_print_logs_crashlytics_title">Ajudar os desenvolvedores a solucionar problemas enviando logs para o Crashlytics após uma falha</string>
     <string name="remote_provisioning_config_failed_toast">Erro ao tentar baixar e aplicar a configuração remota</string>
     <string name="assistant_qr_code_invalid_toast">QR code inválido!</string>
-    <string name="assistant_create_account_using_email_on_our_web_platform">Crie uma conta com seu e-mail em:</string>
-    <string name="assistant_third_party_sip_account_warning_explanation">Alguns recursos exigem uma conta &appName;, como mensagens em grupo, videoconferências…\n\nEsses recursos ficam ocultos quando você se registra com uma conta SIP de terceiros.\n\nPara habilitá-los em um projeto comercial, entre em contato conosco.</string>
-    <string name="assistant_permissions_skip_permissions">Fazer isso mais tarde</string>
-    <string name="assistant_permissions_read_contacts_title"><b>Ler contatos:</b> Para exibir seus contatos e encontrar quem está usando o &appName;.</string>
-    <string name="assistant_recover_phone_number_account_unavailable_no_push_warning">As notificações push não parecem estar disponíveis no seu dispositivo, mas são obrigatórias para recuperar uma conta de número de telefone no aplicativo móvel.</string>
     <string name="help_about_privacy_policy_subtitle">Quais informações o &appName; coleta e usa</string>
     <string name="help_error_checking_version_toast_message">Ocorreu um erro ao verificar por atualizações</string>
     <string name="settings_security_enable_vfs_failure_toast">Falha ao ativar o módulo de criptografia!</string>
@@ -138,43 +131,17 @@
     <string name="media_playback_low_volume_warning_toast">O volume da mídia está baixo, talvez você não ouça nada!</string>
     <string name="remote_provisioning_config_applied_toast">Configuração aplicada com sucesso</string>
     <string name="media_player_generic_error_toast">Erro ao tentar criar o reprodutor de mídia</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_title">Termos gerais e política de privacidade</string>
-    <string name="assistant_dialog_general_terms_label">termos gerais</string>
-    <string name="assistant_dialog_privacy_policy_label">política de privacidade</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_message">Ao continuar, você aceita nossos %1$s e %2$s.</string>
     <string name="assistant_dialog_confirm_phone_number_title">Confirmar número de telefone</string>
     <string name="assistant_dialog_confirm_phone_number_message">Tem certeza de que seu número de telefone é %s?</string>
     <string name="assistant_account_login">Login</string>
-    <string name="assistant_scan_qr_code">Escanear QR code</string>
     <string name="assistant_login_third_party_sip_account">Usar uma conta SIP de terceiros</string>
     <string name="assistant_login_third_party_sip_account_title">Conta SIP de terceiros</string>
-    <string name="assistant_login_using_single_sign_on">Login único</string>
     <string name="assistant_login_cant_parse_address_toast">O endereço SIP é inválido!</string>
     <string name="assistant_account_login_already_connected_error">A conta já existe</string>
-    <string name="assistant_no_account_yet">Ainda não tem uma conta?</string>
-    <string name="assistant_account_register">Registrar</string>
-    <string name="assistant_account_creation_sms_confirmation_title">Confirme seu número de telefone</string>
-    <string name="assistant_account_creation_wrong_phone_number">Número errado?</string>
-    <string name="assistant_account_create">Criar</string>
-    <string name="assistant_already_have_an_account">Já tem uma conta?</string>
     <string name="assistant_sip_account_transport_protocol">Transporte</string>
-    <string name="assistant_third_party_sip_account_create_linphone_account">Prefiro criar uma conta &appName;</string>
-    <string name="assistant_third_party_sip_account_warning_ok">Eu entendo</string>
-    <string name="assistant_account_register_unavailable_no_push_warning">As notificações push não parecem estar disponíveis no seu dispositivo, mas são obrigatórias para criar uma conta no aplicativo móvel.\n\nConvidamos você a criar uma conta em nossa plataforma web:</string>
-    <string name="assistant_account_register_push_notification_not_received_error">Notificação push com token de autenticação não recebida em 5 segundos, por favor, tente novamente mais tarde</string>
-    <string name="assistant_account_register_unexpected_error">Ocorreu um erro inesperado, por favor, tente novamente mais tarde</string>
     <string name="assistant_account_login_forbidden_error">Nome de usuário ou senha incorretos</string>
     <string name="assistant_account_login_error">Falha ao fazer login: o código de erro é %s</string>
-    <string name="assistant_permissions_title">Conceder permissões</string>
     <string name="assistant_permissions_grant_all_of_them">OK</string>
-    <string name="assistant_permissions_subtitle">Para aproveitar ao máximo o &appName; precisamos que você nos conceda as seguintes permissões:</string>
-    <string name="assistant_permissions_post_notifications_title"><b>Publicar notificações:</b> Para ser informado quando você receber uma mensagem ou uma chamada.</string>
-    <string name="assistant_permissions_record_audio_title"><b>Gravar áudio:</b> Para que seu correspondente possa ouvi-lo e para gravar mensagens de voz.</string>
-    <string name="assistant_forgotten_password_title">Senha esquecida</string>
-    <string name="assistant_forgotten_password_subtitle">Escolha como recuperar sua conta.</string>
-    <string name="assistant_forgotten_password_message">Você criou sua conta usando:</string>
-    <string name="assistant_recover_email_account_label">Um e-mail</string>
-    <string name="assistant_recover_phone_number_account_label">Um número de telefone</string>
     <string name="bottom_navigation_contacts_label">Contatos</string>
     <string name="bottom_navigation_calls_label">Chamadas</string>
     <string name="bottom_navigation_conversations_label">Conversas</string>
@@ -302,7 +269,7 @@
     <string name="contacts_list_favourites_title">Favoritos</string>
     <string name="contacts_list_all_contacts_title">Todos os contatos</string>
     <string name="contacts_list_filter_popup_see_all">Ver todos</string>
-    <string name="contacts_list_filter_popup_see_linphone_only">Ver contatos &appName;</string>
+    <string name="contacts_list_filter_popup_see_farcom_only">Ver contatos &appName;</string>
     <string name="contacts_list_filter_popup_see_sip_only">Ver contatos SIP</string>
     <string name="contact_new_title">Novo contato</string>
     <string name="contact_edit_title">Editar contato</string>
@@ -351,7 +318,7 @@
     <string name="manage_account_device_remove">Remover</string>
     <string name="manage_account_device_last_connection">Última conexão:</string>
     <string name="manage_account_dialog_remove_account_title">Sair da sua conta?</string>
-    <string name="manage_account_dialog_remove_account_message">Se você deseja excluir sua conta permanentemente, acesse: https://sip.linphone.org</string>
+    <string name="manage_account_dialog_remove_account_message">Se você deseja excluir sua conta permanentemente, acesse: https://sip.farcom.org</string>
     <string name="account_settings_stun_server_url_title">URL do servidor STUN/TURN</string>
     <string name="account_settings_enable_ice_title">Ativar ICE</string>
     <string name="account_settings_enable_turn_title">Ativar TURN</string>
@@ -583,7 +550,6 @@
     <string name="post_notifications_permission_not_granted">Permissão para publicar notificações não concedida!</string>
     <string name="full_screen_intent_permission_not_granted">Permissão para mostrar chamada recebida não concedida!</string>
     <string name="welcome_carousel_skip"><u>Pular</u></string>
-    <string name="assistant_forgotten_password"><u>Esqueceu a senha?</u></string>
     <string name="call_zrtp_sas_validation_skip"><u>Pular</u></string>
     <string name="conversation_message_meeting_updated_label"><b>A reunião foi atualizada</b></string>
     <string name="conversation_message_meeting_cancelled_label"><b>A reunião foi cancelada!</b></string>

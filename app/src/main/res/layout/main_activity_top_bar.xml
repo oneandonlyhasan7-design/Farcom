@@ -22,7 +22,7 @@
             type="Boolean" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.main.viewmodel.AbstractMainViewModel" />
+            type="org.farcom.ui.main.viewmodel.AbstractMainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

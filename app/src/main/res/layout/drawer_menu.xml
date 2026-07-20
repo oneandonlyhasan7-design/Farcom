@@ -18,7 +18,7 @@
             type="View.OnClickListener" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.main.viewmodel.DrawerMenuViewModel" />
+            type="org.farcom.ui.main.viewmodel.DrawerMenuViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,7 +46,7 @@
                 android:layout_height="@dimen/large_icon_size"
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="15dp"
-                android:src="@drawable/linphone_notification"
+                android:src="@drawable/farcom_notification"
                 android:contentDescription="@string/app_name"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

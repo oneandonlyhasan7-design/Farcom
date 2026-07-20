@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources [
-<!ENTITY appName "Linphone">
+<!ENTITY appName "Farcom">
 ]>
 <resources>
     <string name="sip_address">SIP-Adresse</string>
@@ -81,45 +81,19 @@
     <string name="remote_provisioning_config_applied_toast">Konfiguration erfolgreich angewendet</string>
     <string name="remote_provisioning_config_failed_toast">Fehler beim Versuch, die Remote-Konfiguration herunterzuladen und anzuwenden</string>
     <string name="media_player_generic_error_toast">Fehler beim Erstellen des Media Players</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_title">Allgemeine Geschäftsbedingungen &amp; Datenschutz</string>
-    <string name="assistant_dialog_general_terms_label">allgemeine Bedingungen</string>
-    <string name="assistant_dialog_privacy_policy_label">Datenschutzrichtlinie</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_message">Indem Sie fortfahren, akzeptieren Sie unsere %1$s und %2$s.</string>
     <string name="assistant_dialog_confirm_phone_number_title">Telefonnummer bestätigen</string>
     <string name="assistant_dialog_confirm_phone_number_message">Sind Sie sicher, dass Ihre Rufnummer %s ist?</string>
     <string name="assistant_account_login">Login</string>
-    <string name="assistant_scan_qr_code">QR-Code scannen</string>
     <string name="assistant_qr_code_invalid_toast">Ungültiger QR-Code!</string>
     <string name="assistant_login_third_party_sip_account">Drittanbieter-SIP-Konto verwenden</string>
     <string name="assistant_login_third_party_sip_account_title">Drittanbieter-SIP-Konto</string>
-    <string name="assistant_login_using_single_sign_on">Single Sign-on</string>
     <string name="assistant_login_cant_parse_address_toast">SIP Adresse ist ungültig!</string>
     <string name="assistant_login_address_without_username_toast">SIP Adresse enthält keinen Benutzernamen!</string>
     <string name="assistant_account_login_already_connected_error">Das Konto ist bereits vorhanden</string>
-    <string name="assistant_no_account_yet">Noch kein Konto?</string>
-    <string name="assistant_account_register">Registrieren</string>
-    <string name="assistant_account_creation_sms_confirmation_title">Bestätigen Sie Ihre Telefonnummer</string>
-    <string name="assistant_account_creation_sms_confirmation_explanation">Wir haben einen Bestätigungscode an Ihre Telefonnummer %1$s gesendet.\n\nBitte geben Sie den Bestätigungscode unten ein:</string>
-    <string name="assistant_account_creation_wrong_phone_number">Falsche Nummer?</string>
-    <string name="assistant_account_create">Erstellen</string>
-    <string name="assistant_create_account_using_email_on_our_web_platform">Erstellen Sie mit Ihrer E-Mail ein Konto bei:</string>
-    <string name="assistant_already_have_an_account">Haben Sie bereits ein Konto?</string>
     <string name="assistant_sip_account_transport_protocol">Transport</string>
-    <string name="assistant_third_party_sip_account_warning_explanation">Für einige Funktionen ist ein &appName;-Konto erforderlich, z. B. Gruppennachrichten, Videokonferenzen…\n\nDiese Funktionen sind ausgeblendet, wenn Sie sich mit einem SIP-Konto eines Drittanbieters registrieren.\n\nUm sie in einem kommerziellen Projekt zu aktivieren, kontaktieren Sie uns bitte.</string>
-    <string name="assistant_third_party_sip_account_create_linphone_account">Ich möchte lieber ein &appName;-Konto erstellen</string>
-    <string name="assistant_third_party_sip_account_warning_ok">Ich verstehe</string>
-    <string name="assistant_account_register_push_notification_not_received_error">Push Benachrichtigung mit Authentifizierungstoken nicht innerhalb von 5 Sekunden empfangen, bitte versuchen Sie es später erneut</string>
-    <string name="assistant_account_register_unexpected_error">Unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.</string>
     <string name="assistant_account_login_forbidden_error">Falscher Benutzername oder Passwort</string>
     <string name="assistant_account_login_error">Anmeldung fehlgeschlagen: Fehlercode ist %s</string>
-    <string name="assistant_permissions_title">Berechtigungen erteilen</string>
     <string name="assistant_permissions_grant_all_of_them">OK</string>
-    <string name="assistant_permissions_skip_permissions">Mach es später</string>
-    <string name="assistant_permissions_subtitle">Um &appName; in vollem Umfang genießen zu können, müssen Sie uns die folgenden Berechtigungen erteilen:</string>
-    <string name="assistant_permissions_read_contacts_title"><b>Kontakte:</b> Um Ihre Kontakte anzuzeigen und herauszufinden, wer &appName; verwendet.</string>
-    <string name="assistant_permissions_post_notifications_title"><b>Benachrichtigungen:</b> Um informiert zu werden, wenn Sie eine Nachricht oder einen Anruf erhalten.</string>
-    <string name="assistant_permissions_record_audio_title"><b>Mikrofon:</b> Damit Ihre Gesprächspartner Sie hören können.</string>
-    <string name="assistant_permissions_access_camera_title"><b>Kamera:</b> Zum Aufnehmen von Videos während Videoanrufen und -konferenzen.</string>
     <string name="bottom_navigation_contacts_label">Kontakte</string>
     <string name="bottom_navigation_calls_label">Anrufe</string>
     <string name="bottom_navigation_conversations_label">Chats</string>
@@ -270,7 +244,7 @@
     <string name="manage_account_device_remove">Entfernen</string>
     <string name="manage_account_device_last_connection">Letzte Verbindung:</string>
     <string name="manage_account_dialog_remove_account_title">Von Ihrem Konto abmelden?</string>
-    <string name="manage_account_dialog_remove_account_message">Wenn Sie Ihr Konto dauerhaft löschen möchten, gehen Sie zu: https://sip.linphone.org</string>
+    <string name="manage_account_dialog_remove_account_message">Wenn Sie Ihr Konto dauerhaft löschen möchten, gehen Sie zu: https://sip.farcom.org</string>
     <string name="account_settings_title">Kontoeinstellungen</string>
     <string name="account_settings_push_notification_title">Push Benachrichtigungen zulassen</string>
     <string name="account_settings_push_notification_not_available_title">Push Benachrichtigungen sind nicht verfügbar!</string>
@@ -314,7 +288,7 @@
     <string name="contacts_list_favourites_title">Favoriten</string>
     <string name="contacts_list_all_contacts_title">Alle Kontakte</string>
     <string name="contacts_list_filter_popup_see_all">Alle anzeigen</string>
-    <string name="contacts_list_filter_popup_see_linphone_only">&appName; Kontakte</string>
+    <string name="contacts_list_filter_popup_see_farcom_only">&appName; Kontakte</string>
     <string name="contacts_list_filter_popup_see_sip_only">SIP Kontakte</string>
     <string name="contact_new_title">Neuer Kontakt</string>
     <string name="contact_edit_title">Kontakt bearbeiten</string>
@@ -682,7 +656,6 @@
         <item quantity="other">%s neue Sprachnachrichten</item>
     </plurals>
     <string name="welcome_carousel_skip"><u>Überspringen</u></string>
-    <string name="assistant_forgotten_password"><u>Passwort vergessen?</u></string>
     <string name="call_zrtp_sas_validation_skip"><u>Überspringen</u></string>
     <string name="conversation_message_meeting_updated_label"><b>Das Besprechung wurde aktualisiert</b></string>
     <string name="conversation_message_meeting_cancelled_label"><b>Das Besprechung wurde abgesagt</b></string>
@@ -811,12 +784,6 @@
     <string name="conversation_event_security_event_level_downgraded">Sicherheitsstufe verringert wegen %s</string>
     <string name="conversation_event_security_event_max_participant_count_exceeded">Maximale Teilnehmerzahl um %s überschritten</string>
     <string name="meeting_cancel_action_label">Besprechung absagen</string>
-    <string name="assistant_forgotten_password_title">Passwort vergessen</string>
-    <string name="assistant_forgotten_password_message">Sie haben Ihren Account erstellt mit:</string>
-    <string name="assistant_account_register_unavailable_no_push_warning">Benachrichtigungen scheinen auf Ihrem Gerät nicht verfügbar zu sein, sind allerdings nötig um einen Account in der App zu erstellen.\n\nWir laden Sie ein, stattdessen einen Account auf unserer Webplattform zu erstellen:</string>
-    <string name="assistant_recover_email_account_label">Einer E-Mail</string>
-    <string name="assistant_recover_phone_number_account_label">Einer Telefonnummer</string>
-    <string name="assistant_recover_phone_number_account_unavailable_no_push_warning">Benachrichtigungen scheinen auf Ihrem Gerät nicht verfügbar zu sein, sind aber für die Wiederherstellung eines Rufnummernkontos in der mobilen App zwingend erforderlich.</string>
     <string name="help_about_user_guide_title">&appName; Benutzeranleitung</string>
     <string name="help_about_user_guide_subtitle">Lerne alle Funktionen der App zu meistern, Schritt für Schritt.</string>
     <string name="content_description_cancel_files_or_text_pending_sharing">Hier tippen um Datei- oder Textfreigaben abzubrechen</string>
@@ -826,7 +793,6 @@
     <string name="settings_advanced_audio_codecs_stereo_subtitle">Stereo</string>
     <string name="contact_sms_invite_content">Hallo, kommen Sie mit zu &appName;! Sie können es hier %s kostenlos herunterladen</string>
     <string name="settings_contacts_ldap_enabled_title">Aktiviert</string>
-    <string name="assistant_forgotten_password_subtitle">Wählen Sie aus, wie Sie Ihr Konto wiederherstellen möchten.</string>
     <string name="call_zrtp_point_to_point_encrypted">Punkt-zu-Punkt Verschlüsselung durch ZRTP</string>
     <string name="manage_account_status_disconnected_summary">Dieses Konto ist offline, weil Sie vermutlich nicht mit dem Internet verbunden sind.</string>
     <string name="drawer_menu_account_connection_status_disconnected">Getrennt</string>
@@ -856,7 +822,7 @@
     <string name="notification_account_registration_error_message">Öffne &appName; um die Registrierung zu aktualisieren</string>
     <string name="assistant_sip_account_lime_algorithm">LIME-Algorithmus (kommasepariert)</string>
     <string name="settings_contacts_sort_by_first_name_title">Kontakte sortieren nach</string>
-    <string name="settings_contacts_edit_native_contacts_in_linphone_title">Verwenden Sie den Kontakteditor von &appName; für native Kontakte</string>
+    <string name="settings_contacts_edit_native_contacts_in_farcom_title">Verwenden Sie den Kontakteditor von &appName; für native Kontakte</string>
     <string name="settings_contacts_carddav_read_only_label">Dieses Adressbuch ist schreibgeschützt</string>
     <string name="settings_contacts_hide_empty_contacts_title">Kontakte ohne SIP-Adresse oder Telefonnummer ausblenden</string>
     <string name="settings_contacts_ldap_verbose_mode_title">LDAP Log Informationen zu &appName; hinzufügen</string>

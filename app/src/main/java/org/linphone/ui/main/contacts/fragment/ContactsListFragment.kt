@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.contacts.fragment
+package org.farcom.ui.main.contacts.fragment
 
 import android.Manifest
 import android.content.ActivityNotFoundException
@@ -43,23 +43,23 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import org.linphone.LinphoneApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.coreContext
 import java.io.File
-import org.linphone.R
-import org.linphone.core.FriendList
-import org.linphone.core.tools.Log
-import org.linphone.databinding.ContactsListFilterPopupMenuBinding
-import org.linphone.databinding.ContactsListFragmentBinding
-import org.linphone.ui.fileviewer.FileViewerActivity
-import org.linphone.ui.fileviewer.MediaViewerActivity
-import org.linphone.ui.main.MainActivity
-import org.linphone.ui.main.contacts.adapter.ContactsListAdapter
-import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.ui.main.contacts.viewmodel.ContactsListViewModel
-import org.linphone.ui.main.fragment.AbstractMainFragment
-import org.linphone.utils.ConfirmationDialogModel
-import org.linphone.utils.DialogUtils
-import org.linphone.utils.Event
+import org.farcom.R
+import org.farcom.core.FriendList
+import org.farcom.core.tools.Log
+import org.farcom.databinding.ContactsListFilterPopupMenuBinding
+import org.farcom.databinding.ContactsListFragmentBinding
+import org.farcom.ui.fileviewer.FileViewerActivity
+import org.farcom.ui.fileviewer.MediaViewerActivity
+import org.farcom.ui.main.MainActivity
+import org.farcom.ui.main.contacts.adapter.ContactsListAdapter
+import org.farcom.ui.main.contacts.model.ContactAvatarModel
+import org.farcom.ui.main.contacts.viewmodel.ContactsListViewModel
+import org.farcom.ui.main.fragment.AbstractMainFragment
+import org.farcom.utils.ConfirmationDialogModel
+import org.farcom.utils.DialogUtils
+import org.farcom.utils.Event
 
 @UiThread
 class ContactsListFragment : AbstractMainFragment() {
@@ -377,7 +377,7 @@ class ContactsListFragment : AbstractMainFragment() {
             false
         )
         popupView.seeAllSelected = listViewModel.areAllContactsDisplayed.value == true
-        popupView.showLinphoneFilter = listViewModel.isDefaultAccountLinphone.value == true
+        popupView.showFarcomFilter = listViewModel.isDefaultAccountFarcom.value == true
 
         val popupWindow = PopupWindow(
             popupView.root,
@@ -389,17 +389,17 @@ class ContactsListFragment : AbstractMainFragment() {
         popupView.setNoFilterClickListener {
             if (listViewModel.areAllContactsDisplayed.value != true) {
                 listViewModel.changeContactsFilter(
-                    onlyLinphoneContacts = false,
+                    onlyFarcomContacts = false,
                     onlySipContacts = false
                 )
             }
             popupWindow.dismiss()
         }
 
-        popupView.setLinphoneOnlyClickListener {
+        popupView.setFarcomOnlyClickListener {
             if (listViewModel.areAllContactsDisplayed.value == true) {
                 listViewModel.changeContactsFilter(
-                    onlyLinphoneContacts = true,
+                    onlyFarcomContacts = true,
                     onlySipContacts = false
                 )
             }
@@ -409,7 +409,7 @@ class ContactsListFragment : AbstractMainFragment() {
         popupView.setSipOnlyClickListener {
             if (listViewModel.areAllContactsDisplayed.value == true) {
                 listViewModel.changeContactsFilter(
-                    onlyLinphoneContacts = false,
+                    onlyFarcomContacts = false,
                     onlySipContacts = true
                 )
             }

@@ -10,7 +10,7 @@
             type="View.OnClickListener" />
         <variable
             name="model"
-            type="org.linphone.ui.main.model.ConversationContactOrSuggestionModel" />
+            type="org.farcom.ui.main.model.ConversationContactOrSuggestionModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

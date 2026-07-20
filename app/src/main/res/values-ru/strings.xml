@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources [
-<!ENTITY appName "Linphone">
+<!ENTITY appName "Farcom">
 ]>
 <resources>
     <string name="sip_address_display_name">Отображаемое имя</string>
@@ -63,24 +63,14 @@
     <string name="remote_provisioning_config_applied_toast">Конфигурация успешно применена</string>
     <string name="remote_provisioning_config_failed_toast">Ошибка при попытке загрузить и применить удаленную конфигурацию</string>
     <string name="media_player_generic_error_toast">Ошибка при попытке создания медиаплеера</string>
-    <string name="assistant_dialog_general_terms_label">общие положения</string>
-    <string name="assistant_dialog_privacy_policy_label">политика конфиденциальности</string>
     <string name="assistant_dialog_confirm_phone_number_title">Подтвердите номер телефона</string>
     <string name="assistant_dialog_confirm_phone_number_message">Вы уверены, что ваш номер телефона %s?</string>
     <string name="assistant_account_login">Логин</string>
-    <string name="assistant_scan_qr_code">Сканировать QR-код</string>
     <string name="assistant_qr_code_invalid_toast">Неверный QR-код!</string>
     <string name="assistant_login_third_party_sip_account">Использовать сторонний SIP-аккаунт</string>
-    <string name="assistant_login_using_single_sign_on">Единый вход</string>
     <string name="assistant_login_address_without_username_toast">SIP-адрес не содержит имя пользователя!</string>
     <string name="assistant_account_login_already_connected_error">Учетная запись уже существует</string>
-    <string name="assistant_no_account_yet">Еще нет аккаунта?</string>
-    <string name="assistant_account_register">Зарегистрироваться</string>
-    <string name="assistant_account_create">Создать</string>
-    <string name="assistant_create_account_using_email_on_our_web_platform">Создайте учетную запись, указав свой адрес электронной почты:</string>
-    <string name="assistant_already_have_an_account">У вас уже есть аккаунт?</string>
     <string name="assistant_sip_account_transport_protocol">Транспорт</string>
-    <string name="assistant_third_party_sip_account_create_linphone_account">Я предпочитаю создать учетную запись &appName;</string>
     <string name="settings_contacts_carddav_server_url_title">URL-адрес сервера</string>
     <string name="settings_contacts_carddav_username_title">Имя пользователя</string>
     <string name="settings_contacts_carddav_password_title">Пароль</string>
@@ -94,11 +84,7 @@
     <string name="notification_channel_incoming_call_name">Уведомления о входящих звонках &appName;</string>
     <string name="welcome_page_2_message">Ваши коммуникации защищены благодаря нашему <b>сквозному шифрованию</b>.</string>
     <string name="media_playback_low_volume_warning_toast">Громкость мультимедиа низкая, вы можете ничего не услышать!</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_title">Общие положения и политика конфиденциальности</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_message">Продолжая, вы принимаете наши %1$s и %2$s.</string>
     <string name="assistant_login_cant_parse_address_toast">Недействительный SIP-адрес!</string>
-    <string name="assistant_account_creation_sms_confirmation_title">Подтвердите свой номер телефона</string>
-    <string name="assistant_account_creation_wrong_phone_number">Неправильный номер?</string>
     <string name="settings_contacts_carddav_name_title">Отображаемое имя</string>
     <string name="dialog_install">Установить</string>
     <string name="dialog_confirm">Подтвердить</string>
@@ -110,8 +96,6 @@
         <item quantity="many">Отправляются %s файлов</item>
         <item quantity="other">Отправляются %s файлов</item>
     </plurals>
-    <string name="assistant_account_creation_sms_confirmation_explanation">Мы отправили код подтверждения на ваш номер телефона %1$s.\n\nВведите код подтверждения ниже:</string>
-    <string name="assistant_third_party_sip_account_warning_explanation">Для некоторых функций требуется учетная запись &appName;, например, групповые сообщения, видеоконференции…\n\nЭти функции скрыты при регистрации с использованием стороннего SIP-аккаунта.\n\nЧтобы включить её в коммерческом проекте, свяжитесь с нами.</string>
     <string name="notification_channel_service_desc">Эта служба будет работать постоянно, чтобы поддерживать приложение в рабочем состоянии и позволять вам принимать звонки и сообщения без push-уведомлений.</string>
     <string name="notification_mark_message_as_read">Отметить как прочитанное</string>
     <string name="welcome_page_title">Добро пожаловать</string>
@@ -239,24 +223,12 @@
     <string name="settings_advanced_video_codecs_title">Видеокодеки</string>
     <string name="manage_account_edit_picture">Редактировать изображение</string>
     <string name="manage_account_add_picture">Добавить изображение</string>
-    <string name="manage_account_dialog_remove_account_message">Если вы хотите удалить свою учетную запись навсегда, перейдите по ссылке: https://sip.linphone.org</string>
+    <string name="manage_account_dialog_remove_account_message">Если вы хотите удалить свою учетную запись навсегда, перейдите по ссылке: https://sip.farcom.org</string>
     <string name="account_settings_turn_username_title">Имя пользователя TURN</string>
     <string name="account_settings_audio_video_conference_factory_uri_title">URI фабрики аудио/видео конференции</string>
-    <string name="assistant_third_party_sip_account_warning_ok">Я понял</string>
-    <string name="assistant_account_register_unavailable_no_push_warning">Похоже, push-уведомления недоступны на вашем устройстве, но они обязательны для создания учетной записи в мобильном приложении.\n\nВместо этого мы предлагаем вам создать аккаунт на нашей веб-платформе:</string>
-    <string name="assistant_account_register_push_notification_not_received_error">Push-уведомление с токеном аутентификации не получено в течение 5 секунд, повторите попытку позже</string>
-    <string name="assistant_account_register_unexpected_error">Произошла непредвиденная ошибка, попробуйте еще раз позже</string>
     <string name="assistant_account_login_forbidden_error">Неправильное имя пользователя или пароль</string>
     <string name="assistant_account_login_error">Не удалось войти: код ошибки %s</string>
-    <string name="assistant_permissions_title">Предоставить разрешения</string>
     <string name="assistant_permissions_grant_all_of_them">ОК</string>
-    <string name="assistant_permissions_skip_permissions">Сделайте это позже</string>
-    <string name="assistant_permissions_read_contacts_title"><b>Чтение контактов:</b> Чтобы отобразить ваши контакты и узнать, кто использует &appName;.</string>
-    <string name="assistant_permissions_record_audio_title"><b>Запись звука:</b> Чтобы ваш собеседник мог слышать вас и записывать голосовые сообщения.</string>
-    <string name="assistant_permissions_access_camera_title"><b>Доступ к камере.</b> Для записи видео во время видеозвонков и конференций.</string>
-    <string name="assistant_forgotten_password_title">Пароль забыт</string>
-    <string name="assistant_forgotten_password_subtitle">Выберите способ восстановления вашей учетной записи.</string>
-    <string name="assistant_recover_phone_number_account_label">Номер телефона</string>
     <string name="bottom_navigation_contacts_label">Контакты</string>
     <string name="bottom_navigation_calls_label">Звонки</string>
     <string name="bottom_navigation_conversations_label">Беседы</string>
@@ -324,7 +296,7 @@
     <string name="contacts_list_favourites_title">Избранное</string>
     <string name="contacts_list_all_contacts_title">Все контакты</string>
     <string name="contacts_list_filter_popup_see_all">Смотреть все</string>
-    <string name="contacts_list_filter_popup_see_linphone_only">Смотреть контакты &appName;</string>
+    <string name="contacts_list_filter_popup_see_farcom_only">Смотреть контакты &appName;</string>
     <string name="contacts_list_filter_popup_see_sip_only">Смотреть контакты SIP</string>
     <string name="contact_new_title">Новый контакт</string>
     <string name="contact_edit_title">Изменить контакт</string>
@@ -788,8 +760,6 @@
     <string name="content_description_chat_bubble_reply">Это сообщение является ответом на предыдущее сообщение</string>
     <string name="content_description_chat_bubble_toggle_voice_message_play_pause">Воспроизводит/приостанавливает воспроизведение голосового сообщения</string>
     <string name="content_description_chat_unsecured">Эта беседа не защищена</string>
-    <string name="assistant_permissions_post_notifications_title"><b>Отправлять уведомления:</b> Чтобы получать информацию о получении сообщения или звонка.</string>
-    <string name="assistant_forgotten_password_message">Вы создали свой аккаунт, используя:</string>
     <string name="help_troubleshooting_debug_logs_upload_error_toast_message">Не удалось загрузить журналы отладки</string>
     <string name="settings_security_enable_vfs_dialog_confirmation_title">Вы действительно хотите всё зашифровать?</string>
     <string name="settings_conversations_auto_export_media_to_native_gallery_title">Сделать загруженные медиафайлы общедоступными</string>
@@ -805,7 +775,6 @@
     <string name="content_description_chat_scroll_to_bottom_or_first_unread">Прокрутить до первого непрочитанного сообщения или до конца</string>
     <string name="content_description_stop_voice_message_recording">Останавливает запись голосового сообщения</string>
     <string name="content_description_chat_cancel_reply">Сообщение больше не будет ответом на предыдущее сообщение</string>
-    <string name="assistant_recover_phone_number_account_unavailable_no_push_warning">Похоже, что push-уведомления недоступны на вашем устройстве, но они необходимы для восстановления номера телефона аккаунта в мобильном приложении.</string>
     <string name="drawer_menu_account_connection_status_cleared">Отключено</string>
     <string name="help_about_privacy_policy_title">Политика конфиденциальности</string>
     <string name="help_about_contribute_translations_title">Внесите свой вклад в перевод &appName;</string>
@@ -819,9 +788,7 @@
         <item quantity="other">%s уведомлений для других аккаунта(ов)</item>
     </plurals>
     <string name="full_screen_intent_permission_not_granted">Разрешение на отображение входящего вызова не предоставлено!</string>
-    <string name="assistant_forgotten_password"><u>Забыли пароль?</u></string>
     <string name="content_description_not_trusted_contact_icon">Ненадёжный контакт!</string>
-    <string name="assistant_permissions_subtitle">Чтобы в полной мере насладиться &appName; нам нужно, чтобы вы предоставили следующие разрешения:</string>
     <string name="help_title">Помощь</string>
     <string name="help_dialog_update_available_message">Доступна новая версия %s. Хотите обновить?</string>
     <string name="help_troubleshooting_app_version_title">Версия приложения</string>
@@ -834,7 +801,6 @@
     <string name="content_description_meeting_schedule">Запланируйте встречу</string>
     <string name="content_description_contact_edit">Изменить контакт</string>
     <string name="content_description_join_conference">Присоединиться к конференции</string>
-    <string name="assistant_recover_email_account_label">Электронная почта</string>
     <string name="drawer_menu_account_connection_status_refreshing">Обновляется</string>
     <string name="content_description_open_drawer_menu_icon">Открыть меню ящика</string>
     <string name="help_troubleshooting_subtitle">Отправьте свои диагностические журналы, чтобы облегчить устранение ошибок.</string>
@@ -854,7 +820,7 @@
     <string name="meeting_schedule_notify_cancel_dialog_message">Вы хотите отправить уведомление всем участникам?</string>
     <string name="settings_calls_change_ringtone_picker_unavailable_toast">Выбор мелодии звонка недоступен!</string>
     <string name="settings_conversations_hide_message_content_in_notif_title">Не показывать содержимое собщения в уведомлениях Android</string>
-    <string name="settings_contacts_edit_native_contacts_in_linphone_title">Используйте редактор контактов &appName; для родных контактов</string>
+    <string name="settings_contacts_edit_native_contacts_in_farcom_title">Используйте редактор контактов &appName; для родных контактов</string>
     <string name="settings_advanced_calls">Расширенные настройки звонков</string>
     <string name="settings_advanced_enable_auto_answer_video_send_receive">Автоматический ответ с включенным видео в обоих направлениях</string>
     <string name="settings_developer_clear_orphan_auth_info_title">Очистить информацию об авторизации, которая больше не ассоциирована ни с одним аккаунтом</string>

@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2024 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.telecom.auto
+package org.farcom.telecom.auto
 
 import androidx.car.app.CarContext
 import androidx.car.app.Screen
@@ -29,14 +29,14 @@ import androidx.car.app.model.Header
 import androidx.car.app.model.ItemList
 import androidx.car.app.model.Template
 import androidx.core.graphics.drawable.IconCompat
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.R
-import org.linphone.contacts.AvatarGenerator
-import org.linphone.contacts.getAvatarBitmap
-import org.linphone.core.MagicSearch
-import org.linphone.core.tools.Log
-import org.linphone.utils.AppUtils
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.R
+import org.farcom.contacts.AvatarGenerator
+import org.farcom.contacts.getAvatarBitmap
+import org.farcom.core.MagicSearch
+import org.farcom.core.tools.Log
+import org.farcom.utils.AppUtils
+import org.farcom.utils.FarcomUtils
 
 class AndroidAutoScreen(context: CarContext) : Screen(context) {
     companion object {
@@ -55,7 +55,7 @@ class AndroidAutoScreen(context: CarContext) : Screen(context) {
             val magicSearch = core.createMagicSearch()
             val results = magicSearch.getContactsList(
                 "",
-                LinphoneUtils.getDefaultAccount()?.params?.domain.orEmpty(),
+                FarcomUtils.getDefaultAccount()?.params?.domain.orEmpty(),
                 MagicSearch.Source.FavoriteFriends.toInt(),
                 MagicSearch.Aggregation.Friend
             )

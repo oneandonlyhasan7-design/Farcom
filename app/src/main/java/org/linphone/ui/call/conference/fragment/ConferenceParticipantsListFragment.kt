@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.call.conference.fragment
+package org.farcom.ui.call.conference.fragment
 
 import android.os.Bundle
 import android.view.Gravity
@@ -32,19 +32,19 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.R
-import org.linphone.core.Participant
-import org.linphone.core.tools.Log
-import org.linphone.databinding.CallConferenceParticipantsListFragmentBinding
-import org.linphone.databinding.CallConferenceParticipantsListPopupMenuBinding
-import org.linphone.ui.GenericActivity
-import org.linphone.ui.call.adapter.ConferenceParticipantsListAdapter
-import org.linphone.ui.call.fragment.GenericCallFragment
-import org.linphone.ui.call.viewmodel.CurrentCallViewModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.ConfirmationDialogModel
-import org.linphone.utils.DialogUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.R
+import org.farcom.core.Participant
+import org.farcom.core.tools.Log
+import org.farcom.databinding.CallConferenceParticipantsListFragmentBinding
+import org.farcom.databinding.CallConferenceParticipantsListPopupMenuBinding
+import org.farcom.ui.GenericActivity
+import org.farcom.ui.call.adapter.ConferenceParticipantsListAdapter
+import org.farcom.ui.call.fragment.GenericCallFragment
+import org.farcom.ui.call.viewmodel.CurrentCallViewModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.ConfirmationDialogModel
+import org.farcom.utils.DialogUtils
 
 class ConferenceParticipantsListFragment : GenericCallFragment() {
     companion object {

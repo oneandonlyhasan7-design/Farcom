@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources [
-<!ENTITY appName "Linphone">
+<!ENTITY appName "Farcom">
 ]>
 <resources>
     <string name="sip_address">SIP-адреса</string>
@@ -25,9 +25,6 @@
     <string name="export_file_to_documents_error_toast">Помилка під час спроби завантаження файлу до документів</string>
     <string name="remote_provisioning_config_applied_toast">Конфігурацію успішно застосовано</string>
     <string name="media_player_generic_error_toast">Помилка під час спроби створити медіаплеєр</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_title">Загальні умови та політика конфіденційності</string>
-    <string name="assistant_dialog_general_terms_label">загальні умови</string>
-    <string name="assistant_dialog_privacy_policy_label">політика конфіденційності</string>
     <string name="file_successfully_exported_to_media_store_toast">Файл завантажено до галереї</string>
     <string name="welcome_page_title">Ласкаво просимо</string>
     <string name="welcome_page_3_message"><b>Безкоштовний</b> застосунок з відкритим кодом з <b>2001 року</b>.</string>
@@ -90,37 +87,17 @@
     <string name="welcome_page_1_message"><b>Захищений</b>, <b>з відкритим вихідним кодом</b> та <b>французький</b> застосунок для спілкування.</string>
     <string name="media_playback_low_volume_warning_toast">Гучність занадто низька, можливо, ви нічого не чуєте!</string>
     <string name="remote_provisioning_config_failed_toast">Помилка під час спроби завантажити та застосувати віддалену конфігурацію</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_message">Продовжуючи, Ви приймаєте наші %1$s та %2$s.</string>
     <string name="assistant_dialog_confirm_phone_number_title">Підтвердьте номер телефону</string>
     <string name="assistant_dialog_confirm_phone_number_message">Ви впевнені, що ваш номер телефону %s?</string>
     <string name="assistant_account_login">Логін</string>
-    <string name="assistant_scan_qr_code">Відскануйте QR-код</string>
     <string name="assistant_qr_code_invalid_toast">Недійсний QR-код!</string>
-    <string name="assistant_login_using_single_sign_on">Єдиний вхід</string>
     <string name="assistant_login_cant_parse_address_toast">SIP-адреса недійсна!</string>
     <string name="assistant_login_address_without_username_toast">SIP-адреса не містить імені користувача!</string>
     <string name="assistant_account_login_already_connected_error">Обліковий запис вже існує</string>
-    <string name="assistant_account_register">Зареєструватися</string>
-    <string name="assistant_account_creation_sms_confirmation_title">Підтвердьте свій номер телефону</string>
-    <string name="assistant_account_creation_wrong_phone_number">Невірний номер?</string>
-    <string name="assistant_account_create">Створити</string>
-    <string name="assistant_create_account_using_email_on_our_web_platform">Створіть обліковий запис, використовуючи свою електронну адресу:</string>
-    <string name="assistant_already_have_an_account">Вже маєте обліковий запис?</string>
     <string name="assistant_sip_account_transport_protocol">Транспорт</string>
-    <string name="assistant_third_party_sip_account_create_linphone_account">Я надаю перевагу створенню облікового запису &appName;</string>
-    <string name="assistant_third_party_sip_account_warning_ok">Я розумію</string>
-    <string name="assistant_account_register_unavailable_no_push_warning">Схоже, push-сповіщення недоступні на вашому пристрої, але вони є обов’язковими для створення облікового запису в мобільному застосунку.\n\nЗапрошуємо вас створити обліковий запис на нашій веб-платформі:</string>
-    <string name="assistant_account_register_unexpected_error">Сталася неочікувана помилка, спробуйте ще раз пізніше</string>
     <string name="assistant_account_login_forbidden_error">Невірне ім\'я користувача або пароль</string>
     <string name="assistant_account_login_error">Не вдалося залогінитись: код помилки %s</string>
-    <string name="assistant_permissions_title">Надати дозволи</string>
     <string name="assistant_permissions_grant_all_of_them">ОК</string>
-    <string name="assistant_permissions_skip_permissions">Зробіть це пізніше</string>
-    <string name="assistant_forgotten_password_title">Забули пароль?</string>
-    <string name="assistant_forgotten_password_subtitle">Оберіть, як відновити свій обліковий запис.</string>
-    <string name="assistant_forgotten_password_message">Ви створили свій обліковий запис, використовуючи:</string>
-    <string name="assistant_recover_email_account_label">Електронна пошта</string>
-    <string name="assistant_recover_phone_number_account_label">Номер телефону</string>
     <string name="bottom_navigation_contacts_label">Контакти</string>
     <string name="bottom_navigation_calls_label">Дзвінки</string>
     <string name="bottom_navigation_conversations_label">Розмови</string>
@@ -144,14 +121,8 @@
     <string name="help_troubleshooting_title">Усунення несправностей</string>
     <string name="help_troubleshooting_print_logs_in_logcat">Друкувати логи в logcat</string>
     <string name="help_troubleshooting_clean_logs">Видалити логи</string>
-    <string name="assistant_account_register_push_notification_not_received_error">Push-сповіщення з токеном авторизації не отримано упродовж 5 секунд, спробуйте пізніше</string>
     <string name="assistant_login_third_party_sip_account_title">Сторонній обліковий запис SIP</string>
-    <string name="assistant_account_creation_sms_confirmation_explanation">Ми надіслали код підтвердження на ваш номер телефону %1$s.\n\nБудь ласка, введіть код підтвердження нижче:</string>
     <string name="assistant_login_third_party_sip_account">Використати сторонній обліковий запис SIP</string>
-    <string name="assistant_no_account_yet">Ще немає облікового запису?</string>
-    <string name="assistant_third_party_sip_account_warning_explanation">Для деяких функцій потрібен обліковий запис &appName;, такі як груповий обмін повідомленнями, відеоконференції…\n\nЦі функції приховані, якщо ви реєструєтесь за допомогою стороннього облікового запису SIP.\n\nЩоб увімкнути їх у комерційному проєкті, зв’яжіться з нами.</string>
-    <string name="assistant_permissions_subtitle">Щоб повною мірою користуватися &appName;, вам потрібно надати застосунку наступні дозволи:</string>
-    <string name="assistant_recover_phone_number_account_unavailable_no_push_warning">Схоже, push-сповіщення недоступні на вашому пристрої, але вони обов’язкові для відновлення облікового запису номера телефону в мобільному застосунку.</string>
     <string name="drawer_menu_account_connection_status_failed">Помилка</string>
     <string name="drawer_menu_no_account_configured_yet">Обліковий запис ще не налаштовано</string>
     <string name="help_about_privacy_policy_subtitle">Яку інформацію збирає та використовує &appName;</string>
@@ -239,10 +210,6 @@
     <string name="content_description_play_pause_audio_playback">Починає/призупиняє відтворення аудіо</string>
     <string name="conversation_no_app_registered_to_handle_content_type_dialog_message">Не знайдено жодної програми для відкриття цього типу файлу.\n\nСпробувати відкрити його як звичайний текстовий файл?</string>
     <string name="conversation_no_app_registered_to_handle_content_type_error_toast">Не знайдено програми для відкриття цього типу файлу</string>
-    <string name="assistant_permissions_read_contacts_title"><b>Читати контакти:</b> Для відображення своїх контактів та знайти тих, хто користується &appName;.</string>
-    <string name="assistant_permissions_post_notifications_title"><b>Сповіщення про публікації:</b>Щоб бути в курсі отримання повідомлення або дзвінка.</string>
-    <string name="assistant_permissions_record_audio_title"><b>Запис аудіо:</b> Щоб ваш співрозмовник міг вас чути та записувати голосові повідомлення.</string>
-    <string name="assistant_permissions_access_camera_title"><b>Доступ до камери:</b> Для запису відео під час відеодзвінків та конференцій.</string>
     <string name="generic_address_picker_contacts_list_title">Контакти</string>
     <string name="contact_sms_invite_content">Привіт, приєднуйтесь до мене на &appName;! Ви можете завантажити його безкоштовно за адресою %s</string>
     <string name="generic_address_picker_favorites_list_title">Обрані</string>
@@ -378,7 +345,7 @@
     <string name="manage_account_device_remove">Видалити</string>
     <string name="manage_account_device_last_connection">Останнє з\'єднання:</string>
     <string name="manage_account_dialog_remove_account_title">Вийти з облікового запису?</string>
-    <string name="manage_account_dialog_remove_account_message">Якщо ви хочете видалити свій обліковий запис назавжди, перейдіть за посиланням: https://sip.linphone.org</string>
+    <string name="manage_account_dialog_remove_account_message">Якщо ви хочете видалити свій обліковий запис назавжди, перейдіть за посиланням: https://sip.farcom.org</string>
     <string name="account_settings_title">Налаштування облікового запису</string>
     <string name="account_settings_push_notification_title">Дозволити push-сповіщення</string>
     <string name="account_settings_push_notification_not_available_title">Push-сповіщення недоступні!</string>
@@ -418,7 +385,7 @@
     <string name="contacts_list_favourites_title">Обрані контакти</string>
     <string name="contacts_list_all_contacts_title">Усі контакти</string>
     <string name="contacts_list_filter_popup_see_all">Переглянути усі</string>
-    <string name="contacts_list_filter_popup_see_linphone_only">Переглянути контакти &appName;</string>
+    <string name="contacts_list_filter_popup_see_farcom_only">Переглянути контакти &appName;</string>
     <string name="contacts_list_filter_popup_see_sip_only">Переглянути SIP-контакти</string>
     <string name="contact_new_title">Новий контакт</string>
     <string name="contact_editor_first_name">Ім\'я</string>
@@ -769,7 +736,6 @@
     <string name="menu_delete_selected_item">Видалити</string>
     <string name="full_screen_intent_permission_not_granted">Дозвіл на відображення вхідних дзвінків не надано!</string>
     <string name="welcome_carousel_skip"><u>Пропустити</u></string>
-    <string name="assistant_forgotten_password"><u>Забули пароль?</u></string>
     <string name="call_zrtp_sas_validation_skip"><u>Пропустити</u></string>
     <string name="conversation_message_meeting_updated_label"><b>Нараду оновлено</b></string>
     <string name="conversation_message_meeting_cancelled_label"><b>Нараду скасовано!</b></string>
@@ -859,7 +825,7 @@
     <string name="assistant_sip_account_lime_algorithm">Алгоритм(и) LIME (розділені комами)</string>
     <string name="drawer_menu_account_connection_status_disconnected">Відключено</string>
     <string name="settings_contacts_sort_by_first_name_title">Сортувати контакти за</string>
-    <string name="settings_contacts_edit_native_contacts_in_linphone_title">Використовуйте редактор контактів &appName; для рідних контактів</string>
+    <string name="settings_contacts_edit_native_contacts_in_farcom_title">Використовуйте редактор контактів &appName; для рідних контактів</string>
     <string name="settings_contacts_hide_empty_contacts_title">Приховати контакти без SIP-адреси та номера телефону</string>
     <string name="settings_contacts_carddav_read_only_label">Ця адресна книга доступна лише для читання</string>
     <string name="settings_contacts_ldap_verbose_mode_title">Додати логи LDAP до журналів &appName;</string>

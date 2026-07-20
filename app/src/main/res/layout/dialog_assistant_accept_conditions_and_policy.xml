@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.assistant.model.AcceptConditionsAndPolicyDialogModel" />
+            type="org.farcom.ui.assistant.model.AcceptConditionsAndPolicyDialogModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

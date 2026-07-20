@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.chat.model
+package org.farcom.ui.main.chat.model
 
 import android.graphics.pdf.PdfRenderer
 import android.media.MediaMetadataRetriever
@@ -32,14 +32,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.core.tools.Log
-import org.linphone.utils.FileUtils
-import org.linphone.utils.TimestampUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.core.tools.Log
+import org.farcom.utils.FileUtils
+import org.farcom.utils.TimestampUtils
 import androidx.core.net.toUri
 import androidx.core.graphics.createBitmap
 import kotlinx.coroutines.withContext
-import org.linphone.utils.FileUtils.Companion.getFileStorageCacheDir
+import org.farcom.utils.FileUtils.Companion.getFileStorageCacheDir
 import java.io.File
 
 class FileModel

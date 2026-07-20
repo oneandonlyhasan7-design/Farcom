@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,17 +17,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.core
+package org.farcom.core
 
 import android.content.Context
 import androidx.annotation.AnyThread
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
-import org.linphone.BuildConfig
+import org.farcom.BuildConfig
 import java.io.File
 import java.io.FileOutputStream
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.contacts.ContactLoader.Companion.LINPHONE_ADDRESS_BOOK_FRIEND_LIST
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.contacts.ContactLoader.Companion.FARCOM_ADDRESS_BOOK_FRIEND_LIST
 
 class CorePreferences
     @UiThread
@@ -35,7 +35,7 @@ class CorePreferences
     companion object {
         private const val TAG = "[Preferences]"
 
-        const val CONFIG_FILE_NAME = ".linphonerc"
+        const val CONFIG_FILE_NAME = ".farcomrc"
     }
 
     private var _config: Config? = null
@@ -69,7 +69,7 @@ class CorePreferences
         }
 
     @get:AnyThread @set:WorkerThread
-    var linphoneConfigurationVersion: Int
+    var farcomConfigurationVersion: Int
         get() = config.getInt("app", "config_version", 52005)
         set(value) {
             config.setInt("app", "config_version", value)
@@ -300,17 +300,17 @@ class CorePreferences
         get() = config.getString(
             "app",
             "friend_list_to_store_newly_created_contacts",
-            LINPHONE_ADDRESS_BOOK_FRIEND_LIST
+            FARCOM_ADDRESS_BOOK_FRIEND_LIST
         )!!
         set(value) {
             config.setString("app", "friend_list_to_store_newly_created_contacts", value)
         }
 
     @get:AnyThread @set:WorkerThread
-    var editNativeContactsInLinphone: Boolean
-        get() = config.getBool("ui", "edit_native_contact_in_linphone", false)
+    var editNativeContactsInFarcom: Boolean
+        get() = config.getBool("ui", "edit_native_contact_in_farcom", false)
         set(value) {
-            config.setBool("ui", "edit_native_contact_in_linphone", value)
+            config.setBool("ui", "edit_native_contact_in_farcom", value)
         }
 
     @get:AnyThread @set:WorkerThread
@@ -373,14 +373,14 @@ class CorePreferences
 
     @get:AnyThread @set:WorkerThread
     var pushNotificationCompatibleDomains: Array<String>
-        get() = config.getStringList("app", "push_notification_domains", arrayOf("sip.linphone.org"))
+        get() = config.getStringList("app", "push_notification_domains", arrayOf("sip.farcom.org"))
         set(value) {
             config.setStringList("app", "push_notification_domains", value)
         }
 
     @get:AnyThread
     val defaultDomain: String
-        get() = config.getString("app", "default_domain", "sip.linphone.org")!!
+        get() = config.getString("app", "default_domain", "sip.farcom.org")!!
 
     @get:AnyThread
     val darkModeAllowed: Boolean
@@ -452,7 +452,7 @@ class CorePreferences
 
     @get:AnyThread
     val singleSignOnClientId: String
-        get() = config.getString("app", "oidc_client_id", "linphone")!!
+        get() = config.getString("app", "oidc_client_id", "farcom")!!
 
     @get:AnyThread
     val useUsernameAsSingleSignOnLoginHint: Boolean
@@ -490,11 +490,11 @@ class CorePreferences
 
     @get:AnyThread
     val factoryConfigPath: String
-        get() = context.filesDir.absolutePath + "/linphonerc"
+        get() = context.filesDir.absolutePath + "/farcomrc"
 
     @get:AnyThread
-    val linphoneDefaultValuesPath: String
-        get() = context.filesDir.absolutePath + "/assistant_linphone_default_values"
+    val farcomDefaultValuesPath: String
+        get() = context.filesDir.absolutePath + "/assistant_farcom_default_values"
 
     @get:AnyThread
     val thirdPartyDefaultValuesPath: String
@@ -510,7 +510,7 @@ class CorePreferences
 
     @get:AnyThread
     val messageReceivedInVisibleConversationNotificationSound: String
-        get() = context.filesDir.absolutePath + "/share/sounds/linphone/incoming_chat.wav"
+        get() = context.filesDir.absolutePath + "/share/sounds/farcom/incoming_chat.wav"
 
     @get:AnyThread @set:WorkerThread
     var isMdmConfigured: Boolean
@@ -521,15 +521,15 @@ class CorePreferences
 
     @UiThread
     fun copyAssetsFromPackage() {
-        copy("linphonerc_default", configPath)
-        copy("linphonerc_factory", factoryConfigPath, true)
-        copy("assistant_linphone_default_values", linphoneDefaultValuesPath, true)
+        copy("farcomrc_default", configPath)
+        copy("farcomrc_factory", factoryConfigPath, true)
+        copy("assistant_farcom_default_values", farcomDefaultValuesPath, true)
         copy("assistant_third_party_default_values", thirdPartyDefaultValuesPath, true)
     }
 
     @AnyThread
     fun resetConfigToDefault() {
-        copy("linphonerc_default", configPath, true)
+        copy("farcomrc_default", configPath, true)
     }
 
     @AnyThread
@@ -580,14 +580,14 @@ class CorePreferences
         if (outFile.exists()) {
             if (!overrideIfExists) {
                 android.util.Log.i(
-                    context.getString(org.linphone.R.string.app_name),
+                    context.getString(org.farcom.R.string.app_name),
                     "$TAG File $to already exists"
                 )
                 return
             }
         }
         android.util.Log.i(
-            context.getString(org.linphone.R.string.app_name),
+            context.getString(org.farcom.R.string.app_name),
             "$TAG Overriding $to by $from asset"
         )
 

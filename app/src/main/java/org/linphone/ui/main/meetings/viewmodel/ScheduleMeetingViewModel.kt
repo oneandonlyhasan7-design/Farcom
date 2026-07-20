@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.meetings.viewmodel
+package org.farcom.ui.main.meetings.viewmodel
 
 import androidx.annotation.AnyThread
 import androidx.annotation.UiThread
@@ -25,26 +25,26 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import java.util.Calendar
 import java.util.TimeZone
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.core.Address
-import org.linphone.core.ChatRoom
-import org.linphone.core.Conference
-import org.linphone.core.ConferenceInfo
-import org.linphone.core.ConferenceScheduler
-import org.linphone.core.ConferenceSchedulerListenerStub
-import org.linphone.core.Factory
-import org.linphone.core.Participant
-import org.linphone.core.ParticipantInfo
-import org.linphone.core.StreamType
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.ui.main.meetings.model.TimeZoneModel
-import org.linphone.ui.main.model.SelectedAddressModel
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
-import org.linphone.utils.TimestampUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.core.Address
+import org.farcom.core.ChatRoom
+import org.farcom.core.Conference
+import org.farcom.core.ConferenceInfo
+import org.farcom.core.ConferenceScheduler
+import org.farcom.core.ConferenceSchedulerListenerStub
+import org.farcom.core.Factory
+import org.farcom.core.Participant
+import org.farcom.core.ParticipantInfo
+import org.farcom.core.StreamType
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.ui.main.meetings.model.TimeZoneModel
+import org.farcom.ui.main.model.SelectedAddressModel
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
+import org.farcom.utils.TimestampUtils
 
 class ScheduleMeetingViewModel
     @UiThread
@@ -424,9 +424,9 @@ class ScheduleMeetingViewModel
             Log.i("$TAG Computing timestamps")
             computeTimestampsForSelectedTimezone()
 
-            val startTime = startTimestamp / 1000 // Linphone expects timestamp in seconds
+            val startTime = startTimestamp / 1000 // Farcom expects timestamp in seconds
             val duration =
-                (((endTimestamp - startTimestamp) / 1000) / 60).toInt() // Linphone expects duration in minutes
+                (((endTimestamp - startTimestamp) / 1000) / 60).toInt() // Farcom expects duration in minutes
             Log.i(
                 "$TAG Scheduling meeting using start hour [$startTime] and duration [$duration] (minutes)"
             )
@@ -454,7 +454,7 @@ class ScheduleMeetingViewModel
             conferenceInfo.setParticipantInfos(participantsInfoArray)
 
             if (!::conferenceScheduler.isInitialized) {
-                conferenceScheduler = LinphoneUtils.createConferenceScheduler(localAccount)
+                conferenceScheduler = FarcomUtils.createConferenceScheduler(localAccount)
                 conferenceScheduler.addListener(conferenceSchedulerListener)
             }
 
@@ -484,9 +484,9 @@ class ScheduleMeetingViewModel
             Log.i("$TAG Computing timestamps")
             computeTimestampsForSelectedTimezone()
 
-            val startTime = startTimestamp / 1000 // Linphone expects timestamp in seconds
+            val startTime = startTimestamp / 1000 // Farcom expects timestamp in seconds
             conferenceInfo.dateTime = startTime
-            val duration = (((endTimestamp - startTimestamp) / 1000) / 60).toInt() // Linphone expects duration in minutes
+            val duration = (((endTimestamp - startTimestamp) / 1000) / 60).toInt() // Farcom expects duration in minutes
             conferenceInfo.duration = duration
 
             val participantsList = participants.value.orEmpty()
@@ -510,8 +510,8 @@ class ScheduleMeetingViewModel
             conferenceInfo.setParticipantInfos(participantsInfoArray)
 
             if (!::conferenceScheduler.isInitialized) {
-                conferenceScheduler = LinphoneUtils.createConferenceScheduler(
-                    LinphoneUtils.getDefaultAccount()
+                conferenceScheduler = FarcomUtils.createConferenceScheduler(
+                    FarcomUtils.getDefaultAccount()
                 )
                 conferenceScheduler.addListener(conferenceSchedulerListener)
             }
@@ -532,9 +532,9 @@ class ScheduleMeetingViewModel
 
             isBroadcastSelected.postValue(false) // TODO FIXME: not implemented yet
 
-            startTimestamp = conferenceInfo.dateTime * 1000 // Linphone timestamps are in seconds
+            startTimestamp = conferenceInfo.dateTime * 1000 // Farcom timestamps are in seconds
             endTimestamp =
-                (conferenceInfo.dateTime + conferenceInfo.duration * 60) * 1000 // Linphone timestamps are in seconds
+                (conferenceInfo.dateTime + conferenceInfo.duration * 60) * 1000 // Farcom timestamps are in seconds
             Log.i(
                 "$TAG Loaded start date is [$startTimestamp], loaded end date is [$endTimestamp]"
             )

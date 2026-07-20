@@ -16,7 +16,7 @@
             type="View.OnClickListener" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.main.help.viewmodel.HelpViewModel" />
+            type="org.farcom.ui.main.help.viewmodel.HelpViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -307,7 +307,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="16dp"
-                            android:text="@{viewModel.firebaseProjectId, default=`linphone-android-8a563`}"
+                            android:text="@{viewModel.firebaseProjectId, default=`farcom-android-8a563`}"
                             android:textSize="14sp"
                             android:textColor="?attr/color_main2_600"
                             app:layout_constraintTop_toBottomOf="@id/firebase_project_title"

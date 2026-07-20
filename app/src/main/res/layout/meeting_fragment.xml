@@ -22,7 +22,7 @@
             type="View.OnClickListener" />
         <variable
             name="viewModel"
-            type="org.linphone.ui.main.meetings.viewmodel.MeetingViewModel" />
+            type="org.farcom.ui.main.meetings.viewmodel.MeetingViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -145,7 +145,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
-                        android:text="@{viewModel.sipUri, default=`linphone.com/wjre.fr`}"
+                        android:text="@{viewModel.sipUri, default=`farcom.com/wjre.fr`}"
                         android:textSize="14sp"
                         android:textColor="?attr/color_main2_600"
                         android:includeFontPadding="false"

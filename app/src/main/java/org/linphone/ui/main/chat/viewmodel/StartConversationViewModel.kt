@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,25 +17,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.chat.viewmodel
+package org.farcom.ui.main.chat.viewmodel
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.core.Address
-import org.linphone.core.ChatRoom
-import org.linphone.core.ChatRoomListenerStub
-import org.linphone.core.Conference
-import org.linphone.core.Friend
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.viewmodel.AddressSelectionViewModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.core.Address
+import org.farcom.core.ChatRoom
+import org.farcom.core.ChatRoomListenerStub
+import org.farcom.core.Conference
+import org.farcom.core.Friend
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.viewmodel.AddressSelectionViewModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
 
 class StartConversationViewModel
     @UiThread
@@ -62,14 +62,14 @@ class StartConversationViewModel
             val state = chatRoom.state
             if (state == ChatRoom.State.Instantiated) return
 
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
             Log.i("$TAG Conversation [$id] (${chatRoom.subjectUtf8}) state changed: [$state]")
 
             if (state == ChatRoom.State.Created) {
                 Log.i("$TAG Conversation [$id] successfully created")
                 chatRoom.removeListener(this)
                 operationInProgress.postValue(false)
-                chatRoomCreatedEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                chatRoomCreatedEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
             } else if (state == ChatRoom.State.CreationFailed) {
                 Log.e("$TAG Conversation [$id] creation has failed!")
                 chatRoom.removeListener(this)
@@ -111,7 +111,7 @@ class StartConversationViewModel
             params.isChatEnabled = true
             params.isGroupEnabled = true
             params.subject = groupChatRoomSubject
-            if (LinphoneUtils.isEndToEndEncryptedChatAvailable(core)) {
+            if (FarcomUtils.isEndToEndEncryptedChatAvailable(core)) {
                 params.securityLevel = Conference.SecurityLevel.EndToEnd
             } else {
                 params.securityLevel = Conference.SecurityLevel.None
@@ -132,12 +132,12 @@ class StartConversationViewModel
             if (chatRoom != null) {
                 if (chatParams.backend == ChatRoom.Backend.FlexisipChat) {
                     if (chatRoom.state == ChatRoom.State.Created) {
-                        val id = LinphoneUtils.getConversationId(chatRoom)
+                        val id = FarcomUtils.getConversationId(chatRoom)
                         Log.i(
                             "$TAG Group conversation [$id] ($groupChatRoomSubject) has been created"
                         )
                         operationInProgress.postValue(false)
-                        chatRoomCreatedEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                        chatRoomCreatedEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
                     } else {
                         Log.i(
                             "$TAG Conversation [$groupChatRoomSubject] isn't in Created state yet, wait for it"
@@ -145,10 +145,10 @@ class StartConversationViewModel
                         chatRoom.addListener(chatRoomListener)
                     }
                 } else {
-                    val id = LinphoneUtils.getConversationId(chatRoom)
+                    val id = FarcomUtils.getConversationId(chatRoom)
                     Log.i("$TAG Conversation successfully created [$id] ($groupChatRoomSubject)")
                     operationInProgress.postValue(false)
-                    chatRoomCreatedEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                    chatRoomCreatedEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
                 }
             } else {
                 Log.e("$TAG Failed to create group conversation [$groupChatRoomSubject]!")
@@ -186,7 +186,7 @@ class StartConversationViewModel
             chatParams.backend = ChatRoom.Backend.FlexisipChat
             params.securityLevel = Conference.SecurityLevel.EndToEnd
         } else if (!account.params.instantMessagingEncryptionMandatory) {
-            if (LinphoneUtils.isEndToEndEncryptedChatAvailable(core)) {
+            if (FarcomUtils.isEndToEndEncryptedChatAvailable(core)) {
                 Log.i(
                     "$TAG Account is in interop mode but LIME is available, creating an E2E encrypted conversation"
                 )
@@ -220,19 +220,19 @@ class StartConversationViewModel
                 if (chatParams.backend == ChatRoom.Backend.FlexisipChat) {
                     val state = chatRoom.state
                     if (state == ChatRoom.State.Created) {
-                        val id = LinphoneUtils.getConversationId(chatRoom)
+                        val id = FarcomUtils.getConversationId(chatRoom)
                         Log.i("$TAG 1-1 conversation [$id] has been created")
                         operationInProgress.postValue(false)
-                        chatRoomCreatedEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                        chatRoomCreatedEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
                     } else {
                         Log.i("$TAG Conversation isn't in Created state yet (state is [$state]), wait for it")
                         chatRoom.addListener(chatRoomListener)
                     }
                 } else {
-                    val id = LinphoneUtils.getConversationId(chatRoom)
+                    val id = FarcomUtils.getConversationId(chatRoom)
                     Log.i("$TAG Conversation successfully created [$id]")
                     operationInProgress.postValue(false)
-                    chatRoomCreatedEvent.postValue(Event(LinphoneUtils.getConversationId(chatRoom)))
+                    chatRoomCreatedEvent.postValue(Event(FarcomUtils.getConversationId(chatRoom)))
                 }
             } else {
                 Log.e("$TAG Failed to create 1-1 conversation with [${remote.asStringUriOnly()}]!")
@@ -244,14 +244,14 @@ class StartConversationViewModel
                 "$TAG A 1-1 conversation between local account [${localAddress?.asStringUriOnly()}] and remote [${remote.asStringUriOnly()}] for given parameters already exists!"
             )
             operationInProgress.postValue(false)
-            chatRoomCreatedEvent.postValue(Event(LinphoneUtils.getConversationId(existingChatRoom)))
+            chatRoomCreatedEvent.postValue(Event(FarcomUtils.getConversationId(existingChatRoom)))
         }
     }
 
     @UiThread
     fun updateGroupChatButtonVisibility() {
         coreContext.postOnCoreThread { core ->
-            val hideGroupChat = !LinphoneUtils.isGroupChatAvailable(core)
+            val hideGroupChat = !FarcomUtils.isGroupChatAvailable(core)
             hideGroupChatButton.postValue(hideGroupChat)
         }
     }

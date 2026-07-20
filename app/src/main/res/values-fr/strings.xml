@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources [
-<!ENTITY appName "Linphone">
+<!ENTITY appName "Farcom">
 ]>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Common words -->
@@ -101,57 +101,24 @@
     <string name="remote_provisioning_config_failed_toast">Erreur lors du chargement ou de l\'application de la configuration</string>
     <string name="media_player_generic_error_toast">Erreur lors de la création du lecteur média</string>
     <!-- Assistant related string (account register / login / etc...) -->
-    <string name="assistant_dialog_general_terms_and_privacy_policy_title">Conditions de service &amp; politique de confidentialité</string>
-    <string name="assistant_dialog_general_terms_label">conditions de service</string>
-    <string name="assistant_dialog_privacy_policy_label">politique de confidentialité</string>
-    <string name="assistant_dialog_general_terms_and_privacy_policy_message">En continuant, vous acceptez nos %1$s et %2$s.</string>
     <string name="assistant_dialog_confirm_phone_number_title">Confirmez votre numéro de téléphone</string>
     <string name="assistant_dialog_confirm_phone_number_message">Êtes-vous sûr que le %s est votre numéro de téléphone ?</string>
     <string name="assistant_dialog_phone_number_validation_not_available_title">Inscription par téléphone indisponible</string>
     <string name="assistant_dialog_phone_number_validation_not_available_message">L\'inscription par numéro de téléphone n\'est pas disponible, veuillez utiliser l\'inscription par adresse email.</string>
     <string name="assistant_dialog_phone_number_validation_not_available_register_button_label">S\'inscrire avec un email</string>
     <string name="assistant_account_login">Connexion</string>
-    <string name="assistant_scan_qr_code">Scanner un QR code</string>
     <string name="assistant_qr_code_invalid_toast">Ce QR code est invalide !</string>
     <string name="assistant_login_third_party_sip_account">J\'ai un compte SIP tiers</string>
     <string name="assistant_login_third_party_sip_account_title">Compte SIP tiers</string>
-    <string name="assistant_login_using_single_sign_on">Single sign on</string>
     <string name="assistant_login_cant_parse_address_toast">Adresse SIP invalide</string>
     <string name="assistant_login_address_without_username_toast">L\'adresse SIP ne contient pas de nom d\'utilisateur !</string>
     <string name="assistant_account_login_already_connected_error">Le compte est déjà connecté</string>
-    <string name="assistant_no_account_yet">Pas encore de compte ?</string>
-    <string name="assistant_account_register">Créer un compte</string>
-    <string name="assistant_account_creation_sms_confirmation_title">Confirmez votre numéro</string>
-    <string name="assistant_account_creation_sms_confirmation_explanation">On vous a envoyé un code de vérification par SMS au numéro %1$s.\n\nMerci de le saisir ci-dessous :</string>
-    <string name="assistant_account_creation_wrong_phone_number">Numéro incorrect ?</string>
-    <string name="assistant_account_create">Créer</string>
-    <string name="assistant_create_account_using_email_on_our_web_platform">Créez un compte avec votre email ici :</string>
-    <string name="assistant_already_have_an_account">Vous avez déjà un compte ?</string>
     <string name="assistant_sip_account_transport_protocol">Transport</string>
     <string name="assistant_sip_account_lime_algorithm">Algorithme(s) LIME (séparés par des virgules)</string>
     <string name="assistant_sip_account_lime_algorithm_hint">Les valeurs autorisées sont : c25519, c448, c25519k512, c25519mlk512 and c448mlk1024</string>
-    <string name="assistant_third_party_sip_account_warning_explanation">Certaines fonctionnalités telles que les conversations de groupe, les vidéo-conférences, etc… nécessitent un compte &appName;.\n\nCes fonctionnalités seront masquées si vous utilisez un compte SIP tiers.\n\nPour les activer dans un projet commercial, merci de nous contacter.</string>
-    <string name="assistant_third_party_sip_account_create_linphone_account">Je préfère créer un compte &appName;</string>
-    <string name="assistant_third_party_sip_account_warning_ok">J\'ai compris</string>
-    <string name="assistant_account_register_unavailable_no_push_warning">Les notifications push ne semblent pas être disponibles sur votre appareil. Celles-ci sont nécessaires à la création d’un compte sur l’application mobile.\n\nNous vous invitons à créer un compte depuis notre plateforme web :</string>
-    <string name="assistant_account_register_push_notification_not_received_error">Notification push non reçue, merci de réessayer plus tard</string>
-    <string name="assistant_account_register_unexpected_error">Un erreur inattendue est survenue, merci de réessayer plus tard</string>
     <string name="assistant_account_login_forbidden_error">Mauvais nom d\'utilisateur ou mot de passe</string>
     <string name="assistant_account_login_error">Erreur durant la connexion: %s</string>
-    <string name="assistant_permissions_title">Donner les permissions</string>
     <string name="assistant_permissions_grant_all_of_them">OK</string>
-    <string name="assistant_permissions_skip_permissions">Plus tard</string>
-    <string name="assistant_permissions_subtitle">Pour vous permettre de profiter pleinement de &appName;, nous avons besoin des autorisations suivantes :</string>
-    <string name="assistant_permissions_read_contacts_title"><b>Contacts :</b> Pour afficher vos contacts et retrouver qui utilise &appName;.</string>
-    <string name="assistant_permissions_post_notifications_title"><b>Notifications :</b> Pour vous informer quand vous recevez un message ou un appel.</string>
-    <string name="assistant_permissions_record_audio_title"><b>Microphone :</b> Pour permettre à vos correspondants de vous entendre.</string>
-    <string name="assistant_permissions_access_camera_title"><b>Caméra :</b> Pour capturer votre vidéo lors des appels et des conférences.</string>
-    <string name="assistant_forgotten_password_title">Récupération de compte</string>
-    <string name="assistant_forgotten_password_subtitle">Choisissez comment récupérer votre compte.</string>
-    <string name="assistant_forgotten_password_message">Vous avez créé votre compte avec :</string>
-    <string name="assistant_recover_email_account_label">Un email</string>
-    <string name="assistant_recover_phone_number_account_label">Un numéro de téléphone</string>
-    <string name="assistant_recover_phone_number_account_unavailable_no_push_warning">Les notifications push ne semblent pas être disponibles sur votre appareil. Celles-ci sont nécessaires à la récupération d’un compte sur l’application mobile avec un numéro de téléphone.</string>
     <!-- Main navigation items -->
     <string name="bottom_navigation_contacts_label">Contacts</string>
     <string name="bottom_navigation_calls_label">Appels</string>
@@ -232,7 +199,7 @@
     <string name="settings_conversations_hide_message_content_in_notif_title">Masquer le contenu du message dans la notification Android</string>
     <string name="settings_contacts_title">Contacts</string>
     <string name="settings_contacts_sort_by_first_name_title">Trier les contacts par</string>
-    <string name="settings_contacts_edit_native_contacts_in_linphone_title">Editer les contacts natifs dans &appName;</string>
+    <string name="settings_contacts_edit_native_contacts_in_farcom_title">Editer les contacts natifs dans &appName;</string>
     <string name="settings_contacts_hide_empty_contacts_title">Masquer les contacts sans adresse SIP ni numéro de téléphone</string>
     <string name="settings_contacts_presence_subscribe_title">Souscrire aux informations de présence</string>
     <string name="settings_contacts_add_ldap_server_title">Ajouter un serveur LDAP</string>
@@ -371,7 +338,7 @@
     <string name="manage_account_device_remove">Supprimer</string>
     <string name="manage_account_device_last_connection">Dernière connexion :</string>
     <string name="manage_account_dialog_remove_account_title">Se déconnecter du compte ?</string>
-    <string name="manage_account_dialog_remove_account_message">Si vous souhaitez supprimer définitivement votre compte rendez-vous sur : https://sip.linphone.org</string>
+    <string name="manage_account_dialog_remove_account_message">Si vous souhaitez supprimer définitivement votre compte rendez-vous sur : https://sip.farcom.org</string>
     <string name="manage_account_outbound_proxy">Proxy SIP sortant</string>
     <string name="manage_account_dialog_outbound_proxy_help_message">Si ce champ est rempli, l\'outbound proxy sera activé automatiquement. Laissez-le vide pour le désactiver.</string>
     <string name="account_settings_title">Paramètres de compte</string>
@@ -425,7 +392,7 @@
     <string name="contacts_list_favourites_title">Favoris</string>
     <string name="contacts_list_all_contacts_title">Tous les contacts</string>
     <string name="contacts_list_filter_popup_see_all">Tous les contacts</string>
-    <string name="contacts_list_filter_popup_see_linphone_only">Contacts &appName;</string>
+    <string name="contacts_list_filter_popup_see_farcom_only">Contacts &appName;</string>
     <string name="contacts_list_filter_popup_see_sip_only">Contacts SIP</string>
     <string name="contacts_list_search_results_limit_reached_label">Nombre maximal de résultats atteint, affinez votre recherche.</string>
     <string name="contact_new_title">Nouveau contact</string>
@@ -859,7 +826,6 @@
     </plurals>
     <!-- Keep <u></u> in the following strings translations! -->
     <string name="welcome_carousel_skip"><u>Passer</u></string>
-    <string name="assistant_forgotten_password"><u>Mot de passe oublié ou inconnu ?</u></string>
     <string name="call_zrtp_sas_validation_skip"><u>Passer</u></string>
     <!-- Keep <b></b> in the following strings translations! -->
     <string name="conversation_message_meeting_updated_label"><b>La réunion a été mise à jour</b></string>

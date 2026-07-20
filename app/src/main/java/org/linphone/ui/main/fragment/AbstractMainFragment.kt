@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.fragment
+package org.farcom.ui.main.fragment
 
 import android.content.res.Configuration
 import android.graphics.Outline
@@ -35,23 +35,23 @@ import androidx.navigation.fragment.findNavController
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import androidx.slidingpanelayout.widget.SlidingPaneLayout.PanelSlideListener
 import com.google.android.material.textfield.TextInputLayout
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.databinding.BottomNavBarBinding
-import org.linphone.databinding.MainActivityTopBarBinding
-import org.linphone.ui.main.MainActivity
-import org.linphone.ui.main.chat.fragment.ConversationsListFragmentDirections
-import org.linphone.ui.main.contacts.fragment.ContactsListFragmentDirections
-import org.linphone.ui.main.history.fragment.HistoryListFragmentDirections
-import org.linphone.ui.main.meetings.fragment.MeetingsListFragmentDirections
-import org.linphone.ui.main.viewmodel.AbstractMainViewModel
-import org.linphone.utils.Event
-import org.linphone.utils.SlidingPaneBackPressedCallback
-import org.linphone.utils.hideKeyboard
-import org.linphone.utils.setKeyboardInsetListener
-import org.linphone.utils.showKeyboard
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.databinding.BottomNavBarBinding
+import org.farcom.databinding.MainActivityTopBarBinding
+import org.farcom.ui.main.MainActivity
+import org.farcom.ui.main.chat.fragment.ConversationsListFragmentDirections
+import org.farcom.ui.main.contacts.fragment.ContactsListFragmentDirections
+import org.farcom.ui.main.history.fragment.HistoryListFragmentDirections
+import org.farcom.ui.main.meetings.fragment.MeetingsListFragmentDirections
+import org.farcom.ui.main.viewmodel.AbstractMainViewModel
+import org.farcom.utils.Event
+import org.farcom.utils.SlidingPaneBackPressedCallback
+import org.farcom.utils.hideKeyboard
+import org.farcom.utils.setKeyboardInsetListener
+import org.farcom.utils.showKeyboard
 
 @UiThread
 abstract class AbstractMainFragment : GenericMainFragment() {

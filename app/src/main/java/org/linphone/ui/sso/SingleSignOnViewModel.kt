@@ -1,4 +1,4 @@
-package org.linphone.ui.sso
+package org.farcom.ui.sso
 
 import android.content.Intent
 import androidx.annotation.UiThread
@@ -17,15 +17,15 @@ import net.openid.appauth.ClientSecretBasic
 import net.openid.appauth.NoClientAuthentication
 import net.openid.appauth.ResponseTypeValues
 import org.json.JSONObject
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.core.Factory
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.utils.Event
-import org.linphone.utils.FileUtils
-import org.linphone.utils.TimestampUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.core.Factory
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.utils.Event
+import org.farcom.utils.FileUtils
+import org.farcom.utils.TimestampUtils
 import java.io.File
 
 class SingleSignOnViewModel
@@ -63,7 +63,7 @@ class SingleSignOnViewModel
         clientId = corePreferences.singleSignOnClientId
         operationInProgress.value = true
 
-        val openIdCallbackScheme = coreContext.context.getString(R.string.linphone_openid_callback_scheme)
+        val openIdCallbackScheme = coreContext.context.getString(R.string.farcom_openid_callback_scheme)
         redirectUri = "$openIdCallbackScheme:/openidcallback"
 
         Log.i("$TAG Using client ID [$clientId] and redirect URI [$redirectUri]")
@@ -396,9 +396,9 @@ class SingleSignOnViewModel
                 operationInProgress.postValue(false)
             } else {
                 val accessToken =
-                    Factory.instance().createBearerToken(authState.accessToken.orEmpty(), expire / 1000) // Linphone timestamps are in seconds
+                    Factory.instance().createBearerToken(authState.accessToken.orEmpty(), expire / 1000) // Farcom timestamps are in seconds
                 val refreshToken =
-                    Factory.instance().createBearerToken(authState.refreshToken.orEmpty(), expire / 1000) // Linphone timestamps are in seconds
+                    Factory.instance().createBearerToken(authState.refreshToken.orEmpty(), expire / 1000) // Farcom timestamps are in seconds
 
                 val authInfo = coreContext.bearerAuthInfoPendingPasswordUpdate
                 if (authInfo == null) {

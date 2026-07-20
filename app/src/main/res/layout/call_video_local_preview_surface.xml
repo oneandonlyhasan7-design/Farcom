@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <!--suppress AndroidUnknownAttribute -->
-    <org.linphone.ui.call.view.RoundCornersTextureView
+    <org.farcom.ui.call.view.RoundCornersTextureView
         android:id="@+id/local_preview_video_surface"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package org.linphone.ui.fileviewer
+package org.farcom.ui.fileviewer
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -16,13 +16,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import java.io.File
 import kotlinx.coroutines.launch
-import org.linphone.R
-import org.linphone.core.tools.Log
-import org.linphone.databinding.FileViewerActivityBinding
-import org.linphone.ui.GenericActivity
-import org.linphone.ui.fileviewer.adapter.PdfPagesListAdapter
-import org.linphone.ui.fileviewer.viewmodel.FileViewModel
-import org.linphone.utils.FileUtils
+import org.farcom.R
+import org.farcom.core.tools.Log
+import org.farcom.databinding.FileViewerActivityBinding
+import org.farcom.ui.GenericActivity
+import org.farcom.ui.fileviewer.adapter.PdfPagesListAdapter
+import org.farcom.ui.fileviewer.viewmodel.FileViewModel
+import org.farcom.utils.FileUtils
 import androidx.core.net.toUri
 
 @UiThread

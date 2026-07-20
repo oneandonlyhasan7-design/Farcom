@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.meetings.adapter
+package org.farcom.ui.main.meetings.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -30,14 +30,14 @@ import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import org.linphone.R
-import org.linphone.databinding.MeetingListCellBinding
-import org.linphone.databinding.MeetingListTodayIndicatorBinding
-import org.linphone.databinding.MeetingsListDecorationBinding
-import org.linphone.ui.main.meetings.model.MeetingListItemModel
-import org.linphone.ui.main.meetings.model.MeetingModel
-import org.linphone.utils.Event
-import org.linphone.utils.HeaderAdapter
+import org.farcom.R
+import org.farcom.databinding.MeetingListCellBinding
+import org.farcom.databinding.MeetingListTodayIndicatorBinding
+import org.farcom.databinding.MeetingsListDecorationBinding
+import org.farcom.ui.main.meetings.model.MeetingListItemModel
+import org.farcom.ui.main.meetings.model.MeetingModel
+import org.farcom.utils.Event
+import org.farcom.utils.HeaderAdapter
 
 class MeetingsListAdapter :
     ListAdapter<MeetingListItemModel, RecyclerView.ViewHolder>(

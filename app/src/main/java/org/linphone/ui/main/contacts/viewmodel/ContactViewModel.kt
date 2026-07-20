@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.contacts.viewmodel
+package org.farcom.ui.main.contacts.viewmodel
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
@@ -27,30 +27,30 @@ import androidx.lifecycle.viewModelScope
 import java.io.File
 import java.util.Locale
 import kotlinx.coroutines.launch
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.contacts.ContactsManager
-import org.linphone.contacts.getListOfSipAddressesAndPhoneNumbers
-import org.linphone.core.Address
-import org.linphone.core.Call
-import org.linphone.core.ChatRoom
-import org.linphone.core.ChatRoomListenerStub
-import org.linphone.core.Conference
-import org.linphone.core.Core
-import org.linphone.core.CoreListenerStub
-import org.linphone.core.Friend
-import org.linphone.core.SecurityLevel
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.ui.main.contacts.model.ContactDeviceModel
-import org.linphone.ui.main.contacts.model.ContactNumberOrAddressClickListener
-import org.linphone.ui.main.contacts.model.ContactNumberOrAddressModel
-import org.linphone.utils.AppUtils
-import org.linphone.utils.Event
-import org.linphone.utils.FileUtils
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.contacts.ContactsManager
+import org.farcom.contacts.getListOfSipAddressesAndPhoneNumbers
+import org.farcom.core.Address
+import org.farcom.core.Call
+import org.farcom.core.ChatRoom
+import org.farcom.core.ChatRoomListenerStub
+import org.farcom.core.Conference
+import org.farcom.core.Core
+import org.farcom.core.CoreListenerStub
+import org.farcom.core.Friend
+import org.farcom.core.SecurityLevel
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.ui.main.contacts.model.ContactAvatarModel
+import org.farcom.ui.main.contacts.model.ContactDeviceModel
+import org.farcom.ui.main.contacts.model.ContactNumberOrAddressClickListener
+import org.farcom.ui.main.contacts.model.ContactNumberOrAddressModel
+import org.farcom.utils.AppUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FileUtils
+import org.farcom.utils.FarcomUtils
 
 class ContactViewModel
     @UiThread
@@ -115,7 +115,7 @@ class ContactViewModel
         MutableLiveData()
     }
 
-    val openLinphoneContactEditor: MutableLiveData<Event<String>> by lazy {
+    val openFarcomContactEditor: MutableLiveData<Event<String>> by lazy {
         MutableLiveData()
     }
 
@@ -202,7 +202,7 @@ class ContactViewModel
             val state = chatRoom.state
             if (state == ChatRoom.State.Instantiated) return
 
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
             Log.i("$TAG Conversation [$id] (${chatRoom.subjectUtf8}) state changed: [$state]")
 
             if (state == ChatRoom.State.Created) {
@@ -210,7 +210,7 @@ class ContactViewModel
                 chatRoom.removeListener(this)
                 operationInProgress.postValue(false)
 
-                val conversationId = LinphoneUtils.getConversationId(chatRoom)
+                val conversationId = FarcomUtils.getConversationId(chatRoom)
                 if (existingConversationId.value.orEmpty().isEmpty()) {
                     existingConversationId.postValue(conversationId)
                 }
@@ -260,8 +260,8 @@ class ContactViewModel
             chatDisabled.postValue(corePreferences.disableChat)
             videoCallDisabled.postValue(!core.isVideoEnabled)
 
-            val defaultDomain = LinphoneUtils.getDefaultAccount()?.params?.domain == corePreferences.defaultDomain
-            // Only show contact's devices for Linphone accounts
+            val defaultDomain = FarcomUtils.getDefaultAccount()?.params?.domain == corePreferences.defaultDomain
+            // Only show contact's devices for Farcom accounts
             showContactTrustAndDevices.postValue(defaultDomain)
 
             expandDevicesTrust.postValue(defaultDomain)
@@ -360,7 +360,7 @@ class ContactViewModel
         coreContext.postOnCoreThread {
             if (::friend.isInitialized) {
                 val uri = friend.nativeUri
-                if (uri != null && !corePreferences.editNativeContactsInLinphone) {
+                if (uri != null && !corePreferences.editNativeContactsInFarcom) {
                     Log.i(
                         "$TAG Contact [${friend.name}] is a native contact, opening native contact editor using URI [$uri]"
                     )
@@ -368,9 +368,9 @@ class ContactViewModel
                 } else {
                     val id = contact.value?.id.orEmpty()
                     Log.i(
-                        "$TAG Contact [${friend.name}] is a Linphone contact, opening in-app contact editor using ID [$id]"
+                        "$TAG Contact [${friend.name}] is a Farcom contact, opening in-app contact editor using ID [$id]"
                     )
-                    openLinphoneContactEditor.postValue(Event(id))
+                    openFarcomContactEditor.postValue(Event(id))
                 }
             }
         }
@@ -438,7 +438,7 @@ class ContactViewModel
     @UiThread
     fun startAudioCall() {
         coreContext.postOnCoreThread {
-            val singleAvailableAddress = LinphoneUtils.getSingleAvailableAddressForFriend(friend)
+            val singleAvailableAddress = FarcomUtils.getSingleAvailableAddressForFriend(friend)
             if (singleAvailableAddress != null) {
                 Log.i(
                     "$TAG Only 1 SIP address or phone number found for contact [${friend.name}], starting audio call directly"
@@ -458,7 +458,7 @@ class ContactViewModel
     @UiThread
     fun startVideoCall() {
         coreContext.postOnCoreThread {
-            val singleAvailableAddress = LinphoneUtils.getSingleAvailableAddressForFriend(friend)
+            val singleAvailableAddress = FarcomUtils.getSingleAvailableAddressForFriend(friend)
             if (singleAvailableAddress != null) {
                 Log.i(
                     "$TAG Only 1 SIP address or phone number found for contact [${friend.name}], starting video call directly"
@@ -478,7 +478,7 @@ class ContactViewModel
     @UiThread
     fun goToConversation() {
         coreContext.postOnCoreThread {
-            val singleAvailableAddress = LinphoneUtils.getSingleAvailableAddressForFriend(friend)
+            val singleAvailableAddress = FarcomUtils.getSingleAvailableAddressForFriend(friend)
             if (singleAvailableAddress != null) {
                 Log.i(
                     "$TAG Only 1 SIP address or phone number found for contact [${friend.name}], sending message directly"
@@ -523,7 +523,7 @@ class ContactViewModel
                 chatParams.backend = ChatRoom.Backend.FlexisipChat
                 params.securityLevel = Conference.SecurityLevel.EndToEnd
             } else if (!account.params.instantMessagingEncryptionMandatory) {
-                if (LinphoneUtils.isEndToEndEncryptedChatAvailable(core)) {
+                if (FarcomUtils.isEndToEndEncryptedChatAvailable(core)) {
                     Log.i(
                         "$TAG Account is in interop mode but LIME is available, creating an E2E encrypted conversation"
                     )
@@ -549,12 +549,12 @@ class ContactViewModel
             val existingChatRoom = core.searchChatRoom(params, localAddress, null, participants)
             if (existingChatRoom != null) {
                 Log.i(
-                    "$TAG Found existing conversation [${LinphoneUtils.getConversationId(
+                    "$TAG Found existing conversation [${FarcomUtils.getConversationId(
                         existingChatRoom
                     )}], going to it"
                 )
 
-                val conversationId = LinphoneUtils.getConversationId(existingChatRoom)
+                val conversationId = FarcomUtils.getConversationId(existingChatRoom)
                 if (existingConversationId.value.orEmpty().isEmpty()) {
                     existingConversationId.postValue(conversationId)
                 }
@@ -568,11 +568,11 @@ class ContactViewModel
                 if (chatRoom != null) {
                     if (chatParams.backend == ChatRoom.Backend.FlexisipChat) {
                         if (chatRoom.state == ChatRoom.State.Created) {
-                            val id = LinphoneUtils.getConversationId(chatRoom)
+                            val id = FarcomUtils.getConversationId(chatRoom)
                             Log.i("$TAG 1-1 conversation [$id] has been created")
                             operationInProgress.postValue(false)
 
-                            val conversationId = LinphoneUtils.getConversationId(chatRoom)
+                            val conversationId = FarcomUtils.getConversationId(chatRoom)
                             if (existingConversationId.value.orEmpty().isEmpty()) {
                                 existingConversationId.postValue(conversationId)
                             }
@@ -582,11 +582,11 @@ class ContactViewModel
                             chatRoom.addListener(chatRoomListener)
                         }
                     } else {
-                        val id = LinphoneUtils.getConversationId(chatRoom)
+                        val id = FarcomUtils.getConversationId(chatRoom)
                         Log.i("$TAG Conversation successfully created [$id]")
                         operationInProgress.postValue(false)
 
-                        val conversationId = LinphoneUtils.getConversationId(chatRoom)
+                        val conversationId = FarcomUtils.getConversationId(chatRoom)
                         if (existingConversationId.value.orEmpty().isEmpty()) {
                             existingConversationId.postValue(conversationId)
                         }
@@ -653,7 +653,7 @@ class ContactViewModel
 
     @WorkerThread
     private fun lookUpExistingChatRoom() {
-        val account = LinphoneUtils.getDefaultAccount()
+        val account = FarcomUtils.getDefaultAccount()
         if (account != null) {
             val params = coreContext.core.createConferenceParams(null)
             params.isChatEnabled = true
@@ -667,7 +667,7 @@ class ContactViewModel
                 if (account.params.instantMessagingEncryptionMandatory && sameDomain) {
                     params.securityLevel = Conference.SecurityLevel.EndToEnd
                 } else if (!account.params.instantMessagingEncryptionMandatory) {
-                    if (LinphoneUtils.isEndToEndEncryptedChatAvailable(coreContext.core)) {
+                    if (FarcomUtils.isEndToEndEncryptedChatAvailable(coreContext.core)) {
                         params.securityLevel = Conference.SecurityLevel.EndToEnd
                     } else {
                         params.securityLevel = Conference.SecurityLevel.None
@@ -677,7 +677,7 @@ class ContactViewModel
                 val participants = arrayOf(address)
                 val existingChatRoom = coreContext.core.searchChatRoom(params, localAddress, null, participants)
                 if (existingChatRoom != null) {
-                    val conversationId = LinphoneUtils.getConversationId(existingChatRoom)
+                    val conversationId = FarcomUtils.getConversationId(existingChatRoom)
                     Log.i("$TAG Found existing conversation with ID [$conversationId]")
                     existingConversationId.postValue(conversationId)
                     return

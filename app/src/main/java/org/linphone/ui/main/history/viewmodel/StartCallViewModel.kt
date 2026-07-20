@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.history.viewmodel
+package org.farcom.ui.main.history.viewmodel
 
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
@@ -26,19 +26,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.core.Address
-import org.linphone.core.Conference
-import org.linphone.core.ConferenceListenerStub
-import org.linphone.core.Friend
-import org.linphone.core.MediaDirection
-import org.linphone.core.tools.Log
-import org.linphone.ui.main.history.model.NumpadModel
-import org.linphone.ui.main.viewmodel.AddressSelectionViewModel
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.core.Address
+import org.farcom.core.Conference
+import org.farcom.core.ConferenceListenerStub
+import org.farcom.core.Friend
+import org.farcom.core.MediaDirection
+import org.farcom.core.tools.Log
+import org.farcom.ui.main.history.model.NumpadModel
+import org.farcom.ui.main.viewmodel.AddressSelectionViewModel
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
 
 class StartCallViewModel
     @UiThread
@@ -112,7 +112,7 @@ class StartCallViewModel
             },
             { // onVoicemailClicked
                 coreContext.postOnCoreThread { core ->
-                    val account = LinphoneUtils.getDefaultAccount()
+                    val account = FarcomUtils.getDefaultAccount()
                     val voicemailAddress = account?.params?.voicemailAddress
                     if (voicemailAddress != null) {
                         Log.i("$TAG Calling voicemail URI [${voicemailAddress.asStringUriOnly()}]")
@@ -132,7 +132,7 @@ class StartCallViewModel
                     coreContext.postOnCoreThread { core ->
                         val address = core.interpretUrl(
                             suggestion,
-                            LinphoneUtils.applyInternationalPrefix()
+                            FarcomUtils.applyInternationalPrefix()
                         )
                         if (address != null) {
                             Log.i("$TAG Calling [${address.asStringUriOnly()}]")
@@ -151,10 +151,10 @@ class StartCallViewModel
                     coreContext.postOnCoreThread { core ->
                         val address = core.interpretUrl(
                             suggestion,
-                            LinphoneUtils.applyInternationalPrefix()
+                            FarcomUtils.applyInternationalPrefix()
                         )
                         if (address != null) {
-                            initiateBlindTransferEvent.postValue(Event(Pair(address, LinphoneUtils.getDisplayName(address))))
+                            initiateBlindTransferEvent.postValue(Event(Pair(address, FarcomUtils.getDisplayName(address))))
                             leaveFragmentEvent.postValue(Event(true))
                         } else {
                             Log.e("$TAG Failed to parse [$suggestion] as SIP address")
@@ -185,7 +185,7 @@ class StartCallViewModel
     fun updateGroupCallButtonVisibility() {
         coreContext.postOnCoreThread { core ->
             val hideGroupCall = corePreferences.disableMeetings ||
-                !LinphoneUtils.isRemoteConferencingAvailable(core) ||
+                !FarcomUtils.isRemoteConferencingAvailable(core) ||
                 core.callsNb > 0
             hideGroupCallButton.postValue(hideGroupCall)
         }
@@ -219,7 +219,7 @@ class StartCallViewModel
             operationInProgress.postValue(true)
 
             Log.i("$TAG Creating group call with subject ${subject.value}")
-            val conference = LinphoneUtils.createGroupCall(account, subject.value.orEmpty())
+            val conference = FarcomUtils.createGroupCall(account, subject.value.orEmpty())
             if (conference == null) {
                 Log.e("$TAG Failed to create group call!")
                 showRedToast(R.string.conference_failed_to_create_group_call_toast, R.drawable.warning_circle)

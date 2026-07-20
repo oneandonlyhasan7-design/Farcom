@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2025 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,20 +17,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.meetings.viewmodel
+package org.farcom.ui.main.meetings.viewmodel
 
 import androidx.annotation.UiThread
 import androidx.lifecycle.MutableLiveData
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.core.Address
-import org.linphone.core.ConferenceInfo
-import org.linphone.core.ConferenceScheduler
-import org.linphone.core.ConferenceSchedulerListenerStub
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.utils.Event
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.core.Address
+import org.farcom.core.ConferenceInfo
+import org.farcom.core.ConferenceScheduler
+import org.farcom.core.ConferenceSchedulerListenerStub
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.utils.Event
+import org.farcom.utils.FarcomUtils
 
 open class CancelMeetingViewModel
     @UiThread
@@ -59,7 +59,7 @@ open class CancelMeetingViewModel
                 )
                 if (sendNotificationForCancelledConference) {
                     Log.i("$TAG Sending cancelled meeting ICS to participants")
-                    val params = LinphoneUtils.getChatRoomParamsToCancelMeeting()
+                    val params = FarcomUtils.getChatRoomParamsToCancelMeeting()
                     if (params != null && !corePreferences.disableChat) {
                         conferenceScheduler.sendInvitations(params)
                     } else {
@@ -110,8 +110,8 @@ open class CancelMeetingViewModel
             sendNotificationForCancelledConference = sendNotification
             operationInProgress.postValue(true)
 
-            val conferenceScheduler = LinphoneUtils.createConferenceScheduler(
-                LinphoneUtils.getDefaultAccount()
+            val conferenceScheduler = FarcomUtils.createConferenceScheduler(
+                FarcomUtils.getDefaultAccount()
             )
             conferenceScheduler.addListener(conferenceSchedulerListener)
             conferenceScheduler.cancelConference(conferenceInfo)

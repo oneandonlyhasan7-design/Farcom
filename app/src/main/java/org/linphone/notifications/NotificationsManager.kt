@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.notifications
+package org.farcom.notifications
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -45,41 +45,41 @@ import androidx.core.app.RemoteInput
 import androidx.core.app.TaskStackBuilder
 import androidx.core.content.LocusIdCompat
 import androidx.navigation.NavDeepLinkBuilder
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.compatibility.Compatibility
-import org.linphone.contacts.AvatarGenerator
-import org.linphone.contacts.ContactsManager.ContactsListener
-import org.linphone.contacts.getAvatarBitmap
-import org.linphone.contacts.getPerson
-import org.linphone.core.Account
-import org.linphone.core.Address
-import org.linphone.core.AudioDevice
-import org.linphone.core.Call
-import org.linphone.core.ChatMessage
-import org.linphone.core.ChatMessageListener
-import org.linphone.core.ChatMessageListenerStub
-import org.linphone.core.ChatMessageReaction
-import org.linphone.core.ChatRoom
-import org.linphone.core.ConferenceParams
-import org.linphone.core.Core
-import org.linphone.core.CoreInCallService
-import org.linphone.core.CoreKeepAliveThirdPartyAccountsService
-import org.linphone.core.CoreListenerStub
-import org.linphone.core.Factory
-import org.linphone.core.Friend
-import org.linphone.core.MediaDirection
-import org.linphone.core.RegistrationState
-import org.linphone.core.tools.Log
-import org.linphone.ui.call.CallActivity
-import org.linphone.ui.main.MainActivity
-import org.linphone.ui.main.MainActivity.Companion.ARGUMENTS_CHAT
-import org.linphone.ui.main.MainActivity.Companion.ARGUMENTS_CONVERSATION_ID
-import org.linphone.utils.AppUtils
-import org.linphone.utils.FileUtils
-import org.linphone.utils.LinphoneUtils
-import org.linphone.utils.ShortcutUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.compatibility.Compatibility
+import org.farcom.contacts.AvatarGenerator
+import org.farcom.contacts.ContactsManager.ContactsListener
+import org.farcom.contacts.getAvatarBitmap
+import org.farcom.contacts.getPerson
+import org.farcom.core.Account
+import org.farcom.core.Address
+import org.farcom.core.AudioDevice
+import org.farcom.core.Call
+import org.farcom.core.ChatMessage
+import org.farcom.core.ChatMessageListener
+import org.farcom.core.ChatMessageListenerStub
+import org.farcom.core.ChatMessageReaction
+import org.farcom.core.ChatRoom
+import org.farcom.core.ConferenceParams
+import org.farcom.core.Core
+import org.farcom.core.CoreInCallService
+import org.farcom.core.CoreKeepAliveThirdPartyAccountsService
+import org.farcom.core.CoreListenerStub
+import org.farcom.core.Factory
+import org.farcom.core.Friend
+import org.farcom.core.MediaDirection
+import org.farcom.core.RegistrationState
+import org.farcom.core.tools.Log
+import org.farcom.ui.call.CallActivity
+import org.farcom.ui.main.MainActivity
+import org.farcom.ui.main.MainActivity.Companion.ARGUMENTS_CHAT
+import org.farcom.ui.main.MainActivity.Companion.ARGUMENTS_CONVERSATION_ID
+import org.farcom.utils.AppUtils
+import org.farcom.utils.FileUtils
+import org.farcom.utils.FarcomUtils
+import org.farcom.utils.ShortcutUtils
 
 class NotificationsManager
     @MainThread
@@ -87,14 +87,14 @@ class NotificationsManager
     companion object {
         private const val TAG = "[Notifications Manager]"
 
-        const val INTENT_HANGUP_CALL_NOTIF_ACTION = "org.linphone.HANGUP_CALL_ACTION"
-        const val INTENT_ANSWER_CALL_NOTIF_ACTION = "org.linphone.ANSWER_CALL_ACTION"
-        const val INTENT_TOGGLE_SPEAKER_CALL_NOTIF_ACTION = "org.linphone.TOGGLE_SPEAKER_CALL_ACTION"
-        const val INTENT_REPLY_MESSAGE_NOTIF_ACTION = "org.linphone.REPLY_ACTION"
-        const val INTENT_MARK_MESSAGE_AS_READ_NOTIF_ACTION = "org.linphone.MARK_AS_READ_ACTION"
-        const val INTENT_FOREGROUND_SERVICE_NOTIF_DISMISSED_ACTION = "org.linphone.INTENT_FOREGROUND_SERVICE_NOTIF_DISMISSED_ACTION"
-        const val INTENT_ALLOW_CALL_REDIRECTION_ACTION = "org.linphone.INTENT_ALLOW_CALL_REDIRECTION_ACTION"
-        const val INTENT_DENY_CALL_REDIRECTION_ACTION = "org.linphone.INTENT_DENY_CALL_REDIRECTION_ACTION"
+        const val INTENT_HANGUP_CALL_NOTIF_ACTION = "org.farcom.HANGUP_CALL_ACTION"
+        const val INTENT_ANSWER_CALL_NOTIF_ACTION = "org.farcom.ANSWER_CALL_ACTION"
+        const val INTENT_TOGGLE_SPEAKER_CALL_NOTIF_ACTION = "org.farcom.TOGGLE_SPEAKER_CALL_ACTION"
+        const val INTENT_REPLY_MESSAGE_NOTIF_ACTION = "org.farcom.REPLY_ACTION"
+        const val INTENT_MARK_MESSAGE_AS_READ_NOTIF_ACTION = "org.farcom.MARK_AS_READ_ACTION"
+        const val INTENT_FOREGROUND_SERVICE_NOTIF_DISMISSED_ACTION = "org.farcom.INTENT_FOREGROUND_SERVICE_NOTIF_DISMISSED_ACTION"
+        const val INTENT_ALLOW_CALL_REDIRECTION_ACTION = "org.farcom.INTENT_ALLOW_CALL_REDIRECTION_ACTION"
+        const val INTENT_DENY_CALL_REDIRECTION_ACTION = "org.farcom.INTENT_DENY_CALL_REDIRECTION_ACTION"
 
         const val INTENT_ANSWER_CALL_NOTIF_CODE = 2
         const val INTENT_HANGUP_CALL_NOTIF_CODE = 3
@@ -192,7 +192,7 @@ class NotificationsManager
                     if (addressMatch != null) {
                         peerAddress = addressMatch
                         updated = true
-                        message.sender = friend.name ?: LinphoneUtils.getDisplayName(addressMatch)
+                        message.sender = friend.name ?: FarcomUtils.getDisplayName(addressMatch)
                         message.friend = friend
                     }
                 }
@@ -271,7 +271,7 @@ class NotificationsManager
                     }
                 }
                 Call.State.Released -> {
-                    if (LinphoneUtils.isCallLogMissed(call.callLog)) {
+                    if (FarcomUtils.isCallLogMissed(call.callLog)) {
                         showMissedCallNotification(call)
                     }
                 }
@@ -324,7 +324,7 @@ class NotificationsManager
             Log.i("$TAG Received ${messages.size} aggregated messages")
             if (corePreferences.disableChat) return
 
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
             if (currentlyDisplayedChatRoomId.isNotEmpty() && id == currentlyDisplayedChatRoomId) {
                 Log.i(
                     "$TAG Do not notify received messages for currently displayed conversation [$id], but play sound if at least one message is incoming and not read"
@@ -373,7 +373,7 @@ class NotificationsManager
                 "$TAG Reaction received [${reaction.body}] from [${address.asStringUriOnly()}] for message [$message]"
             )
 
-            val id = LinphoneUtils.getConversationId(chatRoom)
+            val id = FarcomUtils.getConversationId(chatRoom)
             /*if (id == currentlyDisplayedChatRoomId) {
                 Log.i(
                     "$TAG Do not notify received reaction for currently displayed conversation [$id]"
@@ -412,7 +412,7 @@ class NotificationsManager
             if (corePreferences.disableChat) return
 
             if (chatRoom.muted) {
-                val id = LinphoneUtils.getConversationId(chatRoom)
+                val id = FarcomUtils.getConversationId(chatRoom)
                 Log.i("$TAG Conversation $id has been muted")
                 return
             }
@@ -442,7 +442,7 @@ class NotificationsManager
                         val notification = createMessageNotification(
                             notifiable,
                             pendingIntent,
-                            LinphoneUtils.getConversationId(chatRoom),
+                            FarcomUtils.getConversationId(chatRoom),
                             me
                         )
                         notify(notifiable.notificationId, notification, CHAT_TAG)
@@ -461,7 +461,7 @@ class NotificationsManager
         @WorkerThread
         override fun onChatRoomRead(core: Core, chatRoom: ChatRoom) {
             Log.i(
-                "$TAG Conversation [${LinphoneUtils.getConversationId(chatRoom)}] has been marked as read, removing notification if any"
+                "$TAG Conversation [${FarcomUtils.getConversationId(chatRoom)}] has been marked as read, removing notification if any"
             )
             dismissChatNotification(chatRoom)
         }
@@ -592,7 +592,7 @@ class NotificationsManager
                 Log.i(
                     "$TAG At least one call is running and no foreground Service notification was found, starting it using call [${call.remoteAddress.asStringUriOnly()}]"
                 )
-                showCallNotification(call, LinphoneUtils.isCallIncoming(call.state))
+                showCallNotification(call, FarcomUtils.isCallIncoming(call.state))
             }
         }
     }
@@ -692,13 +692,13 @@ class NotificationsManager
         if (currentInCallServiceNotificationId == -1) {
             Log.w("$TAG No current in-call foreground Service notification found, try to create it now")
             val call = coreContext.core.currentCall ?: coreContext.core.calls.find {
-                LinphoneUtils.isCallActive(it.state)
+                FarcomUtils.isCallActive(it.state)
             } ?: coreContext.core.calls.find {
-                LinphoneUtils.isCallPaused(it.state)
+                FarcomUtils.isCallPaused(it.state)
             }
             if (call != null) {
                 Log.i("$TAG Using call [${call.remoteAddress.asStringUriOnly()}] for foreground Service notification")
-                showCallNotification(call, LinphoneUtils.isCallIncoming(call.state))
+                showCallNotification(call, FarcomUtils.isCallIncoming(call.state))
             } else {
                 Log.w("$TAG No active call found for foreground Service notification, aborting")
             }
@@ -792,11 +792,11 @@ class NotificationsManager
             val conferenceInfo = call.callLog.conferenceInfo
             body = if (conferenceInfo != null) {
                 context.getString(R.string.notification_missed_group_call)
-                    .format(conferenceInfo.subject ?: LinphoneUtils.getDisplayName(remoteAddress))
+                    .format(conferenceInfo.subject ?: FarcomUtils.getDisplayName(remoteAddress))
             } else {
                 val friend: Friend? = coreContext.contactsManager.findContactByAddress(remoteAddress)
                 context.getString(R.string.notification_missed_call)
-                    .format(friend?.name ?: LinphoneUtils.getDisplayName(remoteAddress))
+                    .format(friend?.name ?: FarcomUtils.getDisplayName(remoteAddress))
             }
             Log.i("$TAG Creating missed call notification with title [$body]")
         }
@@ -867,7 +867,7 @@ class NotificationsManager
         val notifiable = getNotifiableForCall(call)
         val notificationId = notifiable.notificationId
 
-        if (LinphoneUtils.isCallIncoming(call.state)) {
+        if (FarcomUtils.isCallIncoming(call.state)) {
             val notification = notificationsMap[notificationId]
             if (notification != null) {
                 showIncomingCallForegroundServiceNotification(notificationId, notification)
@@ -921,7 +921,7 @@ class NotificationsManager
 
         var mask = Compatibility.FOREGROUND_SERVICE_TYPE_PHONE_CALL
         val callState = call.state
-        if (!LinphoneUtils.isCallIncoming(callState) && !LinphoneUtils.isCallOutgoing(callState) && !LinphoneUtils.isCallEnding(
+        if (!FarcomUtils.isCallIncoming(callState) && !FarcomUtils.isCallOutgoing(callState) && !FarcomUtils.isCallEnding(
                 callState
             )
         ) {
@@ -1012,7 +1012,7 @@ class NotificationsManager
                 )!!
             }
             val builder = NotificationCompat.Builder(context, channelId)
-                .setSmallIcon(R.drawable.linphone_notification)
+                .setSmallIcon(R.drawable.farcom_notification)
                 .setAutoCancel(false)
                 .setOngoing(true)
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
@@ -1072,8 +1072,8 @@ class NotificationsManager
         val address = chatRoom.peerAddress.asStringUriOnly()
         var notifiable: Notifiable? = chatNotificationsMap[address]
         if (notifiable == null) {
-            notifiable = Notifiable(LinphoneUtils.getConversationId(chatRoom).hashCode())
-            notifiable.myself = LinphoneUtils.getDisplayName(chatRoom.localAddress)
+            notifiable = Notifiable(FarcomUtils.getConversationId(chatRoom).hashCode())
+            notifiable.myself = FarcomUtils.getDisplayName(chatRoom.localAddress)
             notifiable.localIdentity = chatRoom.localAddress.asStringUriOnly()
             notifiable.remoteAddress = chatRoom.peerAddress.asStringUriOnly()
 
@@ -1129,7 +1129,7 @@ class NotificationsManager
             val notification = createMessageNotification(
                 notifiable,
                 pendingIntent,
-                LinphoneUtils.getConversationId(chatRoom),
+                FarcomUtils.getConversationId(chatRoom),
                 me
             )
             notify(notifiable.notificationId, notification, CHAT_TAG)
@@ -1167,9 +1167,9 @@ class NotificationsManager
 
         val contact =
             coreContext.contactsManager.findContactByAddress(address)
-        val displayName = contact?.name ?: LinphoneUtils.getDisplayName(address)
+        val displayName = contact?.name ?: FarcomUtils.getDisplayName(address)
 
-        val originalMessage = LinphoneUtils.getPlainTextDescribingMessage(message)
+        val originalMessage = FarcomUtils.getPlainTextDescribingMessage(message)
         val text = AppUtils.getString(R.string.notification_chat_message_reaction_received).format(
             reaction,
             originalMessage
@@ -1181,7 +1181,7 @@ class NotificationsManager
             contact,
             displayName,
             address.asStringUriOnly(),
-            message.time * 1000, // Linphone timestamps are in seconds
+            message.time * 1000, // Farcom timestamps are in seconds
             isOutgoing = false,
             isReaction = true,
             reactionToMessageId = message.messageId,
@@ -1200,7 +1200,7 @@ class NotificationsManager
             val notification = createMessageNotification(
                 notifiable,
                 pendingIntent,
-                LinphoneUtils.getConversationId(chatRoom),
+                FarcomUtils.getConversationId(chatRoom),
                 me
             )
             notify(notifiable.notificationId, notification, CHAT_TAG)
@@ -1229,7 +1229,7 @@ class NotificationsManager
         val notification = createMessageNotification(
             notifiable,
             pendingIntent,
-            LinphoneUtils.getConversationId(chatRoom),
+            FarcomUtils.getConversationId(chatRoom),
             me
         )
         Log.i(
@@ -1269,7 +1269,7 @@ class NotificationsManager
             )
                 .setContentTitle(context.getString(R.string.notification_account_registration_error_title, identity))
                 .setContentText(context.getString(R.string.notification_account_registration_error_message))
-                .setSmallIcon(R.drawable.linphone_notification)
+                .setSmallIcon(R.drawable.farcom_notification)
                 .setAutoCancel(false)
                 .setOngoing(true)
                 .setCategory(NotificationCompat.CATEGORY_ERROR)
@@ -1380,9 +1380,9 @@ class NotificationsManager
     private fun getNotifiableForChatMessage(message: ChatMessage): NotifiableMessage {
         val contact =
             coreContext.contactsManager.findContactByAddress(message.fromAddress)
-        val displayName = contact?.name ?: LinphoneUtils.getDisplayName(message.fromAddress)
+        val displayName = contact?.name ?: FarcomUtils.getDisplayName(message.fromAddress)
 
-        val text = LinphoneUtils.getPlainTextDescribingMessage(message)
+        val text = FarcomUtils.getPlainTextDescribingMessage(message)
         val address = message.fromAddress
         val notifiableMessage = NotifiableMessage(
             text,
@@ -1390,7 +1390,7 @@ class NotificationsManager
             contact,
             displayName,
             address.asStringUriOnly(),
-            message.time * 1000, // Linphone timestamps are in seconds
+            message.time * 1000, // Farcom timestamps are in seconds
             isOutgoing = message.isOutgoing
         )
 
@@ -1430,11 +1430,11 @@ class NotificationsManager
 
         val remoteAddress = call.callLog.remoteAddress
         val conference = call.conference
-        val conferenceInfo = LinphoneUtils.getConferenceInfoIfAny(call)
+        val conferenceInfo = FarcomUtils.getConferenceInfoIfAny(call)
         val isConference = conference != null || conferenceInfo != null
 
         val caller = if (isConference) {
-            val subject = conferenceInfo?.subject ?: conference?.subject ?: LinphoneUtils.getDisplayName(
+            val subject = conferenceInfo?.subject ?: conference?.subject ?: FarcomUtils.getDisplayName(
                 remoteAddress
             )
             Person.Builder()
@@ -1447,10 +1447,10 @@ class NotificationsManager
         } else {
             val contact = friend
                 ?: coreContext.contactsManager.findContactByAddress(remoteAddress)
-            getPerson(contact, LinphoneUtils.getDisplayName(remoteAddress))
+            getPerson(contact, FarcomUtils.getDisplayName(remoteAddress))
         }
 
-        val isVideo = LinphoneUtils.isVideoEnabled(call)
+        val isVideo = FarcomUtils.isVideoEnabled(call)
 
         val smallIcon = if (isConference) {
             R.drawable.video_conference_notification
@@ -1512,7 +1512,7 @@ class NotificationsManager
             } else {
                 setPriority(NotificationCompat.PRIORITY_HIGH)
             }
-            setWhen(call.callLog.startDate * 1000) // Linphone timestamps are in seconds
+            setWhen(call.callLog.startDate * 1000) // Farcom timestamps are in seconds
             setShowWhen(true)
             setAutoCancel(false)
             setOngoing(true)
@@ -1547,7 +1547,7 @@ class NotificationsManager
         call: Call,
         friend: Friend?
     ) {
-        val isIncoming = LinphoneUtils.isCallIncoming(call.state)
+        val isIncoming = FarcomUtils.isCallIncoming(call.state)
 
         val notificationId = notifiable.notificationId
         val notification = notificationsMap[notificationId]
@@ -1697,7 +1697,7 @@ class NotificationsManager
             return true
         } else {
             val previousNotificationId = previousChatNotifications.find { id ->
-                id == LinphoneUtils.getConversationId(chatRoom).hashCode()
+                id == FarcomUtils.getConversationId(chatRoom).hashCode()
             }
             if (previousNotificationId != null) {
                 Log.i(
@@ -1773,7 +1773,7 @@ class NotificationsManager
             text,
             message.messageId,
             null,
-            notifiable.myself ?: LinphoneUtils.getDisplayName(senderAddress),
+            notifiable.myself ?: FarcomUtils.getDisplayName(senderAddress),
             senderAddress.asStringUriOnly(),
             System.currentTimeMillis(),
             isOutgoing = true
@@ -1786,7 +1786,7 @@ class NotificationsManager
         val notification = createMessageNotification(
             notifiable,
             pendingIntent,
-            LinphoneUtils.getConversationId(chatRoom),
+            FarcomUtils.getConversationId(chatRoom),
             me
         )
         notify(notifiable.notificationId, notification, CHAT_TAG)
@@ -1901,7 +1901,7 @@ class NotificationsManager
             }
 
             val builder = NotificationCompat.Builder(context, channelId)
-                .setSmallIcon(R.drawable.linphone_notification)
+                .setSmallIcon(R.drawable.farcom_notification)
                 .setContentText(AppUtils.getString(R.string.notification_keep_app_alive_description))
                 .setSubText(AppUtils.getString(R.string.notification_keep_app_alive_message))
                 .setAutoCancel(false)
@@ -2072,7 +2072,7 @@ class NotificationsManager
     private fun getChatRoomPendingIntent(chatRoom: ChatRoom, notificationId: Int): PendingIntent {
         val args = Bundle()
         args.putBoolean(ARGUMENTS_CHAT, true)
-        args.putString(ARGUMENTS_CONVERSATION_ID, LinphoneUtils.getConversationId(chatRoom))
+        args.putString(ARGUMENTS_CONVERSATION_ID, FarcomUtils.getConversationId(chatRoom))
 
         // Not using NavDeepLinkBuilder to prevent stacking a ConversationsListFragment above another one
         return TaskStackBuilder.create(context).run {
@@ -2133,7 +2133,7 @@ class NotificationsManager
             val notification = createMessageNotification(
                 notifiable,
                 pendingIntent,
-                LinphoneUtils.getConversationId(chatRoom),
+                FarcomUtils.getConversationId(chatRoom),
                 me
             )
             notify(notifiable.notificationId, notification, CHAT_TAG)
@@ -2155,7 +2155,7 @@ class NotificationsManager
             setColor(context.resources.getColor(R.color.gray_600, context.theme))
             setColorized(true)
             setOnlyAlertOnce(true)
-            setSmallIcon(R.drawable.linphone_notification)
+            setSmallIcon(R.drawable.farcom_notification)
             setCategory(NotificationCompat.CATEGORY_CALL)
             setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             setPriority(NotificationCompat.PRIORITY_HIGH)

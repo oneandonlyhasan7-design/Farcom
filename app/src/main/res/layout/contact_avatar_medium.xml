@@ -4,11 +4,11 @@
 
     <data>
         <import type="android.view.View" />
-        <import type="org.linphone.core.ConsolidatedPresence" />
-        <import type="org.linphone.core.SecurityLevel" />
+        <import type="org.farcom.core.ConsolidatedPresence" />
+        <import type="org.farcom.core.SecurityLevel" />
         <variable
             name="model"
-            type="org.linphone.contacts.AbstractAvatarModel" />
+            type="org.farcom.contacts.AbstractAvatarModel" />
         <variable
             name="hidePresence"
             type="Boolean" />

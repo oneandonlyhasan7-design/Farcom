@@ -23,9 +23,9 @@ dependencyResolutionManagement {
             }
         }
 
-        val localSdk = File("${providers.gradleProperty("LinphoneSdkBuildDir").get()}/maven_repository/org/linphone/linphone-sdk-android/maven-metadata.xml")
+        val localSdk = File("${providers.gradleProperty("FarcomSdkBuildDir").get()}/maven_repository/org/linphone/linphone-sdk-android/maven-metadata.xml")
         if (localSdk.exists()) {
-            val localSdkPath = providers.gradleProperty("LinphoneSdkBuildDir").get()
+            val localSdkPath = providers.gradleProperty("FarcomSdkBuildDir").get()
             println("Using locally built SDK from maven repository at ${localSdkPath}/maven_repository/")
             maven {
                 name = "local linphone-sdk maven repository"
@@ -49,5 +49,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Linphone"
+rootProject.name = "Farcom"
 include(":app")

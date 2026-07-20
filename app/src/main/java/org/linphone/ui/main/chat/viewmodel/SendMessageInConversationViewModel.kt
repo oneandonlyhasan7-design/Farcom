@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2010-2023 Belledonne Communications SARL.
  *
- * This file is part of linphone-android
- * (see https://www.linphone.org).
+ * This file is part of farcom-android
+ * (see https://www.farcom.org).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.linphone.ui.main.chat.viewmodel
+package org.farcom.ui.main.chat.viewmodel
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -35,27 +35,27 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import org.linphone.LinphoneApplication.Companion.coreContext
-import org.linphone.LinphoneApplication.Companion.corePreferences
-import org.linphone.R
-import org.linphone.core.ChatMessage
-import org.linphone.core.ChatRoom
-import org.linphone.core.ChatRoomListenerStub
-import org.linphone.core.EventLog
-import org.linphone.core.Factory
-import org.linphone.core.MediaFileFormat
-import org.linphone.core.Player
-import org.linphone.core.PlayerListener
-import org.linphone.core.Recorder
-import org.linphone.core.tools.Log
-import org.linphone.ui.GenericViewModel
-import org.linphone.ui.main.chat.model.FileModel
-import org.linphone.ui.main.chat.model.MessageModel
-import org.linphone.ui.main.chat.model.ParticipantModel
-import org.linphone.utils.AudioUtils
-import org.linphone.utils.Event
-import org.linphone.utils.FileUtils
-import org.linphone.utils.LinphoneUtils
+import org.farcom.FarcomApplication.Companion.coreContext
+import org.farcom.FarcomApplication.Companion.corePreferences
+import org.farcom.R
+import org.farcom.core.ChatMessage
+import org.farcom.core.ChatRoom
+import org.farcom.core.ChatRoomListenerStub
+import org.farcom.core.EventLog
+import org.farcom.core.Factory
+import org.farcom.core.MediaFileFormat
+import org.farcom.core.Player
+import org.farcom.core.PlayerListener
+import org.farcom.core.Recorder
+import org.farcom.core.tools.Log
+import org.farcom.ui.GenericViewModel
+import org.farcom.ui.main.chat.model.FileModel
+import org.farcom.ui.main.chat.model.MessageModel
+import org.farcom.ui.main.chat.model.ParticipantModel
+import org.farcom.utils.AudioUtils
+import org.farcom.utils.Event
+import org.farcom.utils.FileUtils
+import org.farcom.utils.FarcomUtils
 
 class SendMessageInConversationViewModel
     @UiThread
@@ -259,7 +259,7 @@ class SendMessageInConversationViewModel
             val message = model.chatMessage
             Log.i("$TAG Pending message edit [${message.messageId}]")
             chatMessageToEdit = message
-            isEditingMessage.postValue(LinphoneUtils.getFormattedTextDescribingMessage(message))
+            isEditingMessage.postValue(FarcomUtils.getFormattedTextDescribingMessage(message))
             isEditing.postValue(true)
         }
     }
@@ -283,7 +283,7 @@ class SendMessageInConversationViewModel
             Log.i("$TAG Pending reply to message [${message.messageId}]")
             chatMessageToReplyTo = message
             isReplyingTo.postValue(model.avatarModel.value?.friend?.name)
-            isReplyingToMessage.postValue(LinphoneUtils.getFormattedTextDescribingMessage(message))
+            isReplyingToMessage.postValue(FarcomUtils.getFormattedTextDescribingMessage(message))
             isReplying.postValue(true)
         }
     }

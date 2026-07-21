@@ -109,12 +109,12 @@ project.tasks.preBuild.dependsOn("linphoneSdkSource")
 
 android {
     namespace = "org.linphone"
-    compileSdk = 37
+    compileSdk = 36
 
     defaultConfig {
         applicationId = packageName
         minSdk = 28
-        targetSdk = 37
+        targetSdk = 36
         versionCode = 602003 // 6.02.003
         versionName = "6.2.3"
 

@@ -98,9 +98,32 @@ jobs:
         uses: android-actions/setup-android@v3
         # Installs cmdline-tools, accepts licenses, and exposes ANDROID_HOME/ANDROID_SDK_ROOT.
 
+      # ------------------------------------------------------------------
+      # Install the compileSdk platform this repo actually declares.
+      # Some API levels are only published to the preview/canary channel
+      # before their stable release, so we try stable first and fall back
+      # to --channel=3 (preview) before giving up. If neither channel has
+      # it, this means compileSdk in app/build.gradle.kts is set to an API
+      # level that isn't published anywhere yet - we fail loudly with a
+      # list of what IS available, rather than continuing into a build
+      # that's guaranteed to fail at compile time with a confusing error.
+      # ------------------------------------------------------------------
       - name: Install Android platform & build-tools for compileSdk ${{ steps.detect-sdk.outputs.compile_sdk }}
         run: |
-          sdkmanager "platforms;android-${{ steps.detect-sdk.outputs.compile_sdk }}" "platform-tools"
+          TARGET="platforms;android-${{ steps.detect-sdk.outputs.compile_sdk }}"
+          echo "Attempting to install $TARGET from the stable channel..."
+          if sdkmanager "$TARGET" "platform-tools"; then
+            echo "Installed $TARGET from stable channel."
+          else
+            echo "::warning::$TARGET not found in the stable channel. Retrying via the preview/canary channel (--channel=3), since new API levels are sometimes only published there before general release."
+            if sdkmanager --channel=3 "$TARGET" "platform-tools"; then
+              echo "Installed $TARGET from the preview channel."
+            else
+              echo "::error::$TARGET is not available in any SDK Manager channel. compileSdk=${{ steps.detect-sdk.outputs.compile_sdk }} in app/build.gradle.kts is likely ahead of what's publicly released. The build cannot succeed until either this platform is published, or compileSdk is lowered to a released API level. Listing available platforms below for reference:"
+              sdkmanager --list 2>/dev/null | grep -oP 'platforms;android-\d+' | sort -t'-' -k2 -n -u
+              exit 1
+            fi
+          fi
 
       - name: Install Android NDK (only if this repo requires it)
         if: steps.detect-ndk.outputs.ndk_required == 'true'

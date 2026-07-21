@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Farcom hybrid connectivity note:
+
+    By default (targetSdk >= 28) Android blocks all cleartext (non-TLS) HTTP traffic.
+    That's the right default when only talking to fixed, known Internet hosts. Farcom is
+    different: a self-hosted/LAN deployment's server address is arbitrary and chosen by
+    the user at runtime (127.0.0.1, 192.168.x.x, 10.x.x.x, a local hostname, ...), and
+    Android's network-security-config can only allow-list exact hostnames/IPs, not IP
+    ranges - so there is no way to allow "any private LAN address" without allowing
+    cleartext generally.
+
+    We allow cleartext HTTP app-wide as a result. This affects only HTTP(S)-based
+    features (e.g. the file transfer server URL) - SIP signaling transport (UDP/TCP/TLS)
+    is chosen independently on the login screen and is unaffected by this file.
+
+    Deployers who want to enforce TLS everywhere should run their central/self-hosted
+    server with a valid certificate (e.g. via a local CA + mkcert for LAN) and remove
+    this override, or replace it with a domain-config allow-list of their specific
+    server hostname(s).
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

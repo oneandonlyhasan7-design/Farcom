@@ -1,20 +1,13 @@
 name: Android CI
 
-# --- Triggers ---
-# Every push, every pull request, and on-demand via the Actions tab.
 on:
   push:
   pull_request:
   workflow_dispatch:
 
-# --- Least-privilege permissions ---
-# The GITHUB_TOKEN only needs to read repo contents to check out and build.
-# Artifact upload uses the separate Actions artifact storage API, not this token.
 permissions:
   contents: read
 
-# --- Fail-fast / don't waste CI minutes ---
-# A new push to the same branch/PR cancels any run already in progress for it.
 concurrency:
   group: android-ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -25,19 +18,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ------------------------------------------------------------------
-      # 1) Checkout
-      # ------------------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # full history: this repo's build script computes a version from `git describe`
+          fetch-depth: 0
 
-      # ------------------------------------------------------------------
-      # 2) Detect this repository's actual requirements instead of assuming
-      #    conventions. Each detection is defensive: if a signal is missing,
-      #    it falls back to a sane default rather than failing.
-      # ------------------------------------------------------------------
       - name: Detect required Java version
         id: detect-java
         run: |
@@ -46,14 +31,12 @@ jobs:
             VERSION=$(grep -oP '(?<=^toolchainVersion=)\d+' gradle/gradle-daemon-jvm.properties || true)
           fi
           if [ -z "$VERSION" ] && [ -f app/build.gradle.kts ]; then
-            # Fallback: parse compileOptions sourceCompatibility (e.g. VERSION_21 -> 21)
             VERSION=$(grep -oP '(?<=sourceCompatibility = JavaVersion\.VERSION_)\d+' app/build.gradle.kts || true)
           fi
           if [ -z "$VERSION" ]; then
-            echo "::warning::Could not detect required Java version from repo, defaulting to 21"
+            echo "::warning::Could not detect required Java version, defaulting to 21"
             VERSION="21"
           fi
-          echo "Detected required Java version: $VERSION"
           echo "java_version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Detect compileSdk / target platform
@@ -64,30 +47,21 @@ jobs:
             SDK=$(grep -oP '(?<=compileSdk = )\d+' app/build.gradle.kts || true)
           fi
           if [ -z "$SDK" ]; then
-            echo "::warning::Could not detect compileSdk from repo, defaulting to 35"
+            echo "::warning::Could not detect compileSdk, defaulting to 35"
             SDK="35"
           fi
-          echo "Detected compileSdk: $SDK"
           echo "compile_sdk=$SDK" >> "$GITHUB_OUTPUT"
 
       - name: Detect whether the project requires the Android NDK
         id: detect-ndk
         run: |
-          # Only true native-build setups (CMake / ndk-build wired into Gradle) require
-          # installing the NDK on the runner. A project that merely *consumes* prebuilt
-          # .so libraries via an AAR dependency does not need it.
           if grep -rl "externalNativeBuild" --include="*.gradle*" . >/dev/null 2>&1 \
              || find . -iname "CMakeLists.txt" | grep -q .; then
-            echo "NDK required: found externalNativeBuild/CMakeLists.txt"
             echo "ndk_required=true" >> "$GITHUB_OUTPUT"
           else
-            echo "NDK not required: no externalNativeBuild or CMakeLists.txt found in repo"
             echo "ndk_required=false" >> "$GITHUB_OUTPUT"
           fi
 
-      # ------------------------------------------------------------------
-      # 3) Toolchain setup
-      # ------------------------------------------------------------------
       - name: Set up JDK ${{ steps.detect-java.outputs.java_version }}
         uses: actions/setup-java@v4
         with:
@@ -96,30 +70,25 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
-        # Installs cmdline-tools, accepts licenses, and exposes ANDROID_HOME/ANDROID_SDK_ROOT.
 
-      # ------------------------------------------------------------------
-      # Install the compileSdk platform this repo actually declares.
-      # Some API levels are only published to the preview/canary channel
-      # before their stable release, so we try stable first and fall back
-      # to --channel=3 (preview) before giving up. If neither channel has
-      # it, this means compileSdk in app/build.gradle.kts is set to an API
-      # level that isn't published anywhere yet - we fail loudly with a
-      # list of what IS available, rather than continuing into a build
-      # that's guaranteed to fail at compile time with a confusing error.
-      # ------------------------------------------------------------------
+      - name: Accept all SDK licenses (defensive - setup-android usually handles this)
+        run: yes | sdkmanager --licenses > /dev/null || true
+
       - name: Install Android platform & build-tools for compileSdk ${{ steps.detect-sdk.outputs.compile_sdk }}
         run: |
-          TARGET="platforms;android-${{ steps.detect-sdk.outputs.compile_sdk }}"
-          echo "Attempting to install $TARGET from the stable channel..."
-          if sdkmanager "$TARGET" "platform-tools"; then
-            echo "Installed $TARGET from stable channel."
+          SDK="${{ steps.detect-sdk.outputs.compile_sdk }}"
+          PLATFORM="platforms;android-$SDK"
+          BUILD_TOOLS="build-tools;${SDK}.0.0"
+
+          echo "Installing $PLATFORM, $BUILD_TOOLS, platform-tools (stable channel)..."
+          if sdkmanager "$PLATFORM" "$BUILD_TOOLS" "platform-tools"; then
+            echo "Installed from stable channel."
           else
-            echo "::warning::$TARGET not found in the stable channel. Retrying via the preview/canary channel (--channel=3), since new API levels are sometimes only published there before general release."
-            if sdkmanager --channel=3 "$TARGET" "platform-tools"; then
-              echo "Installed $TARGET from the preview channel."
+            echo "::warning::Not found in stable channel, retrying via preview channel (--channel=3)"
+            if sdkmanager --channel=3 "$PLATFORM" "$BUILD_TOOLS" "platform-tools"; then
+              echo "Installed from preview channel."
             else
-              echo "::error::$TARGET is not available in any SDK Manager channel. compileSdk=${{ steps.detect-sdk.outputs.compile_sdk }} in app/build.gradle.kts is likely ahead of what's publicly released. The build cannot succeed until either this platform is published, or compileSdk is lowered to a released API level. Listing available platforms below for reference:"
+              echo "::error::$PLATFORM is not available in any channel. compileSdk=$SDK in app/build.gradle.kts is ahead of what's released. Available platforms:"
               sdkmanager --list 2>/dev/null | grep -oP 'platforms;android-\d+' | sort -t'-' -k2 -n -u
               exit 1
             fi
@@ -127,14 +96,8 @@ jobs:
 
       - name: Install Android NDK (only if this repo requires it)
         if: steps.detect-ndk.outputs.ndk_required == 'true'
-        run: |
-          sdkmanager --install "ndk-bundle"
+        run: sdkmanager --install "ndk-bundle"
 
-      # ------------------------------------------------------------------
-      # 4) Gradle + Android build caches
-      #    setup-gradle handles wrapper/dependency/build-cache restore+save
-      #    and also gives us a build summary with the resolved Gradle version.
-      # ------------------------------------------------------------------
       - name: Set up Gradle (restores Gradle cache)
         uses: gradle/actions/setup-gradle@v4
         with:
@@ -150,17 +113,9 @@ jobs:
           restore-keys: |
             android-build-cache-${{ runner.os }}-
 
-      # ------------------------------------------------------------------
-      # 5) Make gradlew executable (repo may have lost the exec bit,
-      #    e.g. if checked out from a zip rather than git)
-      # ------------------------------------------------------------------
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      # ------------------------------------------------------------------
-      # 6) Diagnostics - printed before the build so they're visible even
-      #    if the build later fails
-      # ------------------------------------------------------------------
       - name: Print toolchain versions
         run: |
           echo "== Gradle version =="
@@ -170,22 +125,9 @@ jobs:
           echo "== Android SDK packages installed =="
           sdkmanager --list_installed
 
-      # ------------------------------------------------------------------
-      # 7) Debug build - always runs, never depends on secrets
-      # ------------------------------------------------------------------
       - name: Build debug APK
         run: ./gradlew assembleDebug --stacktrace
 
-      # ------------------------------------------------------------------
-      # 8) Signed release build - only if release-signing secrets are
-      #    configured in this repository. Gracefully skipped otherwise.
-      #
-      #    Expected repository secrets:
-      #      SIGNING_KEYSTORE_BASE64  - base64-encoded .keystore/.jks file
-      #      SIGNING_STORE_PASSWORD
-      #      SIGNING_KEY_ALIAS
-      #      SIGNING_KEY_PASSWORD
-      # ------------------------------------------------------------------
       - name: Check for release signing secrets
         id: check-secrets
         run: |
@@ -218,26 +160,17 @@ jobs:
         if: steps.check-secrets.outputs.signing_available == 'false'
         run: echo "Skipping signed Release build - continuing workflow."
 
-      # ------------------------------------------------------------------
-      # 9) Show exactly what got produced, wherever it landed
-      # ------------------------------------------------------------------
       - name: Print output directory tree
         if: always()
         run: |
-          echo "== APK/AAB outputs =="
           find . -type f \( -name "*.apk" -o -name "*.aab" \) -path "*/build/outputs/*" 2>/dev/null || echo "(none found)"
 
-      # ------------------------------------------------------------------
-      # 10) Upload every APK/AAB produced, from any module, without
-      #     assuming a fixed "app/" path
-      # ------------------------------------------------------------------
       - name: Upload APK artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: apk-${{ github.run_number }}
-          path: |
-            **/build/outputs/apk/**/*.apk
+          path: "**/build/outputs/apk/**/*.apk"
           if-no-files-found: warn
           retention-days: 14
 
@@ -246,7 +179,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: aab-${{ github.run_number }}
-          path: |
-            **/build/outputs/bundle/**/*.aab
+          path: "**/build/outputs/bundle/**/*.aab"
           if-no-files-found: warn
           retention-days: 14

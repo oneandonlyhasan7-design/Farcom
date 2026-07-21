@@ -14,15 +14,6 @@ plugins {
     alias(libs.plugins.navigation)
 }
 
-// The Kotlin/data-binding namespace stays "org.linphone" (see `namespace` below) to
-// preserve compatibility with upstream Linphone updates - changing it would require a
-// project-wide rename of every R/databinding reference, which is exactly the kind of
-// blind search-and-replace we want to avoid.
-//
-// applicationId is the actual Play Store / OS-level package identity and is safe and
-// desirable to change independently - this is what makes Farcom installable side-by-side
-// with upstream Linphone and lets it own its own Firebase project, keystore, etc.
-// Deployers building their own fork should change this to their own reverse-domain id.
 val packageName = "org.farcom.app"
 val useDifferentPackageNameForDebugBuild = false
 
@@ -135,9 +126,6 @@ android {
             }
     }
 
-    // Loaded defensively: forks/self-hosters typically won't have (and shouldn't commit)
-    // the original signing key, and this file may be gitignored or absent entirely.
-    // A missing file or missing/blank entries must never break debug or release-unsigned builds.
     val keystorePropertiesFile = rootProject.file("keystore.properties")
     val keystoreProperties = Properties()
     if (keystorePropertiesFile.exists()) {
@@ -260,11 +248,8 @@ dependencies {
     implementation(libs.androidx.emoji2)
     implementation(libs.androidx.car)
 
-    // https://github.com/google/flexbox-layout/blob/main/LICENSE Apache v2.0
     implementation(libs.google.flexbox)
-    // https://github.com/material-components/material-components-android/blob/master/LICENSE Apache v2.0
     implementation(libs.google.material)
-    // To be able to parse native crash tombstone and print them with SDK logs the next time the app will start
     implementation(libs.google.protobuf)
 
     implementation(platform(libs.google.firebase.bom))
@@ -275,16 +260,12 @@ dependencies {
         compileOnly(libs.google.firebase.crashlytics)
     }
 
-    // https://github.com/coil-kt/coil/blob/main/LICENSE.txt Apache v2.0
     implementation(libs.coil)
     implementation(libs.coil.gif)
     implementation(libs.coil.svg)
     implementation(libs.coil.video)
-    // https://github.com/tommybuonomo/dotsindicator/blob/master/LICENSE Apache v2.0
     implementation(libs.dots.indicator)
-    // https://github.com/Baseflow/PhotoView/blob/master/LICENSE Apache v2.0
     implementation(libs.photoview)
-    // https://github.com/openid/AppAuth-Android/blob/master/LICENSE Apache v2.0
     implementation(libs.openid.appauth)
 
     implementation(libs.linphone)
@@ -331,7 +312,7 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         )
     )
 }
-project.tasks.preBuild.dependsOn("ktlintFormat")
+// ktlintFormat is intentionally NOT wired into preBuild.
 
 if (crashlyticsAvailable) {
     afterEvaluate {
@@ -349,4 +330,3 @@ if (crashlyticsAvailable) {
         )
     }
 }
-

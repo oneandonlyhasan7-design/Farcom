@@ -100,12 +100,12 @@ project.tasks.preBuild.dependsOn("farcomSdkSource")
 
 android {
     namespace = "com.farcom"
-    compileSdk = 37
+    compileSdk = 36
 
     defaultConfig {
         applicationId = packageName
         minSdk = 28
-        targetSdk = 37
+        targetSdk = 36
         versionCode = 602003 // 6.02.003
         versionName = "6.3.0-alpha"
 

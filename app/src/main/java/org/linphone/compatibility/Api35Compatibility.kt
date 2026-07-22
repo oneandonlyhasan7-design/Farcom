@@ -65,12 +65,12 @@ class Api35Compatibility {
         }
 
         private fun startComponentToString(component: Int): String {
+            // ApplicationStartInfo.START_COMPONENT_* constants were actually introduced in
+            // API 36, not 35 (confirmed against Android's own API reference), despite this
+            // file being gated to API 35 (VANILLA_ICE_CREAM). They're unresolvable at
+            // compileSdk=35. This is purely a debug-log label helper - falling through to
+            // "Unexpected" for these values has no functional effect.
             return when (component) {
-                ApplicationStartInfo.START_COMPONENT_ACTIVITY -> "Activity"
-                ApplicationStartInfo.START_COMPONENT_BROADCAST -> "Broadcast"
-                ApplicationStartInfo.START_COMPONENT_CONTENT_PROVIDER -> "Content Provider"
-                ApplicationStartInfo.START_COMPONENT_SERVICE -> "Service"
-                ApplicationStartInfo.START_COMPONENT_OTHER -> "Other"
                 else -> "Unexpected ($component)"
             }
         }

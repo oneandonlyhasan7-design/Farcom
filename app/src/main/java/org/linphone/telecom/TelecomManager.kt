@@ -125,8 +125,12 @@ class TelecomManager
                     uri,
                     direction,
                     type,
-                    capabilities,
-                    isLogExcluded = true
+                    capabilities
+                    // isLogExcluded removed: only available in core-telecom 1.1.0-alpha,
+                    // not the 1.0.0 stable version this project now uses (matching the
+                    // real, proven-working Linphone production build). Omitting it just
+                    // means this call isn't excluded from the system telecom call log by
+                    // default - cosmetic only, not a functional/crash risk.
                 )
                 Log.i("$TAG Adding call to Telecom's CallsManager with attributes [$callAttributes]")
 
@@ -212,4 +216,4 @@ class TelecomManager
             core.removeListener(coreListener)
         }
     }
-}
+    }

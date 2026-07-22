@@ -8,12 +8,9 @@ firebaseBomVersion = "34.13.0"
 ktlint = "12.3.0"
 
 annotations = "1.10.0"
-// Versions below this point were reconciled against the actually-published Linphone
-// 6.0.21 production APK (versionCode 6000213) - extracted from its META-INF/*.version
-// files - because the versions previously pinned here (e.g. telecom 1.1.0-alpha06,
-// requiring API 36.1+) were ahead of anything Belledonne has actually built and shipped,
-// which is what caused the compileSdk=37/AAR-metadata build failures. These are the real,
-// proven-compiling versions from a real release.
+#Versions below this point were reconciled against the actually-published Linphone
+# 6.0.21 production APK (versionCode 6000213) - extracted from its META-INF/*.version
+#iles - because the versions p proven-compiling versions from a real release.
 appcompat = "1.7.0"
 constraintLayout = "2.2.1"
 coreKtx = "1.15.0"

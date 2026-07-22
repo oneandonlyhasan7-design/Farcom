@@ -155,8 +155,15 @@ class CoreContext
                         "$TAG Added device [${device.productName}] with ID [${device.id}] and type [${device.type}]"
                     )
 
+
                     when (device.type) {
-                        AudioDeviceInfo.TYPE_BLUETOOTH_SCO, AudioDeviceInfo.TYPE_BLE_HEADSET, AudioDeviceInfo.TYPE_BLE_SPEAKER, AudioDeviceInfo.TYPE_HEARING_AID, AudioDeviceInfo.TYPE_BLE_HEARING_AID -> {
+                        // AudioDeviceInfo.TYPE_BLE_HEARING_AID intentionally omitted here:
+                        // it's a constant only present in an Android API surface newer than
+                        // android-35 (the platform this project compiles against). The other
+                        // 4 bluetooth device types below still correctly cover standard
+                        // bluetooth audio routing; only BLE hearing aids specifically won't
+                        // be flagged by this particular check.
+                        AudioDeviceInfo.TYPE_BLUETOOTH_SCO, AudioDeviceInfo.TYPE_BLE_HEADSET, AudioDeviceInfo.TYPE_BLE_SPEAKER, AudioDeviceInfo.TYPE_HEARING_AID -> {
                             atLeastOneNewDeviceIsBluetooth = true
                         }
 
